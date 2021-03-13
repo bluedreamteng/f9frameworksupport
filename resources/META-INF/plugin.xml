@@ -1,0 +1,52 @@
+<idea-plugin>
+    <id>F9FrameWorkSupport</id>
+    <name>F9FrameWorkSupport</name>
+    <version>1.0</version>
+    <vendor email="support@test.com" url="http://www.test.com">tengfei</vendor>
+
+    <description><![CDATA[
+      support the sytax of f9 framework.<br>
+      <em>Follow-up features are being added</em>
+    ]]></description>
+
+    <change-notes><![CDATA[
+     2021 02 25 v1.0<br>
+     <em>contribute the reference to epoint method parameters</em><br>
+     2021 02 26 v1.1<br>
+     <em>contribute the reference to the action attribute value of html tag</em><br>
+     2021 02 26 v1.2<br>
+     <em>contribute the code complete to the action attribute value of html tag and parameter of epoint method</em><br>
+    ]]>
+    </change-notes>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
+    <depends>JavaScript</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <psi.referenceContributor implementation="com.tengfei.f9framework.reference.F9ReferenceContributor"/>
+        <codeInsight.template.postfixTemplateProvider language="JAVA"
+                                                      implementationClass="com.tengfei.f9framework.template.F9PostfixTemplateProvider"/>
+        <liveTemplateMacro implementation="com.tengfei.f9framework.macro.LowerCaseMacro"/>
+        <intentionAction>
+            <category>f9framework</category>
+            <className>com.tengfei.f9framework.intentionaction.F9QuartzJobRegisterIntention</className>
+        </intentionAction>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+
+        <action id="com.tengfei.f9framework.action.TestAction" class="com.tengfei.f9framework.action.TestAction"
+                text="testaction" description="testaction">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+    </actions>
+
+</idea-plugin>
