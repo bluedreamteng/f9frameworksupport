@@ -45,7 +45,7 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         PsiFileFactory fileFactory = PsiFileFactory.getInstance(project);
         PsiElementFactory elementFactory = PsiElementFactory.getInstance(project);
         //查找特定接口的类
-        PsiClass targetClass = (PsiClass)element.getParent();
+        PsiClass targetClass = (PsiClass) element.getParent();
 
         PackageChooserDialog packageChooserDialog = new PackageChooserDialog("Implement interface", project);
         packageChooserDialog.show();
@@ -97,6 +97,11 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         for (PsiMethod method : methods) {
             PsiMethod implMethod = elementFactory.createMethod(method.getName(), method.getReturnType());
             implMethod.getParameterList().replace(method.getParameterList());
+            PsiCodeBlock codeBlock = elementFactory.createCodeBlock();
+            PsiStatement statement = elementFactory.createStatementFromText(getClassMethodStatementTextByMethod(method), null);
+            codeBlock.add(statement);
+            assert implMethod.getBody() != null;
+            implMethod.getBody().replace(codeBlock);
             implClass.add(implMethod);
         }
         PsiJavaFile javaFile = (PsiJavaFile) fileFactory.createFileFromText(getClassNameByInterfaceName(targetClass.getName()) + ".java", JavaFileType.INSTANCE, "");
@@ -132,14 +137,26 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
     private String geImplMethodStatementTextByMethod(@NotNull PsiMethod method, PsiClass targetClass) {
         assert targetClass.getName() != null;
         String statementText;
-        if (!PsiType.VOID.equals(method.getReturnType())) {
-            statementText = "return new " + getClassNameByInterfaceName(targetClass.getName()) + "()." + method.getName() + getMethodParameterExpression(method) + ";";
+        if (PsiType.VOID.equals(method.getReturnType())) {
+            statementText = "new " + getClassNameByInterfaceName(targetClass.getName()) + "()." + method.getName() + getMethodParameterExpression(method) + ";";
         }
         else {
-            statementText = "new " + getClassNameByInterfaceName(targetClass.getName()) + "()." + method.getName() + getMethodParameterExpression(method) + ";";
+            statementText = "return new " + getClassNameByInterfaceName(targetClass.getName()) + "()." + method.getName() + getMethodParameterExpression(method) + ";";
         }
         return statementText;
     }
+
+    private String getClassMethodStatementTextByMethod(@NotNull PsiMethod method) {
+        String statementText;
+        if (PsiType.VOID.equals(method.getReturnType())) {
+            statementText = "return;";
+        }
+        else {
+            statementText = "return null;";
+        }
+        return statementText;
+    }
+
 
     private String getMethodParameterExpression(@NotNull PsiMethod method) {
         StringBuilder stringBuilder = new StringBuilder("(");
