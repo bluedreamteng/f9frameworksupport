@@ -38,11 +38,13 @@
             <category>f9framework</category>
             <className>com.tengfei.f9framework.intentionaction.F9QuartzJobRegisterIntention</className>
         </intentionAction>
+        <intentionAction>
+            <className>com.tengfei.f9framework.intentionaction.F9ImplInterfaceIntentionAction</className>
+        </intentionAction>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-
         <action id="com.tengfei.f9framework.action.TestAction" class="com.tengfei.f9framework.action.TestAction"
                 text="testaction" description="testaction">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
