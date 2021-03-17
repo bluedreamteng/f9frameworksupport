@@ -5,6 +5,11 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import org.jetbrains.annotations.NotNull;
 
 public class TestAction extends AnAction {
+
+    /**
+     *
+     * @param anActionEvent
+     */
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
 

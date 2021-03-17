@@ -2,7 +2,7 @@ package com.tengfei.f9framework.intentionaction;
 
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.ide.highlighter.JavaFileType;
-import com.intellij.ide.util.PackageChooserDialog;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -10,12 +10,18 @@ import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
+import com.tengfei.f9framework.notification.MyNotifier;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.regex.Pattern;
+
 public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionAction {
+    public static final String SPRINGFRAMEWORK_COMPONENT = "org.springframework.stereotype.Component";
     public static String INTERFACE_PREFIX = "I";
     public static String IMPL_CLASS_POSTFIX = "Impl";
+    public static Pattern F9INTERFACE_PATTERN = Pattern.compile("^I[A-Za-z]*");
+
 
     @Nls(capitalization = Nls.Capitalization.Sentence)
     @NotNull
@@ -36,8 +42,8 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         if (!(element.getParent() instanceof PsiClass) || !(element instanceof PsiIdentifier)) {
             return false;
         }
-        return ((PsiClass) element.getParent()).isInterface();
-
+        return ((PsiClass) element.getParent()).isInterface() &&
+                F9INTERFACE_PATTERN.matcher(((PsiClass) element.getParent()).getName()).matches();
     }
 
     @Override
@@ -46,69 +52,83 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         PsiElementFactory elementFactory = PsiElementFactory.getInstance(project);
         //查找特定接口的类
         PsiClass targetClass = (PsiClass) element.getParent();
-
-        PackageChooserDialog packageChooserDialog = new PackageChooserDialog("Implement interface", project);
-        packageChooserDialog.show();
-        PsiPackage choosePage = packageChooserDialog.getSelectedPackage();
-        if (choosePage == null) {
-            return;
+        PsiDirectory containingDirectory = targetClass.getContainingFile().getContainingDirectory();
+        PsiDirectory implDirectory = containingDirectory.getParent().findSubdirectory("impl");
+        if (implDirectory == null) {
+            implDirectory = containingDirectory.getParent().createSubdirectory("impl");
         }
-
+        PsiDirectory finalImplDirectory = implDirectory;
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            createClassByInterface(fileFactory, elementFactory, targetClass, choosePage);
-            createImplClassByInterface(fileFactory, elementFactory, targetClass, choosePage);
+            createClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
+            createImplClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
         });
     }
 
-    private void createImplClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiPackage choosePage) {
+    private void createImplClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
         //创建类
         assert targetClass.getName() != null;
         PsiClass implClass = elementFactory.createClass(getImplClassNameByInterfaceName(targetClass.getName()));
         assert implClass.getImplementsList() != null;
         implClass.getImplementsList().add(elementFactory.createClassReferenceElement(targetClass));
-        implClass.getModifierList().addAnnotation("org.springframework.stereotype.Component");
+        implClass.getModifierList().addAnnotation(SPRINGFRAMEWORK_COMPONENT);
         //创建一个方法
         PsiMethod[] methods = targetClass.getMethods();
         for (PsiMethod method : methods) {
-            PsiMethod implMethod = elementFactory.createMethod(method.getName(), method.getReturnType(), null);
-            implMethod.getParameterList().replace(method.getParameterList());
-            PsiCodeBlock codeBlock = elementFactory.createCodeBlock();
-            PsiStatement statement = elementFactory.createStatementFromText(geImplMethodStatementTextByMethod(method, targetClass), null);
-            codeBlock.add(statement);
-            assert implMethod.getBody() != null;
-            implMethod.getBody().replace(codeBlock);
+            PsiMethod implMethod = createMethodByTargetMethod(method, geImplMethodStatementTextByMethod(method));
             implClass.add(implMethod);
         }
         PsiJavaFile javaFile = (PsiJavaFile) fileFactory.createFileFromText(getImplClassNameByInterfaceName(targetClass.getName()) + ".java", JavaFileType.INSTANCE, "");
         javaFile.add(implClass);
-        JavaCodeStyleManager.getInstance(choosePage.getProject()).shortenClassReferences(javaFile);
-        CodeStyleManager.getInstance(choosePage.getProject()).reformat(javaFile);
-
-        choosePage.getDirectories()[0].add(javaFile);
+        reformatJavaFile(javaFile);
+        if (implDirectory.findFile(javaFile.getName()) == null) {
+            implDirectory.add(javaFile);
+        }
+        else {
+            MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
+        }
     }
 
 
-    private void createClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiPackage choosePage) {
+    private void createClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
         assert targetClass.getName() != null;
         //创建类
         PsiClass implClass = elementFactory.createClass(getClassNameByInterfaceName(targetClass.getName()));
         //创建一个方法
         PsiMethod[] methods = targetClass.getMethods();
         for (PsiMethod method : methods) {
-            PsiMethod implMethod = elementFactory.createMethod(method.getName(), method.getReturnType());
-            implMethod.getParameterList().replace(method.getParameterList());
-            PsiCodeBlock codeBlock = elementFactory.createCodeBlock();
-            PsiStatement statement = elementFactory.createStatementFromText(getClassMethodStatementTextByMethod(method), null);
-            codeBlock.add(statement);
-            assert implMethod.getBody() != null;
-            implMethod.getBody().replace(codeBlock);
+            PsiMethod implMethod = createMethodByTargetMethod(method, getClassMethodStatementTextByMethod(method));
             implClass.add(implMethod);
         }
         PsiJavaFile javaFile = (PsiJavaFile) fileFactory.createFileFromText(getClassNameByInterfaceName(targetClass.getName()) + ".java", JavaFileType.INSTANCE, "");
         javaFile.add(implClass);
-        JavaCodeStyleManager.getInstance(choosePage.getProject()).shortenClassReferences(javaFile);
-        CodeStyleManager.getInstance(choosePage.getProject()).reformat(javaFile);
-        choosePage.getDirectories()[0].add(javaFile);
+        reformatJavaFile(javaFile);
+        if (implDirectory.findFile(javaFile.getName()) == null) {
+            implDirectory.add(javaFile);
+        }
+        else {
+            MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
+        }
+    }
+
+    private void reformatJavaFile(PsiJavaFile javaFile) {
+        JavaCodeStyleManager.getInstance(javaFile.getProject()).shortenClassReferences(javaFile);
+        CodeStyleManager.getInstance(javaFile.getProject()).reformat(javaFile);
+    }
+
+    @NotNull
+    private PsiMethod createMethodByTargetMethod(PsiMethod method, String statementText) {
+        PsiElementFactory elementFactory = PsiElementFactory.getInstance(method.getProject());
+        PsiMethod result = elementFactory.createMethod(method.getName(), method.getReturnType());
+        result.getParameterList().replace(method.getParameterList());
+        if (method.getDocComment() != null) {
+            result.addBefore(method.getDocComment(), result.getFirstChild());
+        }
+        PsiCodeBlock codeBlock = elementFactory.createCodeBlock();
+        PsiStatement statement = elementFactory.createStatementFromText(statementText, null);
+        codeBlock.add(statement);
+        assert result.getBody() != null;
+        result.getBody().replace(codeBlock);
+        return result;
     }
 
     private static String getImplClassNameByInterfaceName(@NotNull String interfaceName) {
@@ -134,7 +154,8 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         return className;
     }
 
-    private String geImplMethodStatementTextByMethod(@NotNull PsiMethod method, PsiClass targetClass) {
+    private String geImplMethodStatementTextByMethod(@NotNull PsiMethod method) {
+        PsiClass targetClass = method.getContainingClass();
         assert targetClass.getName() != null;
         String statementText;
         if (PsiType.VOID.equals(method.getReturnType())) {
