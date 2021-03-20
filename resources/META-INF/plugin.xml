@@ -41,6 +41,9 @@
         <intentionAction>
             <className>com.tengfei.f9framework.intentionaction.F9ImplInterfaceIntentionAction</className>
         </intentionAction>
+        
+        <webBrowserUrlProvider implementation="com.tengfei.f9framework.webbrowser.F9WebBrowserUrlProvider">
+        </webBrowserUrlProvider>
     </extensions>
 
     <actions>
