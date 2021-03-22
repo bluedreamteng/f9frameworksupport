@@ -42,7 +42,7 @@ public class F9HtmlUrlFactory {
     }
 
     private boolean isValidPath(String filePath) {
-        if(!filePath.contains("webapp")){
+        if(!filePath.contains(F9Settings.WEB_ROOT_PATH)){
             return false;
         }
         return filePath.contains(F9Settings.GL_PROJECT_NAME) || filePath.contains(F9Settings.GL_PROJECT_PAGE_PATH) ||
@@ -57,7 +57,7 @@ public class F9HtmlUrlFactory {
             result = result.substring(1, result.indexOf('.'));
         }
         else if (filePath.contains(F9Settings.QY_PROJECT_PAGE_PATH)) {
-            result = filePath.split(F9Settings.GL_PROJECT_PAGE_PATH)[1];
+            result = filePath.split(F9Settings.QY_PROJECT_PAGE_PATH)[1];
             result = result.substring(1, result.indexOf('.'));
         }
         else {

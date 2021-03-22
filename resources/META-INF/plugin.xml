@@ -41,15 +41,17 @@
         <intentionAction>
             <className>com.tengfei.f9framework.intentionaction.F9ImplInterfaceIntentionAction</className>
         </intentionAction>
-        
+
+
         <webBrowserUrlProvider implementation="com.tengfei.f9framework.webbrowser.F9WebBrowserUrlProvider">
         </webBrowserUrlProvider>
+
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.tengfei.f9framework.action.TestAction" class="com.tengfei.f9framework.action.TestAction"
-                text="testaction" description="testaction">
+        <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction" class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
+                text="copy standard file" description="copy standard file to customize">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

@@ -8,6 +8,8 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.builtInWebServer.BuiltInWebBrowserUrlProvider;
 
 public class F9WebBrowserUrlProvider extends BuiltInWebBrowserUrlProvider {
+
+
     @Nullable
     @Override
     protected Url getUrl(@NotNull OpenInBrowserRequest request, @NotNull VirtualFile file) {
