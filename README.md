@@ -18,13 +18,14 @@
 功能描述：根据方法参数所提供的链接，通过ctrl+click能直接定位到相应的action
 解决痛点：省去了每次都要手动搜索controller的繁琐步骤
 ps:增加对html标签的action支持，找到对应的方法
-``//直接定位到类
-epoint.initPage('generatetestdataaction');`
 
-//直接定位到方法
-function generateEnvironmentData() {
-    epoint.execute('generateEnvironmentData', "@none", callBack)
-}``
+    //直接定位到类
+    epoint.initPage('generatetestdataaction');
+
+    //直接定位到方法
+    function generateEnvironmentData() {
+        epoint.execute('generateEnvironmentData', "@none", callBack)
+    }
 
 
 ### 2.提供对相关引用的代码自动补全功能
