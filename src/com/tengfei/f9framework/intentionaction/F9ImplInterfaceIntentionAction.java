@@ -4,7 +4,10 @@ import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.ide.highlighter.JavaFileType;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
@@ -58,12 +61,17 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         }
         PsiDirectory finalImplDirectory = implDirectory;
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            createClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
             createImplClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
+            PsiFile classByInterface = createClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
+            if(classByInterface != null) {
+                //这里生成的psifile只存在于内存中 所以不能用psifile.getVirtualFile()获取
+                VirtualFile virtualFile = VfsUtil.refreshAndFindChild(finalImplDirectory.getVirtualFile(), classByInterface.getName());
+                FileEditorManager.getInstance(project).openFile(virtualFile,true);
+            }
         });
     }
 
-    private void createImplClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
+    private PsiFile createImplClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
         //创建类
         assert targetClass.getName() != null;
         PsiClass implClass = elementFactory.createClass(getImplClassNameByInterfaceName(targetClass.getName()));
@@ -81,14 +89,16 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         reformatJavaFile(javaFile);
         if (implDirectory.findFile(javaFile.getName()) == null) {
             implDirectory.add(javaFile);
+            return javaFile;
         }
         else {
             MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
         }
+        return null;
     }
 
 
-    private void createClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
+    private PsiFile createClassByInterface(PsiFileFactory fileFactory, PsiElementFactory elementFactory, PsiClass targetClass, PsiDirectory implDirectory) {
         assert targetClass.getName() != null;
         //创建类
         PsiClass implClass = elementFactory.createClass(getClassNameByInterfaceName(targetClass.getName()));
@@ -103,10 +113,12 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         reformatJavaFile(javaFile);
         if (implDirectory.findFile(javaFile.getName()) == null) {
             implDirectory.add(javaFile);
+            return javaFile;
         }
         else {
             MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
         }
+        return null;
     }
 
     private void reformatJavaFile(PsiJavaFile javaFile) {

@@ -46,12 +46,22 @@
         <webBrowserUrlProvider implementation="com.tengfei.f9framework.webbrowser.F9WebBrowserUrlProvider">
         </webBrowserUrlProvider>
 
+        <projectService serviceImplementation="com.tengfei.f9framework.setting.F9SettingsState"/>
+        <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.setting.F9SettingsConfigurable"
+                                 id="com.tengfei.f9framework.setting.F9SettingsConfigurable"
+                                 displayName="F9 Framework Support" nonDefaultProject="true"
+        />
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
         <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction" class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
                 text="copy standard file" description="copy standard file to customize">
+            <keyboard-shortcut first-keystroke="alt V" keymap="$default"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="com.tengfei.f9framework.action.TestAction" class="com.tengfei.f9framework.action.TestAction"
+                text="testaction" description="testaction">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

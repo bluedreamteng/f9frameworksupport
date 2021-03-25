@@ -11,9 +11,12 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.file.PsiDirectoryFactory;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.notification.MyNotifier;
+import com.tengfei.f9framework.setting.F9SettingsState;
 import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
@@ -21,8 +24,6 @@ import org.jetbrains.jps.model.java.JavaSourceRootType;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static com.tengfei.f9framework.setting.F9Settings.*;
 
 /**
  * @author ztf
@@ -49,13 +50,14 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     private void copyWebFileToCustomize(@NotNull PsiFile psiFile) {
         //如何定位到目标文件夹
         String path = psiFile.getContainingDirectory().getVirtualFile().getPath();
-        if (!path.contains(WEB_ROOT_PATH) || path.contains(GL_PROJECT_PAGE_PATH) || path.contains(QY_PROJECT_PAGE_PATH)) {
+        F9SettingsState f9SettingsState = F9SettingsState.getInstance(psiFile.getProject());
+        if (!path.contains(f9SettingsState.webRootPath) || path.contains(f9SettingsState.glProjectPagePath) || path.contains(f9SettingsState.qyProjectPagePath)) {
             return;
         }
 
         WriteCommandAction.runWriteCommandAction(psiFile.getProject(), () -> {
-            String newpath = path.replace(WEB_ROOT_PATH, WEB_ROOT_PATH + "/" + CUSTOMIZE_PROJECT_NAME);
-            File file = new File(newpath);
+            String newPath = path.replace(f9SettingsState.webRootPath, f9SettingsState.webRootPath + "/" + f9SettingsState.customizeProjectName);
+            File file = new File(newPath);
             if (!file.exists()) {
                 boolean success = file.mkdirs();
                 if (!success) {
@@ -93,27 +95,28 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
 
 
     private void copyJavaFileToCustomize(@NotNull PsiJavaFile psiJavaFile) {
-        System.out.println(psiJavaFile.getPackageName());
-        Module module = ModuleManager.getInstance(psiJavaFile.getProject()).findModuleByName("szjs_custom_sfzhgd");
-        if(module == null) {
+        F9SettingsState f9SettingsState = F9SettingsState.getInstance(psiJavaFile.getProject());
+        Module module = ModuleManager.getInstance(psiJavaFile.getProject()).findModuleByName(f9SettingsState.customModuleName);
+        if (module == null) {
             return;
         }
         List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(module).getSourceRoots(JavaSourceRootType.SOURCE);
-        if(CollectionUtils.isEmpty(sourceRoots)) {
+        if (CollectionUtils.isEmpty(sourceRoots)) {
             return;
         }
-        WriteCommandAction.runWriteCommandAction(psiJavaFile.getProject(),()->{
+        WriteCommandAction.runWriteCommandAction(psiJavaFile.getProject(), () -> {
             VirtualFile virtualFile = sourceRoots.get(0);
             PsiDirectory directory = PsiManager.getInstance(psiJavaFile.getProject()).findDirectory(virtualFile);
             PsiDirectory packageDirectory = PackageUtil.findOrCreateDirectoryForPackage(module, psiJavaFile.getPackageName(), directory, true);
-            if(packageDirectory == null) {
+            if (packageDirectory == null) {
                 return;
             }
             PsiFile foundFile = packageDirectory.findFile(psiJavaFile.getName());
-            if(foundFile == null) {
-                PsiJavaFile addedFile =(PsiJavaFile) packageDirectory.add(psiJavaFile);
+            if (foundFile == null) {
+                PsiJavaFile addedFile = (PsiJavaFile) packageDirectory.add(psiJavaFile);
                 FileEditorManager.getInstance(psiJavaFile.getProject()).openFile(addedFile.getVirtualFile(), true);
-            }else {
+            }
+            else {
                 MyNotifier.notifyError(psiJavaFile.getProject(), "file is already exist");
             }
         });
