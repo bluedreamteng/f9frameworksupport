@@ -15,7 +15,7 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
-import com.tengfei.f9framework.notification.MyNotifier;
+import com.tengfei.f9framework.notification.F9Notifier;
 import com.tengfei.f9framework.setting.F9SettingsState;
 import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
@@ -88,7 +88,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
                 FileEditorManager.getInstance(copiedFile.getProject()).openFile(copiedFile.getVirtualFile(), true);
             }
             else {
-                MyNotifier.notifyError(psiFile.getProject(), "file is already exist");
+                F9Notifier.notifyError(psiFile.getProject(), "file is already exist");
             }
         });
     }
@@ -117,7 +117,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
                 FileEditorManager.getInstance(psiJavaFile.getProject()).openFile(addedFile.getVirtualFile(), true);
             }
             else {
-                MyNotifier.notifyError(psiJavaFile.getProject(), "file is already exist");
+                F9Notifier.notifyError(psiJavaFile.getProject(), "file is already exist");
             }
         });
 

@@ -12,7 +12,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 import com.intellij.util.IncorrectOperationException;
-import com.tengfei.f9framework.notification.MyNotifier;
+import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
@@ -92,7 +92,7 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
             return javaFile;
         }
         else {
-            MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
+            F9Notifier.notifyError(javaFile.getProject(),"file is adready exits");
         }
         return null;
     }
@@ -116,7 +116,7 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
             return javaFile;
         }
         else {
-            MyNotifier.notifyError(javaFile.getProject(),"file is adready exits");
+            F9Notifier.notifyError(javaFile.getProject(),"file is adready exits");
         }
         return null;
     }
