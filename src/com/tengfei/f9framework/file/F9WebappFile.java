@@ -1,9 +1,18 @@
 package com.tengfei.f9framework.file;
 
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.setting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
+import java.security.InvalidParameterException;
 
 /**
  * @author ztf
@@ -39,5 +48,38 @@ public abstract class F9WebappFile extends F9File {
     }
 
     @Override
-    public abstract void copyToPatch(VirtualFile directory);
+    public void copyToPatch(@NotNull VirtualFile directory) {
+        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
+        if(targetDirectory == null) {
+            return;
+        }
+        Module containingModule = ModuleUtil.findModuleForFile(virtualFile, project);
+        if(containingModule == null) {
+            throw new InvalidParameterException("not module file");
+        }
+        String path = containingModule.getName()+getWebRelativePath();
+        copyToTargetDirectory(targetDirectory, path);
+
+    }
+
+    protected void copyToTargetDirectory(PsiDirectory targetDirectory, String path) {
+        VirtualFile directoryIfMissing = null;
+        try {
+            directoryIfMissing = VfsUtil.createDirectoryIfMissing(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if(directoryIfMissing != null) {
+            PsiDirectory psiDirectory = PsiManager.getInstance(project).findDirectory(directoryIfMissing);
+            if(psiDirectory == null) {
+                return;
+            }
+            PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
+            if(file != null) {
+                psiDirectory.add(file);
+                targetDirectory.add(psiDirectory);
+            }
+        }
+    }
+
 }

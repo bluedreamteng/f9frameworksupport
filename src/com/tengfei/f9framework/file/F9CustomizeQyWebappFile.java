@@ -2,12 +2,14 @@ package com.tengfei.f9framework.file;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDirectory;
+import com.intellij.psi.PsiManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ztf
  */
-public class F9CustomizeQyWebappFile extends F9WebappFile {
+class F9CustomizeQyWebappFile extends F9WebappFile {
 
     public F9CustomizeQyWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
@@ -20,7 +22,12 @@ public class F9CustomizeQyWebappFile extends F9WebappFile {
 
     @Override
     public void copyToPatch(VirtualFile directory) {
-
+        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
+        if(targetDirectory == null) {
+            return;
+        }
+        String path = f9SettingsState.qyProjectName + "/" + f9SettingsState.qyProjectName + getWebRelativePath();
+        copyToTargetDirectory(targetDirectory,path);
     }
 
     @NotNull
