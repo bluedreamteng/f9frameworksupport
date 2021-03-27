@@ -3,22 +3,17 @@ package com.tengfei.f9framework.file;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDirectory;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
+import com.tengfei.f9framework.notification.F9Notifier;
 import com.tengfei.f9framework.setting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.security.InvalidParameterException;
 
 /**
  * @author ztf
  */
 public abstract class F9WebappFile extends F9File {
     protected F9SettingsState f9SettingsState;
+
     public F9WebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
         f9SettingsState = F9SettingsState.getInstance(project);
@@ -30,8 +25,10 @@ public abstract class F9WebappFile extends F9File {
      * @return 返回Web的路径
      */
     public String getWebPath() {
-        return getHost() + getWebRelativePath();
+        Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
+        return getHost() + "/" + moduleForFile.getName() + getWebRelativePath();
     }
+
 
 
     /**
@@ -44,42 +41,32 @@ public abstract class F9WebappFile extends F9File {
 
 
     public String getWebRelativePath() {
-        return virtualFile.getPath().split(f9SettingsState.webRootPath)[1];
+        String result = virtualFile.getPath().split(getWebRoot() + "/")[1];
+        if (virtualFile.getExtension() != null && "".equals(virtualFile.getExtension())) {
+            result = result.substring(0, result.indexOf("."));
+        }
+        return result;
+    }
+
+    public String getWebRoot() {
+        return f9SettingsState.webRootPath;
+    }
+
+    public String getContainingFileDirPath() {
+        if (!getWebRelativePath().contains("/")) {
+            //根目录
+            return "";
+        }
+       return getWebRelativePath().substring(0,getWebRelativePath().lastIndexOf("/"));
     }
 
     @Override
-    public void copyToPatch(@NotNull VirtualFile directory) {
-        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
-        if(targetDirectory == null) {
-            return;
+    public String getPatchDirRelativePath() {
+        Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
+        if(moduleForFile == null) {
+            F9Notifier.notifyMessage(project,"文件不属于任何模块");
+            throw new UnsupportedOperationException();
         }
-        Module containingModule = ModuleUtil.findModuleForFile(virtualFile, project);
-        if(containingModule == null) {
-            throw new InvalidParameterException("not module file");
-        }
-        String path = containingModule.getName()+getWebRelativePath();
-        copyToTargetDirectory(targetDirectory, path);
-
+        return moduleForFile.getName() + "/" + getContainingFileDirPath();
     }
-
-    protected void copyToTargetDirectory(PsiDirectory targetDirectory, String path) {
-        VirtualFile directoryIfMissing = null;
-        try {
-            directoryIfMissing = VfsUtil.createDirectoryIfMissing(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if(directoryIfMissing != null) {
-            PsiDirectory psiDirectory = PsiManager.getInstance(project).findDirectory(directoryIfMissing);
-            if(psiDirectory == null) {
-                return;
-            }
-            PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
-            if(file != null) {
-                psiDirectory.add(file);
-                targetDirectory.add(psiDirectory);
-            }
-        }
-    }
-
 }

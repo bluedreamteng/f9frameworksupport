@@ -35,7 +35,7 @@ public class F9SettingsComponent {
                 .addLabeledComponent(new JBLabel("Qy Project Name: "), qyProjectNameText, 1, false)
                 .addLabeledComponent(new JBLabel("Gl Deploy Host: "), glDeployHostText, 1, false)
                 .addLabeledComponent(new JBLabel("Qy Deploy Host: "), qyDeployHostText, 1, false)
-                .addLabeledComponent(new JBLabel("Qy Project Page Path: "), glProjectPagePathText, 1, false)
+                .addLabeledComponent(new JBLabel("Gl Project Page Path: "), glProjectPagePathText, 1, false)
                 .addLabeledComponent(new JBLabel("Qy Project Page Path: "), qyProjectPagePathText, 1, false)
                 .addComponent(enableF9ChromeSupport, 1)
                 .addComponentFillVertically(new JPanel(), 0)

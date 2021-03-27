@@ -7,16 +7,15 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author ztf
  */
-class F9StandardGlWebappFile extends F9WebappFile {
+class F9QyWebappFile extends F9WebappFile {
 
-    public F9StandardGlWebappFile(VirtualFile virtualFile, Project project) {
+    public F9QyWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
     }
-
 
     @NotNull
     @Override
     public String getHost() {
-        return f9SettingsState.glDeployHost;
+        return f9SettingsState.qyDeployHost;
     }
 }

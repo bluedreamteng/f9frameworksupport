@@ -4,8 +4,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.setting.F9SettingsState;
 
 /**
@@ -29,10 +27,10 @@ public class F9FileFactory {
         }
 
         if(settingsState.glProjectName.equals(moduleForFile.getName())) {
-            return new F9StandardGlWebappFile(file, project);
+            return new F9GlWebappFile(file, project);
         } else if (settingsState.qyProjectName.equals(moduleForFile.getName())) {
-            return new F9StandardQyWebappFile(file, project);
-        } else if(settingsState.customizeProjectName.equals(moduleForFile.getName())) {
+            return new F9QyWebappFile(file, project);
+        } else if(settingsState.customModuleName.equals(moduleForFile.getName())) {
             if (file.getPath().contains(settingsState.glProjectPagePath)) {
                 return new F9CustomizeGlWebappFile(file, project);
             } else if (file.getPath().contains(settingsState.qyProjectPagePath)) {
