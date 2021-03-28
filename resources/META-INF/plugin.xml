@@ -47,6 +47,7 @@
         </webBrowserUrlProvider>
 
         <projectService serviceImplementation="com.tengfei.f9framework.setting.F9SettingsState"/>
+        <projectService serviceImplementation="com.tengfei.f9framework.setting.F9ProjectSetting"/>
         <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.setting.F9SettingsConfigurable"
                                  id="com.tengfei.f9framework.setting.F9SettingsConfigurable"
                                  displayName="F9 Framework Support" nonDefaultProject="true"

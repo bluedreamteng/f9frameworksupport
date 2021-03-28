@@ -26,7 +26,27 @@ public abstract class F9File {
         this.project = project;
     }
 
-    protected void copyToTargetDirectory(PsiDirectory targetDirectory, String containingFileDirPath) {
+    /**
+     * 将文件复制到补丁包中
+     *
+     * @param directory 补丁包目录
+     */
+    public void copyToPatch(@NotNull VirtualFile directory) {
+        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
+        if(targetDirectory == null) {
+            return;
+        }
+
+        copyToTargetDirectory(targetDirectory,getPatchDirRelativePath());
+    }
+
+    /**
+     *
+     * @return 补丁包文件夹的相对路径
+     */
+    public abstract String getPatchDirRelativePath();
+
+    private void copyToTargetDirectory(PsiDirectory targetDirectory, String containingFileDirPath) {
         String ContainingFileDirPath = targetDirectory.getVirtualFile().getPath() + "/" + containingFileDirPath;
 
         VirtualFile directoryIfMissing = null;
@@ -56,24 +76,4 @@ public abstract class F9File {
             }
         }
     }
-
-    /**
-     * 将文件复制到补丁包中
-     *
-     * @param directory 补丁包目录
-     */
-    public void copyToPatch(@NotNull VirtualFile directory) {
-        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
-        if(targetDirectory == null) {
-            return;
-        }
-
-        copyToTargetDirectory(targetDirectory,getPatchDirRelativePath());
-    }
-
-    /**
-     *
-     * @return 补丁包文件夹的相对路径
-     */
-    public abstract String getPatchDirRelativePath();
 }

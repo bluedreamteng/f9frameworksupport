@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class TestAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project = e.getProject();
+       Project project = e.getProject();
         if (project == null) {
             throw new RuntimeException("project is null");
         }
@@ -39,6 +39,9 @@ public class TestAction extends AnAction {
             }
             F9Notifier.notifyMessage(project,"补丁包制作完成");
         });
+
+
+
 
     }
 

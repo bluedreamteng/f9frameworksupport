@@ -5,6 +5,7 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.notification.F9Notifier;
+import com.tengfei.f9framework.setting.F9ProjectSetting;
 import com.tengfei.f9framework.setting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,10 +14,12 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class F9WebappFile extends F9File {
     protected F9SettingsState f9SettingsState;
+    protected F9ProjectSetting projectSetting;
 
     public F9WebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
         f9SettingsState = F9SettingsState.getInstance(project);
+        projectSetting = F9ProjectSetting.getInstance(project);
     }
 
     /**
