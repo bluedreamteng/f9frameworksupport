@@ -54,8 +54,6 @@ public class F9FileFactory {
             }
         }
         return false;
-
-
     }
 
     private boolean isCustomizeModule(VirtualFile file, Project project) {

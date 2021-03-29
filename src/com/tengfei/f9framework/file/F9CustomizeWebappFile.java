@@ -32,9 +32,9 @@ public class F9CustomizeWebappFile extends F9WebappFile {
     @Override
     public String getPatchDirRelativePath() {
         if ("".equals(getContainingFileDirPath())) {
-            return f9SettingsState.qyProjectName + "/" + f9SettingsState.customizeProjectName;
+            return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath;
         }
-        return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.name + "/" + getContainingFileDirPath();
+        return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath + "/" + getContainingFileDirPath();
     }
 
     private CustomizeModuleInfo getCustomizeModuleInfo() {

@@ -61,8 +61,14 @@
             <keyboard-shortcut first-keystroke="alt V" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="com.tengfei.f9framework.action.TestAction" class="com.tengfei.f9framework.action.TestAction"
-                text="testaction" description="testaction">
+        <action id="com.tengfei.f9framework.action.GeneratePatchAction" class="com.tengfei.f9framework.action.GeneratePatchAction"
+                text="generatepatch" description="generatepatch">
+            <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
+        <action id="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
+                class="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
+                text="GenerateProjectSettingTemplate" description="GenerateProjectSettingTemplate">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

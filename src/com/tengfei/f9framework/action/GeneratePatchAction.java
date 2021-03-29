@@ -13,7 +13,7 @@ import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 
-public class TestAction extends AnAction {
+public class GeneratePatchAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
        Project project = e.getProject();
@@ -29,6 +29,7 @@ public class TestAction extends AnAction {
         VirtualFile directory = FileChooser.chooseFile(fileChooserDescriptor, project, null);
         if(directory == null) {
             F9Notifier.notifyWarning(project, "请选择目录");
+            return;
         }
 
         WriteCommandAction.runWriteCommandAction(project,()->{
