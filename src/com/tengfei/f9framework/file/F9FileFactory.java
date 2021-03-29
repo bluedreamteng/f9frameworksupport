@@ -4,6 +4,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.*;
+import com.intellij.psi.impl.file.PsiDirectoryFactory;
 import com.tengfei.f9framework.setting.F9CustomizeModule;
 import com.tengfei.f9framework.setting.F9ProjectSetting;
 import com.tengfei.f9framework.setting.F9SettingsState;
@@ -19,10 +21,23 @@ public class F9FileFactory {
     }
 
     public F9File createFile(VirtualFile file, Project project) {
+
+        PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
+        if(psiFile instanceof PsiJavaFile) {
+            return new F9JavaFile(file,project);
+        }
+
+        if("jar".equals(file.getExtension())) {
+            return new F9JarFile(file,project);
+        }
+
         Module moduleForFile = ModuleUtil.findModuleForFile(file,project);
         if (moduleForFile == null) {
             return new F9UnSupportFile(file, project);
         }
+
+
+
         F9SettingsState settingsState = F9SettingsState.getInstance(project);
 
         if (!(file.getPath().contains(settingsState.webRootPath))) {

@@ -46,7 +46,7 @@ public abstract class F9File {
      */
     public abstract String getPatchDirRelativePath();
 
-    private void copyToTargetDirectory(PsiDirectory targetDirectory, String containingFileDirPath) {
+    protected void copyToTargetDirectory(PsiDirectory targetDirectory, String containingFileDirPath) {
         String ContainingFileDirPath = targetDirectory.getVirtualFile().getPath() + "/" + containingFileDirPath;
 
         VirtualFile directoryIfMissing = null;
