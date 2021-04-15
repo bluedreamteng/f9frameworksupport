@@ -6,6 +6,9 @@ import com.intellij.notification.NotificationType;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * @author ztf
+ */
 public class F9Notifier {
 
     private static final NotificationGroup NOTIFICATION_GROUP =

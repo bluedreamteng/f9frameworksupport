@@ -5,10 +5,12 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
@@ -23,6 +25,7 @@ import org.jetbrains.jps.model.java.JavaSourceRootType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -95,11 +98,15 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
 
 
     private void copyJavaFileToCustomize(@NotNull PsiJavaFile psiJavaFile) {
-        F9SettingsState f9SettingsState = F9SettingsState.getInstance(psiJavaFile.getProject());
-        Module module = ModuleManager.getInstance(psiJavaFile.getProject()).findModuleByName(f9SettingsState.customModuleName);
-        if (module == null) {
+
+        ChooseModulesDialog chooseModulesDialog = new ChooseModulesDialog(psiJavaFile.getProject(), Arrays.asList(ModuleManager.getInstance(psiJavaFile.getProject()).getModules()), "choose  module", null);
+        chooseModulesDialog.setSingleSelectionMode();
+        chooseModulesDialog.show();
+        List<Module> chosenElements = chooseModulesDialog.getChosenElements();
+        if(chosenElements.size() == 0) {
             return;
         }
+        Module module = chosenElements.get(0);
         List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(module).getSourceRoots(JavaSourceRootType.SOURCE);
         if (CollectionUtils.isEmpty(sourceRoots)) {
             return;

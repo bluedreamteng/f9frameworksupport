@@ -6,6 +6,9 @@ import com.tengfei.f9framework.setting.F9CustomizeModule;
 import com.tengfei.f9framework.setting.F9StandardModule;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author ztf
+ */
 public class F9CustomizeWebappFile extends F9WebappFile {
     CustomizeModuleInfo customizeModuleInfo;
     public F9CustomizeWebappFile(VirtualFile virtualFile, Project project) {
