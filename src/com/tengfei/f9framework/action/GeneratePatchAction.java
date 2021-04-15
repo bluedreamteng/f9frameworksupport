@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 public class GeneratePatchAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-       Project project = e.getProject();
+        Project project = e.getProject();
         if (project == null) {
             throw new RuntimeException("project is null");
         }
@@ -27,21 +27,19 @@ public class GeneratePatchAction extends AnAction {
         }
         FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
         VirtualFile directory = FileChooser.chooseFile(fileChooserDescriptor, project, null);
-        if(directory == null) {
+        if (directory == null) {
             F9Notifier.notifyWarning(project, "请选择目录");
             return;
         }
 
-        WriteCommandAction.runWriteCommandAction(project,()->{
+        WriteCommandAction.runWriteCommandAction(project, () -> {
             F9FileFactory fileFactory = F9FileFactory.getInstance();
             for (VirtualFile file : data) {
                 F9File file1 = fileFactory.createFile(file, project);
                 file1.copyToPatch(directory);
             }
-            F9Notifier.notifyMessage(project,"补丁包制作完成");
+            F9Notifier.notifyMessage(project, "补丁包制作完成");
         });
-
-
 
 
     }

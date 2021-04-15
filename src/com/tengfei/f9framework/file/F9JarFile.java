@@ -25,9 +25,6 @@ public class F9JarFile extends F9File{
         }
     }
 
-
-
-
     @Override
     public String getPatchDirRelativePath() {
         throw new UnsupportedOperationException();

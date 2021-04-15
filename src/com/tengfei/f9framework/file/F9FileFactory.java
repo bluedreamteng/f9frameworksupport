@@ -4,8 +4,9 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.file.PsiDirectoryFactory;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.setting.F9CustomizeModule;
 import com.tengfei.f9framework.setting.F9ProjectSetting;
 import com.tengfei.f9framework.setting.F9SettingsState;
@@ -15,6 +16,8 @@ import com.tengfei.f9framework.setting.F9StandardModule;
  * @author ztf
  */
 public class F9FileFactory {
+
+    public static final String JAR_EXTENSION = "jar";
 
     public static F9FileFactory getInstance() {
         return new F9FileFactory();
@@ -27,7 +30,7 @@ public class F9FileFactory {
             return new F9JavaFile(file,project);
         }
 
-        if("jar".equals(file.getExtension())) {
+        if(JAR_EXTENSION.equals(file.getExtension())) {
             return new F9JarFile(file,project);
         }
 
@@ -35,8 +38,6 @@ public class F9FileFactory {
         if (moduleForFile == null) {
             return new F9UnSupportFile(file, project);
         }
-
-
 
         F9SettingsState settingsState = F9SettingsState.getInstance(project);
 
@@ -53,9 +54,6 @@ public class F9FileFactory {
         return new F9UnSupportFile(file,project);
     }
 
-    public F9WebappFile createWebappFile(VirtualFile file, Project project) {
-        return null;
-    }
 
     private boolean isStandardModule(VirtualFile file, Project project) {
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);

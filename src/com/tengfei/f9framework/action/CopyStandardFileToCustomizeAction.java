@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
-import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -43,7 +42,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
             return;
         }
         if (psiFile instanceof PsiJavaFile) {
-            copyJavaFileToCustomize((PsiJavaFile) psiFile);
+            copyJavaFileToTargetModule((PsiJavaFile) psiFile);
         }
         else {
             copyWebFileToCustomize(psiFile);
@@ -97,7 +96,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     }
 
 
-    private void copyJavaFileToCustomize(@NotNull PsiJavaFile psiJavaFile) {
+    private void copyJavaFileToTargetModule(@NotNull PsiJavaFile psiJavaFile) {
 
         ChooseModulesDialog chooseModulesDialog = new ChooseModulesDialog(psiJavaFile.getProject(), Arrays.asList(ModuleManager.getInstance(psiJavaFile.getProject()).getModules()), "choose  module", null);
         chooseModulesDialog.setSingleSelectionMode();
