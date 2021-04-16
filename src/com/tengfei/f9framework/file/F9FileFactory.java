@@ -9,8 +9,8 @@ import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.setting.F9CustomizeModule;
 import com.tengfei.f9framework.setting.F9ProjectSetting;
-import com.tengfei.f9framework.setting.F9SettingsState;
 import com.tengfei.f9framework.setting.F9StandardModule;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ztf
@@ -18,67 +18,85 @@ import com.tengfei.f9framework.setting.F9StandardModule;
 public class F9FileFactory {
 
     public static final String JAR_EXTENSION = "jar";
+    public static final String WEB_ROOT = "webapp";
 
     public static F9FileFactory getInstance() {
         return new F9FileFactory();
     }
 
-    public F9File createFile(VirtualFile file, Project project) {
+    public F9File createF9File(@NotNull VirtualFile file, @NotNull Project project) {
 
         PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
-        if(psiFile instanceof PsiJavaFile) {
-            return new F9JavaFile(file,project);
-        }
 
-        if(JAR_EXTENSION.equals(file.getExtension())) {
-            return new F9JarFile(file,project);
+        if (isJavaFile(psiFile)) {
+            return new F9JavaFile(file, project);
         }
-
-        Module moduleForFile = ModuleUtil.findModuleForFile(file,project);
-        if (moduleForFile == null) {
+        else if (isJarFile(file)) {
+            return new F9JarFile(file, project);
+        }
+        else if (isStandardWebappFile(file, project)) {
+            return new F9StandardWebappFile(file, project);
+        }
+        else if (isCustomizeWebappFile(file, project)) {
+            return new F9CustomizeWebappFile(file, project);
+        }
+        else {
             return new F9UnSupportFile(file, project);
         }
-
-        F9SettingsState settingsState = F9SettingsState.getInstance(project);
-
-        if (!(file.getPath().contains(settingsState.webRootPath))) {
-            return new F9UnSupportFile(file, project);
-        }
-        if(isStandardModule(file,project) ) {
-            return new F9StandardWebappFile(file,project);
-        }
-        if(isCustomizeModule(file,project)) {
-            return new F9CustomizeWebappFile(file,project);
-        }
-
-        return new F9UnSupportFile(file,project);
     }
 
 
-    private boolean isStandardModule(VirtualFile file, Project project) {
-        F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
-        Module moduleForFile = ModuleUtil.findModuleForFile(file,project);
-        if(moduleForFile == null) {
-            return false;
+    public F9WebappFile createF9WebAppFile(@NotNull VirtualFile file, @NotNull Project project) {
+        if (isStandardWebappFile(file, project)) {
+            return new F9StandardWebappFile(file, project);
         }
-        for(F9StandardModule standardModule:projectSetting.standardModules) {
-            if(standardModule.getName().equals(moduleForFile.getName())) {
-                return true;
+        else if (isCustomizeWebappFile(file, project)) {
+            return new F9CustomizeWebappFile(file, project);
+        }
+        else {
+            throw new RuntimeException("unsupported file, please check your operation");
+        }
+
+    }
+
+    private boolean isJarFile(VirtualFile file) {
+        return JAR_EXTENSION.equals(file.getExtension());
+    }
+
+    private boolean isJavaFile(PsiFile psiFile) {
+        if (psiFile != null) {
+            return psiFile instanceof PsiJavaFile;
+        }
+        return false;
+    }
+
+
+    private boolean isStandardWebappFile(VirtualFile file, Project project) {
+        F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
+        Module moduleForFile = ModuleUtil.findModuleForFile(file, project);
+        if (moduleForFile != null) {
+            for (F9StandardModule standardModule : projectSetting.standardModules) {
+                if (standardModule.getName().equals(moduleForFile.getName())) {
+                    if (file.getPath().contains(WEB_ROOT)) {
+                        return true;
+                    }
+                }
             }
         }
         return false;
     }
 
-    private boolean isCustomizeModule(VirtualFile file, Project project) {
+    private boolean isCustomizeWebappFile(VirtualFile file, Project project) {
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
-        Module moduleForFile = ModuleUtil.findModuleForFile(file,project);
-        if(moduleForFile == null) {
-            return false;
-        }
-        for(F9StandardModule standardModule:projectSetting.standardModules) {
-            for(F9CustomizeModule customizeModule:standardModule.customizeModuleList) {
-                if(customizeModule.getName().equals(moduleForFile.getName())) {
-                    return true;
+        Module moduleForFile = ModuleUtil.findModuleForFile(file, project);
+        if (moduleForFile != null) {
+            for (F9StandardModule standardModule : projectSetting.standardModules) {
+                for (F9CustomizeModule customizeModule : standardModule.customizeModuleList) {
+                    if (customizeModule.getName().equals(moduleForFile.getName())) {
+                        if (file.getPath().contains(customizeModule.getWebRoot())) {
+                            return true;
+                        }
+                    }
                 }
             }
         }

@@ -9,6 +9,9 @@ import com.tengfei.f9framework.setting.F9ProjectSetting;
 import com.tengfei.f9framework.setting.F9StandardModule;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author ztf
+ */
 public class GenerateProjectSettingTemplateAction extends AnAction {
 
 
@@ -17,12 +20,10 @@ public class GenerateProjectSettingTemplateAction extends AnAction {
         Project project =getEventProject(e);
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
         if(projectSetting.standardModules.size() != 0) {
+            F9Notifier.notifyError(project,"文件模板已经存在");
             return;
         }
-
         //生成配置文件模板
-        F9Notifier.notifyError(project,"this is hello world");
-
         F9StandardModule standardModule = new F9StandardModule();
         standardModule.name = "smart-site";
         standardModule.deployHost = "localhost:8011";
@@ -32,7 +33,9 @@ public class GenerateProjectSettingTemplateAction extends AnAction {
         customizeModule.customizeProjectPath = "szjs_sfzhgd";
         customizeModule.webRoot = "gl/szjs_sfzhgd";
         standardModule.customizeModuleList.add(customizeModule);
-
         projectSetting.standardModules.add(standardModule);
+
+        F9Notifier.notifyMessage(project,"文件模板生成完成");
+
     }
 }

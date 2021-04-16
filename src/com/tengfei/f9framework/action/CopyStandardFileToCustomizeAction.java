@@ -50,49 +50,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     }
 
     private void copyWebFileToCustomize(@NotNull PsiFile psiFile) {
-        //如何定位到目标文件夹
-        String path = psiFile.getContainingDirectory().getVirtualFile().getPath();
-        F9SettingsState f9SettingsState = F9SettingsState.getInstance(psiFile.getProject());
-        if (!path.contains(f9SettingsState.webRootPath) || path.contains(f9SettingsState.glProjectPagePath) || path.contains(f9SettingsState.qyProjectPagePath)) {
-            return;
-        }
 
-        WriteCommandAction.runWriteCommandAction(psiFile.getProject(), () -> {
-            String newPath = path.replace(f9SettingsState.webRootPath, f9SettingsState.webRootPath + "/" + f9SettingsState.customizeProjectName);
-            File file = new File(newPath);
-            if (!file.exists()) {
-                boolean success = file.mkdirs();
-                if (!success) {
-                    return;
-                }
-            }
-            VirtualFile directoryIfMissing;
-            try {
-                String realPath = file.toPath().toRealPath().toString();
-                file.delete();
-                directoryIfMissing = VfsUtil.createDirectoryIfMissing(realPath);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-            if (directoryIfMissing == null) {
-                return;
-            }
-
-            PsiDirectory directory = PsiManager.getInstance(psiFile.getProject()).findDirectory(directoryIfMissing);
-            if (directory == null) {
-                return;
-            }
-            PsiFile targetFile = directory.findFile(psiFile.getName());
-            if (targetFile == null) {
-                PsiFile copiedFile = directory.copyFileFrom(psiFile.getName(), psiFile);
-                FileEditorManager.getInstance(copiedFile.getProject()).openFile(copiedFile.getVirtualFile(), true);
-            }
-            else {
-                F9Notifier.notifyError(psiFile.getProject(), "file is already exist");
-            }
-        });
     }
 
 

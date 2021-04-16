@@ -27,11 +27,11 @@ public abstract class F9WebappFile extends F9File {
      *
      * @return 返回Web的路径
      */
-    public String getWebPath() {
+    public String getDeployWebPath() {
         Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
+        assert moduleForFile != null;
         return getHost() + "/" + moduleForFile.getName() + getWebRelativePath();
     }
-
 
 
     /**
@@ -46,13 +46,13 @@ public abstract class F9WebappFile extends F9File {
     public String getWebRelativePath() {
         String result = virtualFile.getPath().split(getWebRoot() + "/")[1];
         if (virtualFile.getExtension() != null && "".equals(virtualFile.getExtension())) {
-            result = result.substring(0, result.indexOf("."));
+            result = result.substring(0, result.indexOf('.'));
         }
         return result;
     }
 
     public String getWebRoot() {
-        return f9SettingsState.webRootPath;
+        return "webapp";
     }
 
     public String getContainingFileDirPath() {
@@ -60,14 +60,14 @@ public abstract class F9WebappFile extends F9File {
             //根目录
             return "";
         }
-       return getWebRelativePath().substring(0,getWebRelativePath().lastIndexOf("/"));
+        return getWebRelativePath().substring(0, getWebRelativePath().lastIndexOf('/'));
     }
 
     @Override
     public String getPatchDirRelativePath() {
         Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
-        if(moduleForFile == null) {
-            F9Notifier.notifyMessage(project,"文件不属于任何模块");
+        if (moduleForFile == null) {
+            F9Notifier.notifyMessage(project, "文件不属于任何模块");
             throw new UnsupportedOperationException();
         }
         return moduleForFile.getName() + "/" + getContainingFileDirPath();

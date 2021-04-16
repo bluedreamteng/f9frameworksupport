@@ -35,4 +35,16 @@ public class StringUtil {
         return count;
     }
 
+    public static boolean isBlank(String s) {
+        if(s == null || "".equals(s)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isNotBlank(String s) {
+        return !isBlank(s);
+    }
+
 }

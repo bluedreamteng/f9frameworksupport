@@ -35,7 +35,7 @@ public class GeneratePatchAction extends AnAction {
         WriteCommandAction.runWriteCommandAction(project, () -> {
             F9FileFactory fileFactory = F9FileFactory.getInstance();
             for (VirtualFile file : data) {
-                F9File file1 = fileFactory.createFile(file, project);
+                F9File file1 = fileFactory.createF9File(file, project);
                 file1.copyToPatch(directory);
             }
             F9Notifier.notifyMessage(project, "补丁包制作完成");

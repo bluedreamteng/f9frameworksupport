@@ -21,15 +21,6 @@ import org.jetbrains.annotations.Nullable;
 )
 public class F9SettingsState implements PersistentStateComponent<F9SettingsState> {
 
-    public String webRootPath = "webapp";
-    public String customizeProjectName = "szjs_sfzhgd";
-    public String glProjectName = "smart-site";
-    public String qyProjectName = "site-brain";
-    public String qyDeployHost = "localhost:8012";
-    public String glDeployHost = "localhost:8011";
-    public String qyProjectPagePath = "qy/szjs_sfzhgd";
-    public String glProjectPagePath ="gl/szjs_sfzhgd";
-    public String customModuleName = "szjs_custom_sfzhgd";
     public boolean enableChromeSupport = false;
 
     public static F9SettingsState getInstance(Project project) {

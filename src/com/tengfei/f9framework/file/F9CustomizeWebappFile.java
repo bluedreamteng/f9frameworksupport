@@ -17,7 +17,7 @@ public class F9CustomizeWebappFile extends F9WebappFile {
     }
 
     @Override
-    public String getWebPath() {
+    public String getDeployWebPath() {
         return getHost() + "/" + customizeModuleInfo.containingStandardPrjName + getWebRelativePath();
     }
 
