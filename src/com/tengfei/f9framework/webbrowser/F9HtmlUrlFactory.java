@@ -26,7 +26,11 @@ public class F9HtmlUrlFactory {
     public Url createF9HtmlUrl(@NotNull OpenInBrowserRequest request, @NotNull VirtualFile file) {
         settingsState = F9SettingsState.getInstance(request.getProject());
         F9WebappFile f9WebAppFile = F9FileFactory.getInstance().createF9WebAppFile(file, request.getProject());
-        return new F9HtmlUrl("http", null, f9WebAppFile.getDeployWebPath());
+        String deployWebPath = f9WebAppFile.getDeployWebPath();
+        if(deployWebPath.contains(".")) {
+            deployWebPath = deployWebPath.substring(0,deployWebPath.indexOf("."));
+        }
+        return new F9HtmlUrl("http", null, deployWebPath);
     }
 
 }

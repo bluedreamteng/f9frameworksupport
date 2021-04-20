@@ -30,7 +30,7 @@ public abstract class F9WebappFile extends F9File {
     public String getDeployWebPath() {
         Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
         assert moduleForFile != null;
-        return getHost() + "/" + moduleForFile.getName() + getWebRelativePath();
+        return getHost() + "/" + moduleForFile.getName() + "/" + getWebRelativePath();
     }
 
 
