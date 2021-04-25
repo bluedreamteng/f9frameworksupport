@@ -77,7 +77,7 @@ public class F9FileFactory {
         if (moduleForFile != null) {
             for (F9StandardModule standardModule : projectSetting.standardModules) {
                 if (standardModule.getName().equals(moduleForFile.getName())) {
-                    if (file.getPath().contains(WEB_ROOT)) {
+                    if (file.getPath().contains(WEB_ROOT) && file.getPath().split(WEB_ROOT).length == 2) {
                         return true;
                     }
                 }
@@ -93,7 +93,7 @@ public class F9FileFactory {
             for (F9StandardModule standardModule : projectSetting.standardModules) {
                 for (F9CustomizeModule customizeModule : standardModule.customizeModuleList) {
                     if (customizeModule.getName().equals(moduleForFile.getName())) {
-                        if (file.getPath().contains(customizeModule.getWebRoot())) {
+                        if (file.getPath().contains(customizeModule.getWebRoot()) && file.getPath().split(customizeModule.getWebRoot()).length == 2) {
                             return true;
                         }
                     }
