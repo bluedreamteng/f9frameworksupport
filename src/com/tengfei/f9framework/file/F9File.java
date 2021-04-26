@@ -33,15 +33,14 @@ public abstract class F9File {
      */
     public void copyToPatch(@NotNull VirtualFile directory) {
         PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
-        if(targetDirectory == null) {
+        if (targetDirectory == null) {
             return;
         }
 
-        copyToTargetDirectory(targetDirectory,getPatchDirRelativePath());
+        copyToTargetDirectory(targetDirectory, getPatchDirRelativePath());
     }
 
     /**
-     *
      * @return 补丁包文件夹的相对路径
      */
     public abstract String getPatchDirRelativePath();
@@ -52,7 +51,8 @@ public abstract class F9File {
         VirtualFile directoryIfMissing = null;
         try {
             directoryIfMissing = VfsUtil.createDirectoryIfMissing(ContainingFileDirPath);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
         if (directoryIfMissing != null) {
@@ -64,11 +64,13 @@ public abstract class F9File {
                 try {
                     PsiDirectory subdirectory = psiDirectory.createSubdirectory(virtualFile.getName());
                     VfsUtil.copyDirectory(this, virtualFile, subdirectory.getVirtualFile(), null);
-                } catch (IOException e) {
+                }
+                catch (IOException e) {
                     F9Notifier.notifyError(project, "文件夹复制失败");
                 }
 
-            } else {
+            }
+            else {
                 PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
                 if (file != null) {
                     psiDirectory.add(file);

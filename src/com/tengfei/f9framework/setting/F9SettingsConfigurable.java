@@ -9,6 +9,7 @@ import javax.swing.*;
 
 /**
  * Provides controller functionality for project settings.
+ *
  * @author ztf
  */
 public class F9SettingsConfigurable implements Configurable {

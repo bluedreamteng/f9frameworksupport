@@ -25,11 +25,11 @@ public class F9ActionReference extends PsiReferenceBase<PsiElement> implements P
     private final String action;
 
     /**
-     * @param element the element of the PSI tree
+     * @param element   the element of the PSI tree
      * @param textRange A text range defined by start and end (exclusive) offset
      */
-    public F9ActionReference(@NotNull PsiElement element, TextRange textRange,boolean isSoft) {
-        super(element, textRange,isSoft);
+    public F9ActionReference(@NotNull PsiElement element, TextRange textRange, boolean isSoft) {
+        super(element, textRange, isSoft);
         action = StringUtil.trim(element.getText().substring(textRange.getStartOffset(), textRange.getEndOffset()));
 
     }
@@ -58,7 +58,7 @@ public class F9ActionReference extends PsiReferenceBase<PsiElement> implements P
         Project project = myElement.getProject();
         List<LookupElement> result = new ArrayList<>();
         List<PsiAnnotationMemberValue> allAnnotationValue = F9Util.findAllAnnotationValue(project);
-        for(PsiAnnotationMemberValue annotationValue:allAnnotationValue){
+        for (PsiAnnotationMemberValue annotationValue : allAnnotationValue) {
             LookupElementRenderer<LookupElement> renderer = new LookupElementRenderer<LookupElement>() {
                 @Override
                 public void renderElement(LookupElement element, LookupElementPresentation presentation) {

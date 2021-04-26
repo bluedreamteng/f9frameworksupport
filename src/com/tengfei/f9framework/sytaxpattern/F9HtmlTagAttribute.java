@@ -6,7 +6,7 @@ package com.tengfei.f9framework.sytaxpattern;
 public class F9HtmlTagAttribute {
     public static String ACTION = "action";
 
-    public static String[] getSupportHtmlTagAttr(){
+    public static String[] getSupportHtmlTagAttr() {
         return new String[]{ACTION};
     }
 }

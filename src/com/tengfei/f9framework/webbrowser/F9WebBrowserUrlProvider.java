@@ -18,10 +18,11 @@ public class F9WebBrowserUrlProvider extends BuiltInWebBrowserUrlProvider {
     @Override
     protected Url getUrl(@NotNull OpenInBrowserRequest request, @NotNull VirtualFile file) {
         F9SettingsState f9SettingsState = F9SettingsState.getInstance(request.getProject());
-        if(f9SettingsState.enableChromeSupport){
-            return F9HtmlUrlFactory.getInstance().createF9HtmlUrl(request,file);
-        } else {
-            return super.getUrl(request,file);
+        if (f9SettingsState.enableChromeSupport) {
+            return F9HtmlUrlFactory.getInstance().createF9HtmlUrl(request, file);
+        }
+        else {
+            return super.getUrl(request, file);
         }
     }
 }

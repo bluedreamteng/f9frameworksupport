@@ -17,10 +17,10 @@ public class GenerateProjectSettingTemplateAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        Project project =getEventProject(e);
+        Project project = getEventProject(e);
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
-        if(projectSetting.standardModules.size() != 0) {
-            F9Notifier.notifyError(project,"文件模板已经存在");
+        if (projectSetting.standardModules.size() != 0) {
+            F9Notifier.notifyError(project, "文件模板已经存在");
             return;
         }
         //生成配置文件模板
@@ -35,7 +35,7 @@ public class GenerateProjectSettingTemplateAction extends AnAction {
         standardModule.customizeModuleList.add(customizeModule);
         projectSetting.standardModules.add(standardModule);
 
-        F9Notifier.notifyMessage(project,"文件模板生成完成");
+        F9Notifier.notifyMessage(project, "文件模板生成完成");
 
     }
 }

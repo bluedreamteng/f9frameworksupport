@@ -60,7 +60,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
         chooseModulesDialog.setSingleSelectionMode();
         chooseModulesDialog.show();
         List<Module> chosenElements = chooseModulesDialog.getChosenElements();
-        if(chosenElements.size() == 0) {
+        if (chosenElements.size() == 0) {
             return;
         }
         Module module = chosenElements.get(0);

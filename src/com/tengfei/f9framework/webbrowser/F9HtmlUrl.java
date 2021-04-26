@@ -170,7 +170,7 @@ public class F9HtmlUrl implements Url {
             return false;
         }
 
-        F9HtmlUrl url = (F9HtmlUrl)o;
+        F9HtmlUrl url = (F9HtmlUrl) o;
         return StringUtil.equals(scheme, url.scheme) && StringUtil.equals(authority, url.authority) && getPath().equals(url.getPath()) && StringUtil.equals(parameters, url.parameters);
     }
 
@@ -183,7 +183,7 @@ public class F9HtmlUrl implements Url {
             return false;
         }
 
-        F9HtmlUrl url = (F9HtmlUrl)o;
+        F9HtmlUrl url = (F9HtmlUrl) o;
         return StringUtil.equalsIgnoreCase(scheme, url.scheme) &&
                 StringUtil.equalsIgnoreCase(authority, url.authority) &&
                 getPath().equalsIgnoreCase(url.getPath()) &&

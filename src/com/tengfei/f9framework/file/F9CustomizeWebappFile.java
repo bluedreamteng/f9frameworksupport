@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class F9CustomizeWebappFile extends F9WebappFile {
     CustomizeModuleInfo customizeModuleInfo;
+
     public F9CustomizeWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
         customizeModuleInfo = getCustomizeModuleInfo();
@@ -42,12 +43,12 @@ public class F9CustomizeWebappFile extends F9WebappFile {
 
     private CustomizeModuleInfo getCustomizeModuleInfo() {
         CustomizeModuleInfo customizeModuleInfo = new CustomizeModuleInfo();
-        for(F9StandardModule standardModule:projectSetting.standardModules) {
-            for(F9CustomizeModule customizeModule:standardModule.customizeModuleList) {
-                if(virtualFile.getPath().contains(customizeModule.getWebRoot())) {
+        for (F9StandardModule standardModule : projectSetting.standardModules) {
+            for (F9CustomizeModule customizeModule : standardModule.customizeModuleList) {
+                if (virtualFile.getPath().contains(customizeModule.getWebRoot())) {
                     customizeModuleInfo.name = customizeModule.name;
                     customizeModuleInfo.containingStandardPrjName = standardModule.name;
-                    customizeModuleInfo.deployHost =standardModule.deployHost;
+                    customizeModuleInfo.deployHost = standardModule.deployHost;
                     customizeModuleInfo.webRoot = customizeModule.webRoot;
                     customizeModuleInfo.customizeProjectPath = customizeModule.customizeProjectPath;
                 }

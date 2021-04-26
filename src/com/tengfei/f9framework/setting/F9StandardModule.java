@@ -11,7 +11,6 @@ public class F9StandardModule {
     public List<F9CustomizeModule> customizeModuleList = new ArrayList<>();
 
 
-
     public String getName() {
         return name;
     }

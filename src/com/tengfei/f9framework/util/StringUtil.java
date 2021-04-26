@@ -36,9 +36,10 @@ public class StringUtil {
     }
 
     public static boolean isBlank(String s) {
-        if(s == null || "".equals(s)) {
+        if (s == null || "".equals(s)) {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }

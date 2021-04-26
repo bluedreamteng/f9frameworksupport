@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * @author ztf
  */
-public class F9StandardWebappFile extends F9WebappFile{
+public class F9StandardWebappFile extends F9WebappFile {
     public F9StandardWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
     }
@@ -32,11 +32,11 @@ public class F9StandardWebappFile extends F9WebappFile{
     @Override
     public String getHost() {
         Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
-        if(moduleForFile == null) {
+        if (moduleForFile == null) {
             return "";
         }
-        for(F9StandardModule standardModule:projectSetting.standardModules) {
-            if(moduleForFile.getName().equals(standardModule.getName())) {
+        for (F9StandardModule standardModule : projectSetting.standardModules) {
+            if (moduleForFile.getName().equals(standardModule.getName())) {
                 return standardModule.deployHost;
             }
         }
@@ -46,14 +46,14 @@ public class F9StandardWebappFile extends F9WebappFile{
     public void copyToCustomize() {
         //如何定位到目标文件夹
         PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
-        if(psiFile == null) {
+        if (psiFile == null) {
             throw new RuntimeException("file is valid");
         }
         Module moduleForFile = ModuleUtil.findModuleForFile(psiFile);
         assert moduleForFile != null;
         List<F9CustomizeModule> customizeListOfStandardModule = F9ProjectSetting.getInstance(project).findCustomizeListOfStandardModule(moduleForFile.getName());
-        if(customizeListOfStandardModule.size() == 0) {
-            F9Notifier.notifyWarning(project,"当前标版模块没有相关联的个性化模块");
+        if (customizeListOfStandardModule.size() == 0) {
+            F9Notifier.notifyWarning(project, "当前标版模块没有相关联的个性化模块");
         }
         WriteCommandAction.runWriteCommandAction(psiFile.getProject(), () -> {
             String path = psiFile.getContainingDirectory().getVirtualFile().getPath();

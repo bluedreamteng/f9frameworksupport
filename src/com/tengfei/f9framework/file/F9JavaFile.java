@@ -6,7 +6,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
 
-public class F9JavaFile extends F9File{
+public class F9JavaFile extends F9File {
     public F9JavaFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
     }
@@ -14,11 +14,11 @@ public class F9JavaFile extends F9File{
     @Override
     public String getPatchDirRelativePath() {
         PsiFile file = PsiManager.getInstance(project).findFile(virtualFile);
-        PsiJavaFile javaFile = (PsiJavaFile)file;
+        PsiJavaFile javaFile = (PsiJavaFile) file;
         String packageName = javaFile.getPackageName();
-        if("".equals(packageName)) {
+        if ("".equals(packageName)) {
             return "src";
         }
-        return "src" + "/" + packageName.replaceAll("\\.","/");
+        return "src" + "/" + packageName.replaceAll("\\.", "/");
     }
 }

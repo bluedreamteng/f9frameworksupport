@@ -16,7 +16,7 @@ public class F9ReferenceFactory {
     public static PsiReference[] createReferenceByElement(PsiElement element) {
 
         if (F9SyntaxPattern.is1StParamOfSupportJsActionCall(element)) {
-            return new PsiReference[]{new F9ActionReference(element, new TextRange(1, element.getText().length() - 1),false)};
+            return new PsiReference[]{new F9ActionReference(element, new TextRange(1, element.getText().length() - 1), false)};
         }
 
         if (F9SyntaxPattern.is1StParamOfSupportJsMethodCall(element) || F9SyntaxPattern.isSupportedAttributeValueOfHtmlTag(element)) {
@@ -29,13 +29,13 @@ public class F9ReferenceFactory {
 
     private static PsiReference[] createMethodReferenceByElement(PsiElement element) {
         if (element.getText().contains(PERIODOPERATOR)) {
-            if(StringUtil.countPeriodOperator(element.getText()) == 1) {
+            if (StringUtil.countPeriodOperator(element.getText()) == 1) {
                 return new PsiReference[]{new F9ActionMethodReference(element, new TextRange(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1), element.getText().split("\\.")[0], element.getText().split("\\.")[1]),
-                                            new F9ActionReference(element,new TextRange(1,element.getText().indexOf(PERIODOPERATOR)),false)};
+                        new F9ActionReference(element, new TextRange(1, element.getText().indexOf(PERIODOPERATOR)), false)};
             }
             return new PsiReference[]{new F9ActionMethodNullReference(element, new TextRange(1, element.getText().length() - 1))};
         }
         return new PsiReference[]{new F9ActionMethodReference(element, new TextRange(1, element.getText().length() - 1)),
-                new F9ActionReference(element, new TextRange(1, element.getText().length() - 1),true)};
+                new F9ActionReference(element, new TextRange(1, element.getText().length() - 1), true)};
     }
 }

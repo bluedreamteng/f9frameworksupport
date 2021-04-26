@@ -63,10 +63,10 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         WriteCommandAction.runWriteCommandAction(project, () -> {
             createImplClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
             PsiFile classByInterface = createClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
-            if(classByInterface != null) {
+            if (classByInterface != null) {
                 //这里生成的psifile只存在于内存中 所以不能用psifile.getVirtualFile()获取
                 VirtualFile virtualFile = VfsUtil.refreshAndFindChild(finalImplDirectory.getVirtualFile(), classByInterface.getName());
-                FileEditorManager.getInstance(project).openFile(virtualFile,true);
+                FileEditorManager.getInstance(project).openFile(virtualFile, true);
             }
         });
     }
@@ -92,7 +92,7 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
             return javaFile;
         }
         else {
-            F9Notifier.notifyError(javaFile.getProject(),"file is adready exits");
+            F9Notifier.notifyError(javaFile.getProject(), "file is adready exits");
         }
         return null;
     }
@@ -116,7 +116,7 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
             return javaFile;
         }
         else {
-            F9Notifier.notifyError(javaFile.getProject(),"file is adready exits");
+            F9Notifier.notifyError(javaFile.getProject(), "file is adready exits");
         }
         return null;
     }

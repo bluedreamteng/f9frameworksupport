@@ -25,9 +25,10 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
     public static F9ProjectSetting getInstance(Project project) {
         F9ProjectSetting f9ProjectSetting = ServiceManager.getService(project, F9ProjectSetting.class);
         boolean valid = f9ProjectSetting.checkValid();
-        if(valid) {
+        if (valid) {
             return f9ProjectSetting;
-        } else {
+        }
+        else {
             throw new RuntimeException("the project setting is not valid,please check your settings");
         }
 
@@ -66,7 +67,7 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
 
     public List<F9CustomizeModule> findCustomizeListOfStandardModule(String standardModuleName) {
         for (F9StandardModule standardModule : standardModules) {
-            if(standardModule.getName().equals(standardModuleName)) {
+            if (standardModule.getName().equals(standardModuleName)) {
                 return standardModule.customizeModuleList;
             }
         }
