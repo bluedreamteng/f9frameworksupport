@@ -2,6 +2,7 @@ package com.tengfei.f9framework.file;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.tengfei.f9framework.notification.F9Notifier;
 import com.tengfei.f9framework.setting.F9CustomizeModule;
 import com.tengfei.f9framework.setting.F9StandardModule;
 import org.jetbrains.annotations.NotNull;
@@ -39,6 +40,11 @@ public class F9CustomizeWebappFile extends F9WebappFile {
             return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath;
         }
         return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath + "/" + getContainingFileDirPath();
+    }
+
+    @Override
+    public void copyToCustomize() {
+        F9Notifier.notifyError(project,virtualFile.getName() +  "不支持的操作");
     }
 
     private CustomizeModuleInfo getCustomizeModuleInfo() {

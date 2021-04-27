@@ -16,6 +16,8 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
+import com.tengfei.f9framework.file.F9FileFactory;
+import com.tengfei.f9framework.file.F9WebappFile;
 import com.tengfei.f9framework.notification.F9Notifier;
 import com.tengfei.f9framework.setting.F9SettingsState;
 import org.apache.commons.collections.CollectionUtils;
@@ -50,7 +52,8 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     }
 
     private void copyWebFileToCustomize(@NotNull PsiFile psiFile) {
-
+        F9WebappFile f9WebAppFile = F9FileFactory.getInstance().createF9WebAppFile(psiFile.getVirtualFile(), psiFile.getProject());
+        f9WebAppFile.copyToCustomize();
     }
 
 
