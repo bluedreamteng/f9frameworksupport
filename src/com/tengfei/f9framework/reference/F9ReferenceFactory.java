@@ -32,7 +32,7 @@ public class F9ReferenceFactory {
     private static PsiReference[] createMethodReferenceByElement(PsiElement element) {
         if (element.getText().contains(PERIODOPERATOR)) {
             if (StringUtil.countPeriodOperator(element.getText()) == 1) {
-                return new PsiReference[]{new F9ActionMethodReference(element, new TextRange(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1), element.getText().split("\\.")[0], element.getText().split("\\.")[1]),
+                return new PsiReference[]{new F9MethodReference(element, new TextRange(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1), element.getText().split("\\.")[0], element.getText().split("\\.")[1]),
                         new F9ActionReference(element, new TextRange(1, element.getText().indexOf(PERIODOPERATOR)), false)};
             }
             else {
@@ -40,7 +40,7 @@ public class F9ReferenceFactory {
             }
         }
         else {
-            return new PsiReference[]{new F9ActionMethodReference(element, new TextRange(1, element.getText().length() - 1)),
+            return new PsiReference[]{new F9MethodReference(element, new TextRange(1, element.getText().length() - 1)),
                     new F9ActionReference(element, new TextRange(1, element.getText().length() - 1), true)};
         }
     }

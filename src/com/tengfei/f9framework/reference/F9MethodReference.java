@@ -18,18 +18,18 @@ import java.util.List;
  *
  * @author ztf
  */
-public class F9ActionMethodReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference {
+public class F9MethodReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference {
 
     private final String methodName;
     private final String annotationValue;
 
-    public F9ActionMethodReference(@NotNull PsiElement element, TextRange textRange) {
+    public F9MethodReference(@NotNull PsiElement element, TextRange textRange) {
         super(element, textRange);
         methodName = StringUtil.trim(element.getText().substring(textRange.getStartOffset(), textRange.getEndOffset()));
         annotationValue = StringUtil.trim(getInitPageUrl());
     }
 
-    public F9ActionMethodReference(@NotNull PsiElement element, TextRange textRange, String annotationValue, String methodName) {
+    public F9MethodReference(@NotNull PsiElement element, TextRange textRange, String annotationValue, String methodName) {
         super(element, textRange);
         this.methodName = StringUtil.trim(methodName);
         this.annotationValue = StringUtil.trim(annotationValue);
