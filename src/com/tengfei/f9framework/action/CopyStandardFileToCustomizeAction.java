@@ -10,7 +10,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
@@ -19,13 +18,10 @@ import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.file.F9WebappFile;
 import com.tengfei.f9framework.notification.F9Notifier;
-import com.tengfei.f9framework.setting.F9SettingsState;
 import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.jps.model.java.JavaSourceRootType;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,7 +37,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         PsiFile psiFile = anActionEvent.getData(CommonDataKeys.PSI_FILE);
         if (psiFile == null) {
-            return;
+            throw new RuntimeException("文件非法");
         }
         if (psiFile instanceof PsiJavaFile) {
             copyJavaFileToTargetModule((PsiJavaFile) psiFile);
