@@ -10,7 +10,7 @@ import com.intellij.psi.xml.XmlAttribute;
  */
 public class F9SyntaxPattern {
 
-    public static boolean is1StParamOfSupportJsActionCall(PsiElement element) {
+    public static boolean is1StParamOfSupportActionCall(PsiElement element) {
         if (is1stParamOfJsMethodCall(element)) {
             JSCallExpression jsCallExpression = PsiTreeUtil.getParentOfType(element, JSCallExpression.class);
             assert jsCallExpression != null;

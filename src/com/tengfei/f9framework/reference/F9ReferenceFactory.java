@@ -5,6 +5,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.tengfei.f9framework.sytaxpattern.F9SyntaxPattern;
 import com.tengfei.f9framework.util.StringUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ztf
@@ -15,7 +16,11 @@ public class F9ReferenceFactory {
 
     public static PsiReference[] createReferenceByElement(PsiElement element) {
 
-        if (F9SyntaxPattern.is1StParamOfSupportJsActionCall(element)) {
+        if (!notEmpty(element.getText())) {
+            return PsiReference.EMPTY_ARRAY;
+        }
+
+        if (F9SyntaxPattern.is1StParamOfSupportActionCall(element)) {
             return new PsiReference[]{new F9ActionReference(element,
                     new TextRange(1, element.getText().length() - 1), false)};
         }
@@ -32,7 +37,10 @@ public class F9ReferenceFactory {
     private static PsiReference[] createMethodReferenceByElement(PsiElement element) {
         if (element.getText().contains(PERIODOPERATOR)) {
             if (StringUtil.countPeriodOperator(element.getText()) == 1) {
-                return new PsiReference[]{new F9MethodReference(element, new TextRange(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1), element.getText().split("\\.")[0], element.getText().split("\\.")[1]),
+                String annotationValue = element.getText().substring(1, element.getText().indexOf(PERIODOPERATOR));
+                String methodName = element.getText().substring(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1);
+                TextRange methodTextRange = new TextRange(element.getText().indexOf(PERIODOPERATOR) + 1, element.getText().length() - 1);
+                return new PsiReference[]{new F9MethodReference(element, methodTextRange, annotationValue, methodName),
                         new F9ActionReference(element, new TextRange(1, element.getText().indexOf(PERIODOPERATOR)), false)};
             }
             else {
@@ -43,5 +51,9 @@ public class F9ReferenceFactory {
             return new PsiReference[]{new F9MethodReference(element, new TextRange(1, element.getText().length() - 1)),
                     new F9ActionReference(element, new TextRange(1, element.getText().length() - 1), true)};
         }
+    }
+
+    private static boolean notEmpty(@NotNull String text) {
+        return !"''".equals(text) && !"\"\"".equals(text);
     }
 }

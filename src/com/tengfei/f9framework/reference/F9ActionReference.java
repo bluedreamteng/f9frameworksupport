@@ -38,7 +38,7 @@ public class F9ActionReference extends PsiReferenceBase<PsiElement> implements P
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiClass> psiElements = F9Util.findJavaClassByAnnotationValue(project, action);
+        final List<PsiClass> psiElements = F9Util.findJavaClass(project, action);
         List<ResolveResult> results = new ArrayList<>();
         for (PsiClass psiElement : psiElements) {
             results.add(new PsiElementResolveResult(psiElement));

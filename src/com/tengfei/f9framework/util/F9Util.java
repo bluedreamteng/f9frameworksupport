@@ -16,14 +16,14 @@ import java.util.List;
  */
 public class F9Util {
 
-    public static List<PsiMethod> findJavaMethodByAnnotationValueAndMethodName(Project project,
-                                                                               String annotationValue,
-                                                                               String methodName) {
+    public static List<PsiMethod> findJavaMethod(@NotNull Project project,
+                                                 String annotationValue,
+                                                 String methodName) {
         List<PsiMethod> psiMethods = new ArrayList<>();
         if (methodName == null || annotationValue == null) {
             return psiMethods;
         }
-        List<PsiClass> allPsiClasses = findJavaClassByAnnotationValue(project, annotationValue);
+        List<PsiClass> allPsiClasses = findJavaClass(project, annotationValue);
 
         for (PsiClass psiClass : allPsiClasses) {
             PsiMethod[] methods = psiClass.getMethods();
@@ -33,7 +33,6 @@ public class F9Util {
                 }
             }
         }
-
         return psiMethods;
 
     }
@@ -43,7 +42,7 @@ public class F9Util {
         if (annotationValue == null) {
             return psiMethods;
         }
-        List<PsiClass> allPsiClasses = findJavaClassByAnnotationValue(project, annotationValue);
+        List<PsiClass> allPsiClasses = findJavaClass(project, annotationValue);
 
         for (PsiClass psiClass : allPsiClasses) {
             PsiMethod[] methods = psiClass.getMethods();
@@ -79,7 +78,7 @@ public class F9Util {
      * @return the set of PsiElements
      */
     @NotNull
-    public static List<PsiClass> findJavaClassByAnnotationValue(Project project, String
+    public static List<PsiClass> findJavaClass(Project project, String
             annotationValue) {
         List<PsiClass> result = new ArrayList<>();
 

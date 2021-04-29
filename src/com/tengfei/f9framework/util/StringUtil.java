@@ -8,13 +8,10 @@ import java.util.regex.Pattern;
  */
 public class StringUtil {
 
-    public static final Pattern PERIODOPERATORPATTERN = Pattern.compile("\\.");
+    public static final Pattern PERIOD_OPERATOR_PATTERN = Pattern.compile("\\.");
 
     public static String trim(String s) {
-        if (s != null) {
-            return s.replaceAll("'", "").replaceAll("\"", "");
-        }
-        return "";
+        return s == null ? null : s.replaceAll("'", "").replaceAll("\"", "");
     }
 
 
@@ -27,7 +24,7 @@ public class StringUtil {
 
 
     public static int countPeriodOperator(String text) {
-        Matcher matcher = PERIODOPERATORPATTERN.matcher(text);
+        Matcher matcher = PERIOD_OPERATOR_PATTERN.matcher(text);
         int count = 0;
         while (matcher.find()) {
             count++;
@@ -36,12 +33,7 @@ public class StringUtil {
     }
 
     public static boolean isBlank(String s) {
-        if (s == null || "".equals(s)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return s == null || "".equals(s);
     }
 
     public static boolean isNotBlank(String s) {
