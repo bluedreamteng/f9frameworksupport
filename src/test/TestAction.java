@@ -78,14 +78,15 @@ public class TestAction extends AnAction {
     private void appendOtherRequestBodyResult(HttpRequestInfo requestInfo, StringBuilder result) {
         Map<String, String> paramMap = parseRequestParam(requestInfo.getRequestBody());
         if (paramMap.isEmpty()) {
-            result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, null, HttpUtil.POST_METHOD, HttpUtil.RTN_TYPE_STRING);");
+            result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, null, \""+requestInfo.getMethodName()+"\", HttpUtil.RTN_TYPE_STRING);");
         } else {
             result.append("Map<String,String> paramMap = new HashMap<>();");
+            result.append("\n");
             for (Map.Entry<String, String> params : paramMap.entrySet()) {
                 result.append("paramMap.put(\"" + params.getKey() + "\",\"" + params.getValue() + "\");");
                 result.append("\n");
             }
-            result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, paramMap, HttpUtil.POST_METHOD, HttpUtil.RTN_TYPE_STRING);");
+            result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, paramMap, \""+requestInfo.getMethodName()+"\", HttpUtil.RTN_TYPE_STRING);");
         }
 
     }
@@ -98,11 +99,11 @@ public class TestAction extends AnAction {
             result.append("params.put(\"" + item.getKey() + "\", " + item.getValue() + ");");
             result.append("\n");
         }
-        result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, JSON.toJSONString(params), HttpUtil.POST_METHOD, HttpUtil.RTN_TYPE_STRING);");
+        result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, JSON.toJSONString(params), \""+requestInfo.getMethodName()+"\", HttpUtil.RTN_TYPE_STRING);");
     }
 
     private void appendNoRequestBodyResult(HttpRequestInfo requestInfo, StringBuilder result) {
-        result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, null, HttpUtil.POST_METHOD, HttpUtil.RTN_TYPE_STRING);");
+        result.append("String resp = HttpUtil.doHttp(\"" + requestInfo.getUrl() + "\", headerMap, null, \""+requestInfo.getMethodName()+"\", HttpUtil.RTN_TYPE_STRING);");
         result.append("\n");
     }
 
@@ -124,7 +125,11 @@ public class TestAction extends AnAction {
         String[] params = requestParam.split("&");
         for (String param : params) {
             String[] keyValue = param.split("=");
-            result.put(keyValue[0], keyValue[1]);
+            if (keyValue.length < 2) {
+                result.put(keyValue[0], "");
+            } else {
+                result.put(keyValue[0], keyValue[1]);
+            }
         }
         return result;
     }
