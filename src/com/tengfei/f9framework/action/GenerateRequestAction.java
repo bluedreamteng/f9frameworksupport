@@ -1,4 +1,4 @@
-package test;
+package com.tengfei.f9framework.action;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,6 +13,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ws.http.request.HttpRequestVariableSubstitutor;
 import com.intellij.ws.http.request.psi.HttpHeaderField;
 import com.intellij.ws.http.request.psi.HttpRequest;
+import com.tengfei.f9framework.common.HttpRequestInfo;
+import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.datatransfer.StringSelection;
@@ -20,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TestAction extends AnAction {
+public class GenerateRequestAction extends AnAction {
     public static final String HTTP_POST = "POST";
     public static final String HTTP_GET = "GET";
 
@@ -53,6 +55,8 @@ public class TestAction extends AnAction {
         String requestMethod = generateRequestMethod(requestInfo);
 
         CopyPasteManager.getInstance().setContents(new StringSelection(requestMethod));
+
+        F9Notifier.notifyMessage(project,"请求方法已生成至剪切板!");
 
     }
 

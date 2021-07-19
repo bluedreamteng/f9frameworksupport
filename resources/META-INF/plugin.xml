@@ -72,7 +72,8 @@
                 text="GenerateProjectSettingTemplate" description="GenerateProjectSettingTemplate">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="test.TestAction" class="test.TestAction" text="test" description="test">
+        <action id="com.tengfei.f9framework.action.GenerateRequestAction" class="com.tengfei.f9framework.action.GenerateRequestAction" text="generaterequestaction" description="generaterequestaction">
+            <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>

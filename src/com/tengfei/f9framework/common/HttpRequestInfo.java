@@ -1,4 +1,4 @@
-package test;
+package com.tengfei.f9framework.common;
 
 import java.util.HashMap;
 import java.util.Map;
