@@ -13,7 +13,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ws.http.request.HttpRequestVariableSubstitutor;
 import com.intellij.ws.http.request.psi.HttpHeaderField;
 import com.intellij.ws.http.request.psi.HttpRequest;
-import com.tengfei.f9framework.common.HttpRequestInfo;
+import com.tengfei.f9framework.entity.HttpRequestInfo;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 

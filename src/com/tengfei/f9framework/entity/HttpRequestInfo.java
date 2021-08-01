@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.common;
+package com.tengfei.f9framework.entity;
 
 import java.util.HashMap;
 import java.util.Map;

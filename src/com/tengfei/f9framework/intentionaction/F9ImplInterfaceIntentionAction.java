@@ -53,16 +53,16 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         PsiFileFactory fileFactory = PsiFileFactory.getInstance(project);
         PsiElementFactory elementFactory = PsiElementFactory.getInstance(project);
         //查找特定接口的类
-        PsiClass targetClass = (PsiClass) element.getParent();
-        PsiDirectory containingDirectory = targetClass.getContainingFile().getContainingDirectory();
+        PsiClass targetInterface = (PsiClass) element.getParent();
+        PsiDirectory containingDirectory = targetInterface.getContainingFile().getContainingDirectory();
         PsiDirectory implDirectory = containingDirectory.getParent().findSubdirectory("impl");
         if (implDirectory == null) {
             implDirectory = containingDirectory.getParent().createSubdirectory("impl");
         }
         PsiDirectory finalImplDirectory = implDirectory;
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            createImplClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
-            PsiFile classByInterface = createClassByInterface(fileFactory, elementFactory, targetClass, finalImplDirectory);
+            createImplClassByInterface(fileFactory, elementFactory, targetInterface, finalImplDirectory);
+            PsiFile classByInterface = createClassByInterface(fileFactory, elementFactory, targetInterface, finalImplDirectory);
             if (classByInterface != null) {
                 //这里生成的psifile只存在于内存中 所以不能用psifile.getVirtualFile()获取
                 VirtualFile virtualFile = VfsUtil.refreshAndFindChild(finalImplDirectory.getVirtualFile(), classByInterface.getName());
@@ -93,8 +93,8 @@ public class F9ImplInterfaceIntentionAction extends PsiElementBaseIntentionActio
         }
         else {
             F9Notifier.notifyError(javaFile.getProject(), "file is adready exits");
+            return null;
         }
-        return null;
     }
 
 
