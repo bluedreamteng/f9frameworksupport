@@ -22,6 +22,8 @@ public class TableInfo {
      */
     private DbTable original;
 
+    private PathConfig pathConfig;
+
     /**
      * 表名（首字母大写）
      */
@@ -44,11 +46,12 @@ public class TableInfo {
      */
     private List<ColumnInfo> otherColumn;
 
-    public TableInfo(DbTable original) {
+    public TableInfo(DbTable original,PathConfig pathConfig) {
         if(original == null) {
             throw new RuntimeException("表信息为空");
         }
         this.original = original;
+        this.pathConfig = pathConfig;
         // 设置原属对象
         setOriginal(original);
         // 设置类名
@@ -90,6 +93,21 @@ public class TableInfo {
 
     public String getEntityName() {
         return name;
+    }
+
+    public  String getEntityQualifiedName() {
+        if("".equals(pathConfig.getEntityPackageName())) {
+            return getEntityName();
+        }
+        return pathConfig.getEntityPackageName() + "." + getEntityName();
+    }
+
+
+    public  String getServiceInterfaceQualifiedName() {
+        if("".equals(pathConfig.getServiceInterfacePackageName())) {
+            return getServiceInterfaceName();
+        }
+        return pathConfig.getServiceInterfacePackageName() + "." + getServiceInterfaceName();
     }
 
     public String getServiceInterfaceName() {

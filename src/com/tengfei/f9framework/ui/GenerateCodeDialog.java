@@ -110,8 +110,8 @@ public class GenerateCodeDialog extends JDialog {
         // add your code here
         dispose();
         if (StringUtil.isNotBlank(getSelectedModule()) && getSelectedPackage() != null) {
-            TableInfo tableInfo = new TableInfo(dbTable);
             PathConfig pathConfig = new PathConfig(getSelectedModule(), getSelectedPackage(), isCreateDefaultPackage());
+            TableInfo tableInfo = new TableInfo(dbTable,pathConfig);
             if (isEntitySelected()) {
                 codeGenerateService.generateEntityByTableInfoAndPathConfig(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "entity生成完毕");
