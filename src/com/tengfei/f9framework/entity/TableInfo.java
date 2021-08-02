@@ -88,6 +88,22 @@ public class TableInfo {
         }
     }
 
+    public String getEntityName() {
+        return name;
+    }
+
+    public String getServiceInterfaceName() {
+        return "I"+name+"Service";
+    }
+
+    public String getServiceImplName() {
+        return name+"Service"+"Impl";
+    }
+
+    public String getServiceName() {
+        return name+"Service";
+    }
+
     public DbTable getOriginal() {
         return original;
     }

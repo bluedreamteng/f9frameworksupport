@@ -4,6 +4,7 @@ import com.intellij.openapi.util.text.StringUtil;
 
 /**
  * 命名工具类
+ * @author ztf
  */
 public class NameUtils {
     public static String toCamelCaseWithFirstUpper(String name) {

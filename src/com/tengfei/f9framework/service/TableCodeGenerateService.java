@@ -17,7 +17,17 @@ public interface TableCodeGenerateService {
         return ServiceManager.getService(project, TableCodeGenerateService.class);
     }
 
+    /**
+     * 构造实体类文件
+     * @param tableInfo 表信息
+     * @param pathConfig 路径配置
+     */
     void generateEntityByTableInfoAndPathConfig(TableInfo tableInfo, PathConfig pathConfig);
 
+    /**
+     * 构造service类文件
+     * @param tableInfo 表信息
+     * @param pathConfig 路径配置
+     */
     void generateServiceByTableInfoAndPathConfig(TableInfo tableInfo, PathConfig pathConfig);
 }

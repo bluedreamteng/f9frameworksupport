@@ -1,5 +1,8 @@
 package com.tengfei.f9framework.entity;
 
+/**
+ * @author ztf
+ */
 public class PathConfig {
     private final String moduleName;
 
@@ -19,22 +22,24 @@ public class PathConfig {
 
     public String getEntityPackageName() {
         String result = "";
-        if(isCreateDefaultPackage()) {
-            if("".equals(packageName)) {
+        if (isCreateDefaultPackage()) {
+            if ("".equals(packageName)) {
                 result = packageName + "api.entity";
-            } else {
+            }
+            else {
                 result = packageName + ".api.entity";
             }
         }
         return result;
     }
 
-    public String getServicePackageName() {
+    public String getServiceInterfacePackageName() {
         String result = "";
-        if(isCreateDefaultPackage()) {
-            if("".equals(packageName)) {
+        if (isCreateDefaultPackage()) {
+            if ("".equals(packageName)) {
                 result = packageName + "api";
-            } else {
+            }
+            else {
                 result = packageName + ".api";
             }
         }
@@ -43,14 +48,19 @@ public class PathConfig {
 
     public String getServiceImplPackageName() {
         String result = "";
-        if(isCreateDefaultPackage()) {
-            if("".equals(packageName)) {
+        if (isCreateDefaultPackage()) {
+            if ("".equals(packageName)) {
                 result = packageName + "api.impl";
-            } else {
+            }
+            else {
                 result = packageName + ".api.impl";
             }
         }
         return result;
+    }
+
+    public String getServicePackageName() {
+        return getServiceImplPackageName();
     }
 
     public boolean isCreateDefaultPackage() {
