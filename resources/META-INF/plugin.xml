@@ -80,7 +80,7 @@
             <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="TestAction" class="test.TestAction" text="TestAction" description="TestAction">
+        <action id="TestAction" class="com.tengfei.f9framework.action.GenerateTableCodeAction" text="Generate Table Code" description="Generate table code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
     </actions>

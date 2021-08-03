@@ -1,4 +1,4 @@
-package test;
+package com.tengfei.f9framework.action;
 
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -7,7 +7,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.ui.GenerateCodeDialog;
 
-public class TestAction extends AnAction {
+public class GenerateTableCodeAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
