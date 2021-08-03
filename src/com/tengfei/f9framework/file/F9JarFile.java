@@ -6,8 +6,12 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.setting.F9ProjectSetting;
 import com.tengfei.f9framework.setting.F9StandardModule;
+import com.tengfei.f9framework.util.FileUtils;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author ztf
+ */
 public class F9JarFile extends F9File {
     public F9JarFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
@@ -16,12 +20,11 @@ public class F9JarFile extends F9File {
     @Override
     public void copyToPatch(@NotNull VirtualFile directory) {
         PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
-        if (targetDirectory == null) {
-            return;
-        }
+        assert targetDirectory != null;
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
         for (F9StandardModule standardModule : projectSetting.standardModules) {
-            copyToTargetDirectory(targetDirectory, standardModule.getName() + "/" + "WEB-INF/lib");
+            String containingFileDir = targetDirectory + "/" + standardModule.getName() + "/" + "WEB-INF/lib";
+            FileUtils.copyFileToTargetDirectory(containingFileDir, psiFile);
         }
     }
 

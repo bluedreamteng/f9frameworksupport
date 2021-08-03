@@ -29,6 +29,7 @@
     <depends>JavaScript</depends>
     <depends>com.jetbrains.restClient</depends>
     <depends>com.intellij.database</depends>
+    <depends>com.intellij.javaee</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
@@ -51,22 +52,25 @@
         <projectService serviceImplementation="com.tengfei.f9framework.setting.F9SettingsState"/>
         <projectService serviceImplementation="com.tengfei.f9framework.setting.F9ProjectSetting"/>
         <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.setting.F9SettingsConfigurable"
-                                 id="com.tengfei.f9framework.setting.F9SettingsConfigurable"
-                                 displayName="F9 Framework Support" nonDefaultProject="true"
+                             id="com.tengfei.f9framework.setting.F9SettingsConfigurable"
+                             displayName="F9 Framework Support" nonDefaultProject="true"
         />
 
-        <projectService serviceInterface="com.tengfei.f9framework.service.TableCodeGenerateService" serviceImplementation="com.tengfei.f9framework.service.impl.TableCodeGenerateServiceImpl"/>
+        <projectService serviceInterface="com.tengfei.f9framework.service.TableCodeGenerateService"
+                        serviceImplementation="com.tengfei.f9framework.service.impl.TableCodeGenerateServiceImpl"/>
 
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction" class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
+        <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
+                class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
                 text="copy standard file" description="copy standard file to customize">
             <keyboard-shortcut first-keystroke="alt V" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="com.tengfei.f9framework.action.GeneratePatchAction" class="com.tengfei.f9framework.action.GeneratePatchAction"
+        <action id="com.tengfei.f9framework.action.GeneratePatchAction"
+                class="com.tengfei.f9framework.action.GeneratePatchAction"
                 text="generatepatch" description="generatepatch">
             <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
@@ -76,12 +80,18 @@
                 text="GenerateProjectSettingTemplate" description="GenerateProjectSettingTemplate">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="com.tengfei.f9framework.action.GenerateRequestAction" class="com.tengfei.f9framework.action.GenerateRequestAction" text="generaterequestaction" description="generaterequestaction">
+        <action id="com.tengfei.f9framework.action.GenerateRequestAction"
+                class="com.tengfei.f9framework.action.GenerateRequestAction" text="generaterequestaction"
+                description="generaterequestaction">
             <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="TestAction" class="com.tengfei.f9framework.action.GenerateTableCodeAction" text="Generate Table Code" description="Generate table code">
+        <action id="GenerateTableCodeAction" class="com.tengfei.f9framework.action.GenerateTableCodeAction"
+                text="Generate Table Code" description="Generate table code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
+        </action>
+        <action id="TestAction" class="test.TestAction" text="TestAction" description="TestAction">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
     </actions>
 

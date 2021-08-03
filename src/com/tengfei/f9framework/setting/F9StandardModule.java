@@ -8,6 +8,8 @@ public class F9StandardModule {
 
     public String deployHost;
 
+    public String productCustomizeName;
+
     public List<F9CustomizeModule> customizeModuleList = new ArrayList<>();
 
 
@@ -25,6 +27,14 @@ public class F9StandardModule {
 
     public void setDeployHost(String deployHost) {
         this.deployHost = deployHost;
+    }
+
+    public String getProductCustomizeName() {
+        return productCustomizeName;
+    }
+
+    public void setProductCustomizeName(String productCustomizeName) {
+        this.productCustomizeName = productCustomizeName;
     }
 
     public List<F9CustomizeModule> getCustomizeModuleList() {

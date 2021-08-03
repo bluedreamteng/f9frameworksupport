@@ -1,6 +1,7 @@
 package com.tengfei.f9framework.file;
 
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -21,6 +22,7 @@ public class F9FileFactory {
     public static final String WEB_ROOT = "webapp";
 
     public static F9FileFactory getInstance() {
+
         return new F9FileFactory();
     }
 

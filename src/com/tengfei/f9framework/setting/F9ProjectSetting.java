@@ -22,6 +22,8 @@ import java.util.List;
 )
 public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetting> {
 
+    public List<F9StandardModule> standardModules = new ArrayList<>();
+
     public static F9ProjectSetting getInstance(Project project) {
         F9ProjectSetting f9ProjectSetting = ServiceManager.getService(project, F9ProjectSetting.class);
         boolean valid = f9ProjectSetting.checkValid();
@@ -33,9 +35,6 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
         }
 
     }
-
-
-    public List<F9StandardModule> standardModules = new ArrayList<>();
 
 
     @Nullable
