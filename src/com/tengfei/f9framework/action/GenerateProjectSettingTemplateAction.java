@@ -4,9 +4,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.tengfei.f9framework.notification.F9Notifier;
-import com.tengfei.f9framework.setting.F9CustomizeModule;
-import com.tengfei.f9framework.setting.F9ProjectSetting;
-import com.tengfei.f9framework.setting.F9StandardModule;
+import com.tengfei.f9framework.module.setting.F9CustomizeModuleSetting;
+import com.tengfei.f9framework.module.setting.F9ProjectSetting;
+import com.tengfei.f9framework.module.setting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -24,14 +24,14 @@ public class GenerateProjectSettingTemplateAction extends AnAction {
             return;
         }
         //生成配置文件模板
-        F9StandardModule standardModule = new F9StandardModule();
+        F9StandardModuleSetting standardModule = new F9StandardModuleSetting();
         standardModule.name = "smart-site";
         standardModule.deployHost = "localhost:8011";
+        standardModule.productCustomizeName = "zhgd";
 
-        F9CustomizeModule customizeModule = new F9CustomizeModule();
+        F9CustomizeModuleSetting customizeModule = new F9CustomizeModuleSetting();
         customizeModule.name = "szjs-custom-sfzhgd";
         customizeModule.customizeProjectPath = "szjs_sfzhgd";
-        customizeModule.webRoot = "gl/szjs_sfzhgd";
         standardModule.customizeModuleList.add(customizeModule);
         projectSetting.standardModules.add(standardModule);
 

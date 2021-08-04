@@ -1,16 +1,19 @@
-package com.tengfei.f9framework.setting;
+package com.tengfei.f9framework.module.setting;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class F9StandardModule {
+/**
+ * @author ztf
+ */
+public class F9StandardModuleSetting {
     public String name;
 
     public String deployHost;
 
     public String productCustomizeName;
 
-    public List<F9CustomizeModule> customizeModuleList = new ArrayList<>();
+    public List<F9CustomizeModuleSetting> customizeModuleList = new ArrayList<>();
 
 
     public String getName() {
@@ -37,11 +40,11 @@ public class F9StandardModule {
         this.productCustomizeName = productCustomizeName;
     }
 
-    public List<F9CustomizeModule> getCustomizeModuleList() {
+    public List<F9CustomizeModuleSetting> getCustomizeModuleList() {
         return customizeModuleList;
     }
 
-    public void setCustomizeModuleList(List<F9CustomizeModule> customizeModuleList) {
+    public void setCustomizeModuleList(List<F9CustomizeModuleSetting> customizeModuleList) {
         this.customizeModuleList = customizeModuleList;
     }
 }

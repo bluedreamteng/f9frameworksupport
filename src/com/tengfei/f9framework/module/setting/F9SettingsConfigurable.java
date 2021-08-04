@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.setting;
+package com.tengfei.f9framework.module.setting;
 
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;

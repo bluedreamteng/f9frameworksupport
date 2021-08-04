@@ -1,8 +1,10 @@
-package com.tengfei.f9framework.setting;
+package com.tengfei.f9framework.module.setting;
 
-public class F9CustomizeModule {
+/**
+ * @author ztf
+ */
+public class F9CustomizeModuleSetting {
     public String name;
-    public String webRoot;
     public String customizeProjectPath;
 
     public String getName() {
@@ -11,15 +13,6 @@ public class F9CustomizeModule {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-
-    public String getWebRoot() {
-        return webRoot;
-    }
-
-    public void setWebRoot(String webRoot) {
-        this.webRoot = webRoot;
     }
 
     public String getCustomizeProjectPath() {

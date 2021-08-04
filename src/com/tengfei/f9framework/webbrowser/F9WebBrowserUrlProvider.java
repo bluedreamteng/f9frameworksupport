@@ -3,7 +3,7 @@ package com.tengfei.f9framework.webbrowser;
 import com.intellij.ide.browsers.OpenInBrowserRequest;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Url;
-import com.tengfei.f9framework.setting.F9SettingsState;
+import com.tengfei.f9framework.module.setting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.builtInWebServer.BuiltInWebBrowserUrlProvider;

@@ -13,6 +13,9 @@ import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * @author ztf
+ */
 public class GeneratePatchAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
@@ -33,7 +36,7 @@ public class GeneratePatchAction extends AnAction {
         }
 
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            F9FileFactory fileFactory = F9FileFactory.getInstance();
+            F9FileFactory fileFactory = F9FileFactory.getInstance(project);
             for (VirtualFile file : data) {
                 F9File file1 = fileFactory.createF9File(file, project);
                 file1.copyToPatch(directory);

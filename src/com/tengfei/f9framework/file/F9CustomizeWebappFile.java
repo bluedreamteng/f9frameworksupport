@@ -1,75 +1,41 @@
 package com.tengfei.f9framework.file;
 
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.tengfei.f9framework.notification.F9Notifier;
-import com.tengfei.f9framework.setting.F9CustomizeModule;
-import com.tengfei.f9framework.setting.F9StandardModule;
-import org.jetbrains.annotations.NotNull;
+import com.tengfei.f9framework.module.F9CustomizeModule;
 
 /**
  * @author ztf
  */
 public class F9CustomizeWebappFile extends F9WebappFile {
-    CustomizeModuleInfo customizeModuleInfo;
+    private final F9CustomizeModule customizeModule;
 
     public F9CustomizeWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
-        customizeModuleInfo = getCustomizeModuleInfo();
+        Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
+        if (moduleForFile == null) {
+            throw new RuntimeException("该文件未找到对应模块");
+        }
+        customizeModule = moduleFacade.findCustomizeModuleByName(moduleForFile.getName());
+        if (customizeModule == null) {
+            throw new RuntimeException("该文件未找到对应配置模块");
+        }
     }
 
     @Override
     public String getDeployWebPath() {
-        return getHost() + "/" + customizeModuleInfo.containingStandardPrjName + "/" + getWebRelativePath();
+        return null;
     }
 
     @Override
-    public String getWebRoot() {
-        return customizeModuleInfo.webRoot;
-    }
-
-    @NotNull
-    @Override
-    public String getHost() {
-        return customizeModuleInfo.deployHost;
+    public String getWebRelativePath() {
+        return null;
     }
 
     @Override
     public String getPatchDirRelativePath() {
-        if ("".equals(getContainingFileDirPath())) {
-            return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath;
-        }
-        return customizeModuleInfo.containingStandardPrjName + "/" + customizeModuleInfo.customizeProjectPath + "/" + getContainingFileDirPath();
-    }
-
-    @Override
-    public void copyToCustomize() {
-        F9Notifier.notifyError(project,virtualFile.getName() +  "不支持的操作");
-    }
-
-    private CustomizeModuleInfo getCustomizeModuleInfo() {
-        CustomizeModuleInfo customizeModuleInfo = new CustomizeModuleInfo();
-        for (F9StandardModule standardModule : projectSetting.standardModules) {
-            for (F9CustomizeModule customizeModule : standardModule.customizeModuleList) {
-                if (virtualFile.getPath().contains(customizeModule.getWebRoot())) {
-                    customizeModuleInfo.name = customizeModule.name;
-                    customizeModuleInfo.containingStandardPrjName = standardModule.name;
-                    customizeModuleInfo.deployHost = standardModule.deployHost;
-                    customizeModuleInfo.webRoot = customizeModule.webRoot;
-                    customizeModuleInfo.customizeProjectPath = customizeModule.customizeProjectPath;
-                }
-            }
-        }
-        return customizeModuleInfo;
-    }
-
-    public static class CustomizeModuleInfo {
-        public String name;
-        public String webRoot;
-        public String customizeProjectPath;
-
-        public String containingStandardPrjName;
-
-        public String deployHost;
+        return null;
     }
 }

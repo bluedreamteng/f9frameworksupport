@@ -6,7 +6,7 @@ import com.intellij.util.Url;
 
 import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.file.F9WebappFile;
-import com.tengfei.f9framework.setting.F9SettingsState;
+import com.tengfei.f9framework.module.setting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,7 +25,7 @@ public class F9HtmlUrlFactory {
 
     public Url createF9HtmlUrl(@NotNull OpenInBrowserRequest request, @NotNull VirtualFile file) {
         settingsState = F9SettingsState.getInstance(request.getProject());
-        F9WebappFile f9WebAppFile = F9FileFactory.getInstance().createF9WebAppFile(file, request.getProject());
+        F9WebappFile f9WebAppFile = F9FileFactory.getInstance(request.getProject()).createF9WebAppFile(file, request.getProject());
         String deployWebPath = f9WebAppFile.getDeployWebPath();
         if (deployWebPath.contains(".")) {
             deployWebPath = deployWebPath.substring(0, deployWebPath.indexOf("."));

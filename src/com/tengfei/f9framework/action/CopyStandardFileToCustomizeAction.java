@@ -48,7 +48,7 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     }
 
     private void copyWebFileToCustomize(@NotNull PsiFile psiFile) {
-        F9WebappFile f9WebAppFile = F9FileFactory.getInstance().createF9WebAppFile(psiFile.getVirtualFile(), psiFile.getProject());
+        F9WebappFile f9WebAppFile = F9FileFactory.getInstance(psiFile.getProject()).createF9WebAppFile(psiFile.getVirtualFile(), psiFile.getProject());
         f9WebAppFile.copyToCustomize();
     }
 
