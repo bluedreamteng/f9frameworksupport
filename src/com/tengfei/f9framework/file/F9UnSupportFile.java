@@ -6,7 +6,7 @@ import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 
 class F9UnSupportFile extends F9File {
-    public F9UnSupportFile(VirtualFile virtualFile, Project project) {
+    F9UnSupportFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
     }
 

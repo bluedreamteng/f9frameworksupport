@@ -12,8 +12,8 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author ztf
  */
-public class F9JarFile extends F9File {
-    public F9JarFile(VirtualFile virtualFile, Project project) {
+class F9JarFile extends F9File {
+    F9JarFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
     }
 

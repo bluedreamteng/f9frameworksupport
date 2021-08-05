@@ -3,6 +3,7 @@ package com.tengfei.f9framework.file;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.module.F9CustomizeModule;
 import com.tengfei.f9framework.module.F9StandardModule;
@@ -11,10 +12,10 @@ import com.tengfei.f9framework.notification.F9Notifier;
 /**
  * @author ztf
  */
-public class F9CustomizeWebappFile extends F9WebappFile {
+class F9CustomizeWebappFile extends F9WebappFile {
     private final F9CustomizeModule customizeModule;
 
-    public F9CustomizeWebappFile(VirtualFile virtualFile, Project project) {
+    F9CustomizeWebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
         Module moduleForFile = ModuleUtil.findModuleForFile(virtualFile, project);
         if (moduleForFile == null) {
@@ -34,14 +35,17 @@ public class F9CustomizeWebappFile extends F9WebappFile {
 
     @Override
     public String getWebRelativePath() {
-        return virtualFile.getCanonicalPath().replaceFirst(customizeModule.getWebRoot(),"");
+        String webRelativePath =  virtualFile.getPresentableUrl().replace(customizeModule.getWebRoot(), "");
+        webRelativePath = StringUtil.trim(webRelativePath,(ch)-> ch != '\\');
+        return webRelativePath;
     }
 
     @Override
     public String getPatchDirRelativePath() {
         F9StandardModule standardModule = customizeModule.getStandardModule();
-        String relativepath = virtualFile.getCanonicalPath().replaceFirst(customizeModule.getWebRoot(),"");
-        return standardModule + "/" + customizeModule.getCustomizeProjectPath() + relativepath;
+        String relativepath = virtualFile.getParent().getPresentableUrl().replace(customizeModule.getWebRoot(), "");
+        relativepath = StringUtil.trim(relativepath,(ch)->ch != '\\');
+        return standardModule.getName() + "/" + customizeModule.getCustomizeProjectPath() + "/" + relativepath;
     }
 
     /**
@@ -49,6 +53,6 @@ public class F9CustomizeWebappFile extends F9WebappFile {
      */
     @Override
     public void copyToCustomize() {
-        F9Notifier.notifyMessage(project,"个性化文件夹不支持此操作");
+        F9Notifier.notifyMessage(project, "个性化文件夹不支持此操作");
     }
 }

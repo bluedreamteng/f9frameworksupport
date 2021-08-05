@@ -39,6 +39,7 @@ public abstract class F9File {
 
     /**
      * 获取补丁包文件夹的相对路径
+     *
      * @return 补丁包文件夹的相对路径
      */
     public abstract String getPatchDirRelativePath();

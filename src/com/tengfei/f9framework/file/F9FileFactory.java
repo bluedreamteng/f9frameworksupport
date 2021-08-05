@@ -79,23 +79,40 @@ public class F9FileFactory {
     private boolean isStandardWebappFile(VirtualFile file) {
         List<F9StandardModule> allStandardModules = f9ModuleFacade.findAllStandardModules();
         for (F9StandardModule standardModule : allStandardModules) {
-            if(standardModule.getWebRootPath() != null) {
-                if (file.getPresentableUrl().startsWith(standardModule.getWebRootPath())) {
-                    return true;
-                }
+            if (standardModule.getWebRootPath() == null) {
+                continue;
+            }
+            //排除目录根文件
+            if (file.getPresentableUrl().equals(standardModule.getWebRootPath())) {
+                continue;
+            }
+
+            //必须是目录底下的文件
+            if (file.getPresentableUrl().startsWith(standardModule.getWebRootPath()) && !file.getPresentableUrl().equals(standardModule.getWebRootPath())) {
+                return true;
             }
         }
+
         return false;
     }
 
     private boolean isCustomizeWebappFile(VirtualFile file) {
         List<F9CustomizeModule> allCustomizeModules = f9ModuleFacade.findAllCustomizeModules();
         for (F9CustomizeModule customizeModule : allCustomizeModules) {
-            if(customizeModule.getWebRoot() != null) {
-                if (file.getPresentableUrl().startsWith(customizeModule.getWebRoot())) {
-                    return true;
-                }
+            if (customizeModule.getWebRoot() == null) {
+                continue;
             }
+
+            //排除目录根文件
+            if (file.getPresentableUrl().equals(customizeModule.getWebRoot())) {
+                continue;
+            }
+
+            //必须是目录底下的文件
+            if (file.getPresentableUrl().startsWith(customizeModule.getWebRoot())) {
+                return true;
+            }
+
         }
         return false;
     }
