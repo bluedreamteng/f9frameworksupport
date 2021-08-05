@@ -45,7 +45,8 @@ class F9CustomizeWebappFile extends F9WebappFile {
         F9StandardModule standardModule = customizeModule.getStandardModule();
         String relativepath = virtualFile.getParent().getPresentableUrl().replace(customizeModule.getWebRoot(), "");
         relativepath = StringUtil.trim(relativepath,(ch)->ch != '\\');
-        return standardModule.getName() + "/" + customizeModule.getCustomizeProjectPath() + "/" + relativepath;
+        String patchDirPath = standardModule.getName() + "\\" + customizeModule.getCustomizeProjectPath() + "\\" + relativepath;
+        return StringUtil.trim(patchDirPath,(ch -> ch != '\\'));
     }
 
     /**

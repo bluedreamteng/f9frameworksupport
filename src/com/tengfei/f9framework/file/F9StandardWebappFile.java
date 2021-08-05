@@ -43,7 +43,7 @@ class F9StandardWebappFile extends F9WebappFile {
     public String getDeployWebPath() {
         String webRelativePath = getWebRelativePath();
         webRelativePath = StringUtil.trimExtensions(webRelativePath);
-        return standardModule.getDeployHost() + "/" + standardModule.getName() + "/" + webRelativePath;
+        return standardModule.getDeployHost() + "\\" + standardModule.getName() + "\\" + webRelativePath;
     }
 
     @Override
@@ -78,7 +78,7 @@ class F9StandardWebappFile extends F9WebappFile {
         String parentPath = virtualFile.getParent().getPresentableUrl();
         String relativePath = parentPath.replace(standardModule.getWebRootPath(), "");
         relativePath = StringUtil.trim(relativePath, (ch -> ch != '\\'));
-        return standardModule.getName() +"/"+ standardModule.getWebRootPath() + "/" + relativePath;
+        return StringUtil.trim(standardModule.getName() + "\\" + relativePath,(ch -> ch != '\\'));
     }
 
     @Override
