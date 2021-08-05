@@ -80,7 +80,7 @@ public class F9FileFactory {
         List<F9StandardModule> allStandardModules = f9ModuleFacade.findAllStandardModules();
         for (F9StandardModule standardModule : allStandardModules) {
             if(standardModule.getWebRootPath() != null) {
-                if (file.getPath().startsWith(standardModule.getWebRootPath())) {
+                if (file.getPresentableUrl().startsWith(standardModule.getWebRootPath())) {
                     return true;
                 }
             }
@@ -92,7 +92,7 @@ public class F9FileFactory {
         List<F9CustomizeModule> allCustomizeModules = f9ModuleFacade.findAllCustomizeModules();
         for (F9CustomizeModule customizeModule : allCustomizeModules) {
             if(customizeModule.getWebRoot() != null) {
-                if (file.getPath().startsWith(customizeModule.getWebRoot())) {
+                if (file.getPresentableUrl().startsWith(customizeModule.getWebRoot())) {
                     return true;
                 }
             }

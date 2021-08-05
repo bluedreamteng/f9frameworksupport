@@ -5,6 +5,8 @@ import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.module.F9CustomizeModule;
+import com.tengfei.f9framework.module.F9StandardModule;
+import com.tengfei.f9framework.notification.F9Notifier;
 
 /**
  * @author ztf
@@ -26,16 +28,27 @@ public class F9CustomizeWebappFile extends F9WebappFile {
 
     @Override
     public String getDeployWebPath() {
-        return null;
+        F9StandardModule standardModule = customizeModule.getStandardModule();
+        return standardModule.getDeployHost() + "/" + standardModule.getName() + "/" + getWebRelativePath();
     }
 
     @Override
     public String getWebRelativePath() {
-        return null;
+        return virtualFile.getCanonicalPath().replaceFirst(customizeModule.getWebRoot(),"");
     }
 
     @Override
     public String getPatchDirRelativePath() {
-        return null;
+        F9StandardModule standardModule = customizeModule.getStandardModule();
+        String relativepath = virtualFile.getCanonicalPath().replaceFirst(customizeModule.getWebRoot(),"");
+        return standardModule + "/" + customizeModule.getCustomizeProjectPath() + relativepath;
+    }
+
+    /**
+     * 复制到个性化目录
+     */
+    @Override
+    public void copyToCustomize() {
+        F9Notifier.notifyMessage(project,"个性化文件夹不支持此操作");
     }
 }

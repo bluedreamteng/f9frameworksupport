@@ -49,7 +49,7 @@ public class F9StandardWebappFile extends F9WebappFile {
 
     @Override
     public String getWebRelativePath() {
-        String filePath = virtualFile.getCanonicalPath();
+        String filePath = virtualFile.getPresentableUrl();
         assert filePath != null;
         String webPath = filePath.replace(standardModule.getWebRootPath(), "");
         List<F9CustomizeModule> customizeModuleList = standardModule.getCustomizeModuleList();
@@ -76,13 +76,11 @@ public class F9StandardWebappFile extends F9WebappFile {
      */
     @Override
     public String getPatchDirRelativePath() {
-        return null;
+        String filePath = virtualFile.getPresentableUrl();
+        return filePath.replace(standardModule.getWebRootPath(), "");
     }
 
-    private String getProductCustomizeWebRootRelativePath() {
-        return standardModule.getWebRootPath() + "/" + standardModule.getProductCustomizeName();
-    }
-
+    @Override
     public void copyToCustomize() {
         //如何定位到目标文件夹
         PsiFile psiFile = PsiManager.getInstance(project).findFile(virtualFile);
@@ -94,10 +92,9 @@ public class F9StandardWebappFile extends F9WebappFile {
         }
 
         //默认选择第一个个性化模块
-
         WriteCommandAction.runWriteCommandAction(psiFile.getProject(), () -> {
             String webRelativePath = getWebRelativePath();
-            String newPath = standardModule.getWebRootPath() + "/" + webRelativePath;
+            String newPath = standardModule.getCustomizeModuleList().get(0).getWebRoot() + "/" + webRelativePath;
             File file = new File(newPath);
             if (file.exists()) {
                 F9Notifier.notifyMessage(project, "文件已存在！！");

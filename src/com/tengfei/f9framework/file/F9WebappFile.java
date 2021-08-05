@@ -12,7 +12,7 @@ public abstract class F9WebappFile extends F9File {
 
     public F9WebappFile(VirtualFile virtualFile, Project project) {
         super(virtualFile, project);
-        F9ModuleFacade.getInstance(project);
+        moduleFacade = F9ModuleFacade.getInstance(project);
     }
 
     /**
@@ -24,14 +24,21 @@ public abstract class F9WebappFile extends F9File {
 
     /**
      * 获取文件在web的相对路径
+     *
      * @return 文件在web的相对路径
      */
     public abstract String getWebRelativePath();
 
     /**
      * 获取文件补丁包的相对路径
+     *
      * @return 文件补丁包的相对路径
      */
     @Override
     public abstract String getPatchDirRelativePath();
+
+    /**
+     * 复制到个性化目录
+     */
+    public abstract void copyToCustomize();
 }
