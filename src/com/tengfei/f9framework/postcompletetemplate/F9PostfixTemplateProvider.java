@@ -1,10 +1,10 @@
-package com.tengfei.f9framework.template;
+package com.tengfei.f9framework.postcompletetemplate;
 
 import com.intellij.codeInsight.template.postfix.templates.JavaPostfixTemplateProvider;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplate;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,17 +12,23 @@ import java.util.Set;
  */
 public class F9PostfixTemplateProvider extends JavaPostfixTemplateProvider {
 
-    private final Set<PostfixTemplate> templates;
+    private final Set<PostfixTemplate> templates = new HashSet<>();
 
     public F9PostfixTemplateProvider() {
-        templates = ContainerUtil.newHashSet(
-                new AllSetTemplate()
-        );
+        //
+       templates.add(new AllSetTemplate());
+       templates.add(new F9DataGridTemplate());
     }
 
     @NotNull
     @Override
     public Set<PostfixTemplate> getTemplates() {
         return templates;
+    }
+
+    @NotNull
+    @Override
+    public String getId() {
+        return "custom";
     }
 }

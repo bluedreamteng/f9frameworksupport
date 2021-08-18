@@ -37,7 +37,7 @@
         <!-- Add your extensions here -->
         <psi.referenceContributor implementation="com.tengfei.f9framework.reference.F9ReferenceContributor"/>
         <codeInsight.template.postfixTemplateProvider language="JAVA"
-                                                      implementationClass="com.tengfei.f9framework.template.F9PostfixTemplateProvider"/>
+                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.F9PostfixTemplateProvider"/>
         <liveTemplateMacro implementation="com.tengfei.f9framework.macro.LowerCaseMacro"/>
         <intentionAction>
             <category>f9framework</category>
