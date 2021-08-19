@@ -2,6 +2,10 @@ package com.tengfei.f9framework.postcompletetemplate;
 
 import com.intellij.codeInsight.template.postfix.templates.JavaPostfixTemplateProvider;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplate;
+import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9DataGridTemplate;
+import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9DeleteTemplate;
+import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9ExportTemplate;
+import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9allSetTemplate;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -16,8 +20,10 @@ public class F9PostfixTemplateProvider extends JavaPostfixTemplateProvider {
 
     public F9PostfixTemplateProvider() {
         //
-       templates.add(new AllSetTemplate());
+       templates.add(new F9allSetTemplate());
        templates.add(new F9DataGridTemplate());
+       templates.add(new F9DeleteTemplate());
+       templates.add(new F9ExportTemplate());
     }
 
     @NotNull

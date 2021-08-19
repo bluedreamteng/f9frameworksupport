@@ -46,8 +46,8 @@ public class TableInfo {
      */
     private List<ColumnInfo> otherColumn;
 
-    public TableInfo(DbTable original,PathConfig pathConfig) {
-        if(original == null) {
+    public TableInfo(DbTable original, PathConfig pathConfig) {
+        if (original == null) {
             throw new RuntimeException("表信息为空");
         }
         this.original = original;
@@ -73,9 +73,9 @@ public class TableInfo {
             // 列类型
             columnInfo.setType(TypeMapper.getJavaTypeBySqlType(column.getDataType().getSpecification()));
             // 列名
-           columnInfo.setName(NameUtils.toCamelCaseWithFirstLower(column.getName()));
+            columnInfo.setName(NameUtils.toCamelCaseWithFirstLower(column.getName()));
 
-           columnInfo.setLength(column.getDataType().size);
+            columnInfo.setLength(column.getDataType().size);
             // 列注释
             columnInfo.setComment(column.getComment());
             // 扩展项
@@ -85,7 +85,8 @@ public class TableInfo {
             // 主键列添加到主键列，否则添加到其他列
             if (DasUtil.isPrimary(column)) {
                 getPkColumn().add(columnInfo);
-            } else {
+            }
+            else {
                 getOtherColumn().add(columnInfo);
             }
         }
@@ -95,32 +96,49 @@ public class TableInfo {
         return name;
     }
 
-    public  String getEntityQualifiedName() {
-        if("".equals(pathConfig.getEntityPackageName())) {
+    public String getEntityQualifiedName() {
+        if ("".equals(pathConfig.getEntityPackageName())) {
             return getEntityName();
         }
         return pathConfig.getEntityPackageName() + "." + getEntityName();
     }
 
 
-    public  String getServiceInterfaceQualifiedName() {
-        if("".equals(pathConfig.getServiceInterfacePackageName())) {
+    public String getServiceInterfaceQualifiedName() {
+        if ("".equals(pathConfig.getServiceInterfacePackageName())) {
             return getServiceInterfaceName();
         }
         return pathConfig.getServiceInterfacePackageName() + "." + getServiceInterfaceName();
     }
 
     public String getServiceInterfaceName() {
-        return "I"+name+"Service";
+        return "I" + name + "Service";
     }
 
     public String getServiceImplName() {
-        return name+"Service"+"Impl";
+        return name + "Service" + "Impl";
     }
 
     public String getServiceName() {
-        return name+"Service";
+        return name + "Service";
     }
+
+    public String getAddActionName() {
+        return name + "AddAction";
+    }
+
+    public String getEditActionName() {
+        return name + "EditAction";
+    }
+
+    public String getListActionName() {
+        return name + "ListAction";
+    }
+
+    public String getDetailActionName() {
+        return name + "DetailAction";
+    }
+
 
     public DbTable getOriginal() {
         return original;

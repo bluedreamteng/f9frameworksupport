@@ -19,6 +19,9 @@ import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author ztf
+ */
 public class GenerateCodeDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
@@ -30,6 +33,10 @@ public class GenerateCodeDialog extends JDialog {
     private JCheckBox entity;
     private JCheckBox service;
     private JCheckBox isCreateDefaultPackage;
+    private JCheckBox addAction;
+    private JCheckBox editAction;
+    private JCheckBox listAction;
+    private JCheckBox detailAction;
 
     private final Project project;
     private final DbTable dbTable;
@@ -111,17 +118,38 @@ public class GenerateCodeDialog extends JDialog {
         dispose();
         if (StringUtil.isNotBlank(getSelectedModule()) && getSelectedPackage() != null) {
             PathConfig pathConfig = new PathConfig(getSelectedModule(), getSelectedPackage(), isCreateDefaultPackage());
-            TableInfo tableInfo = new TableInfo(dbTable,pathConfig);
+            TableInfo tableInfo = new TableInfo(dbTable, pathConfig);
             if (isEntitySelected()) {
-                codeGenerateService.generateEntityByTableInfoAndPathConfig(tableInfo, pathConfig);
+                codeGenerateService.generateEntity(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "entity生成完毕");
             }
 
             if (isServiceSelected()) {
                 //生成service
-                codeGenerateService.generateServiceByTableInfoAndPathConfig(tableInfo, pathConfig);
+                codeGenerateService.generateService(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "service生成完毕");
             }
+
+            if (isAddActionSelected()) {
+                codeGenerateService.generateAddAction(tableInfo, pathConfig);
+                F9Notifier.notifyMessage(project, "add action 生成完毕");
+            }
+
+            if (isEditActionSelected()) {
+                codeGenerateService.generateEditAction(tableInfo, pathConfig);
+                F9Notifier.notifyMessage(project, "edit action 生成完毕");
+            }
+
+            if (isListActionSelected()) {
+                codeGenerateService.generateListAction(tableInfo, pathConfig);
+                F9Notifier.notifyMessage(project, "list action 生成完毕");
+            }
+
+            if (isDetailActionSelected()) {
+                codeGenerateService.generateDetailAction(tableInfo, pathConfig);
+                F9Notifier.notifyMessage(project, "detail action 生成完毕");
+            }
+
         }
     }
 
@@ -131,9 +159,8 @@ public class GenerateCodeDialog extends JDialog {
     }
 
     public void open() {
-        setPreferredSize(new Dimension(640, 360));
-        setLocationRelativeTo(null);
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -155,5 +182,21 @@ public class GenerateCodeDialog extends JDialog {
 
     public boolean isCreateDefaultPackage() {
         return isCreateDefaultPackage.isSelected();
+    }
+
+    public boolean isAddActionSelected() {
+        return addAction.isSelected();
+    }
+
+    public boolean isEditActionSelected() {
+        return editAction.isSelected();
+    }
+
+    public boolean isListActionSelected() {
+        return listAction.isSelected();
+    }
+
+    public boolean isDetailActionSelected() {
+        return detailAction.isSelected();
     }
 }

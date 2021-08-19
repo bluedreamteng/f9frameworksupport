@@ -8,13 +8,13 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.javadoc.PsiDocComment;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
-import com.tengfei.f9framework.util.GenerateTableCodeUtil;
+import com.tengfei.f9framework.util.F9JavaFileFacade;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author ztf
  */
-public abstract class ServiceCodeBase {
+public abstract class ServiceCodeServiceBase {
 
     public static final String SERVICE_INTERFACE = "0";
     public static final String SERVICE_IMPL = "1";
@@ -25,15 +25,17 @@ public abstract class ServiceCodeBase {
 
     protected PsiElementFactory elementFactory;
     protected JavaPsiFacade javaPsiFacade;
+    protected Project project;
 
-    public ServiceCodeBase(Project project, TableInfo tableInfo, PathConfig pathConfig) {
+    public ServiceCodeServiceBase(Project project, TableInfo tableInfo, PathConfig pathConfig) {
         this.tableInfo = tableInfo;
         this.pathConfig = pathConfig;
+        this.project = project;
         elementFactory = PsiElementFactory.getInstance(project);
         javaPsiFacade = JavaPsiFacade.getInstance(project);
     }
 
-    public static ServiceCodeBase getInstance(Project project, TableInfo tableInfo, PathConfig pathConfig, String type) {
+    public static ServiceCodeServiceBase getInstance(Project project, TableInfo tableInfo, PathConfig pathConfig, String type) {
         switch (type) {
             case SERVICE_INTERFACE:
                 return new ServiceInterfaceCodeService(project, tableInfo, pathConfig);
@@ -77,7 +79,7 @@ public abstract class ServiceCodeBase {
         paginatorListMethod.addBefore(createPaginatorDocComment(),paginatorListMethod.getFirstChild());
         result.add(paginatorListMethod);
         
-        GenerateTableCodeUtil.generateCode(getModuleName(), getPackageName(), result);
+        F9JavaFileFacade.getInstance(project).createJavaFile(getModuleName(), getPackageName(), result);
         return result;
     }
 

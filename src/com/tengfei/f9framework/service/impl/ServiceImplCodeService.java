@@ -11,7 +11,7 @@ import com.tengfei.f9framework.entity.TableInfo;
 /**
  * @author ztf
  */
-public class ServiceImplCodeService extends ServiceCodeBase {
+public class ServiceImplCodeService extends ServiceCodeServiceBase {
 
     private Project project;
 

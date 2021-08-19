@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.postcompletetemplate;
+package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
 import com.intellij.codeInsight.template.Template;
 import com.intellij.codeInsight.template.TemplateManager;
@@ -22,11 +22,11 @@ import java.util.regex.Pattern;
  * 列举出所有的setter方法
  * @author ztf
  */
-public class AllSetTemplate extends PostfixTemplateWithExpressionSelector {
+public class F9allSetTemplate extends PostfixTemplateWithExpressionSelector {
 
     public static final Pattern SETTERMETHODPATTERN = Pattern.compile("^set[A-Z]\\w*");
 
-    public AllSetTemplate() {
+    public F9allSetTemplate() {
         super(
                 "allset",
                 "list all setter",

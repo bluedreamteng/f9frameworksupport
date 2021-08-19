@@ -59,6 +59,19 @@ public class PathConfig {
         return result;
     }
 
+    public String getActionPackageName() {
+        String result = "";
+        if (isCreateDefaultPackage()) {
+            if ("".equals(packageName)) {
+                result = packageName + "action";
+            }
+            else {
+                result = packageName + ".action";
+            }
+        }
+        return result;
+    }
+
     public String getServicePackageName() {
         return getServiceImplPackageName();
     }

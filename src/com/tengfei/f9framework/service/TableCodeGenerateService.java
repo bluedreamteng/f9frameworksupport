@@ -22,12 +22,26 @@ public interface TableCodeGenerateService {
      * @param tableInfo 表信息
      * @param pathConfig 路径配置
      */
-    void generateEntityByTableInfoAndPathConfig(TableInfo tableInfo, PathConfig pathConfig);
+    void generateEntity(TableInfo tableInfo, PathConfig pathConfig);
 
     /**
      * 构造service类文件
      * @param tableInfo 表信息
      * @param pathConfig 路径配置
      */
-    void generateServiceByTableInfoAndPathConfig(TableInfo tableInfo, PathConfig pathConfig);
+    void generateService(TableInfo tableInfo, PathConfig pathConfig);
+
+
+    /**
+     * 构造Add action文件
+     * @param tableInfo
+     */
+    void generateAddAction(TableInfo tableInfo,PathConfig pathConfig);
+
+    void generateEditAction(TableInfo tableInfo,PathConfig pathConfig);
+
+    void generateListAction(TableInfo tableInfo,PathConfig pathConfig);
+
+    void generateDetailAction(TableInfo tableInfo,PathConfig pathConfig);
+
 }

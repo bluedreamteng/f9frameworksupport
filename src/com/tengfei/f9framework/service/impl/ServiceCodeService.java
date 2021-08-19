@@ -8,7 +8,7 @@ import com.tengfei.f9framework.entity.TableInfo;
 /**
  * @author ztf
  */
-public class ServiceCodeService extends ServiceCodeBase {
+public class ServiceCodeService extends ServiceCodeServiceBase {
 
      ServiceCodeService(Project project, TableInfo tableInfo, PathConfig pathConfig) {
         super(project, tableInfo, pathConfig);

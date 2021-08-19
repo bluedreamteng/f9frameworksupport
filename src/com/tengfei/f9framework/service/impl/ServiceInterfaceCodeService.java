@@ -9,7 +9,7 @@ import com.tengfei.f9framework.entity.TableInfo;
 /**
  * @author ztf
  */
-public class ServiceInterfaceCodeService extends ServiceCodeBase {
+public class ServiceInterfaceCodeService extends ServiceCodeServiceBase {
     
     
     public ServiceInterfaceCodeService(Project project, TableInfo tableInfo, PathConfig pathConfig) {
