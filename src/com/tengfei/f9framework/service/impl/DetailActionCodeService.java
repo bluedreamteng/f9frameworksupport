@@ -53,8 +53,8 @@ public class DetailActionCodeService extends ActionCodeServiceBase {
                 "}";
         return String.format(detailActionTemplate,
                 tableInfo.getListActionName(),
-                StringUtil.toLowerCase(tableInfo.getEditActionName()),
-                tableInfo.getEditActionName(),
+                StringUtil.toLowerCase(tableInfo.getDetailActionName()),
+                tableInfo.getDetailActionName(),
                 tableInfo.getServiceInterfaceName(),
                 tableInfo.getEntityName(),
                 tableInfo.getEntityName(),
