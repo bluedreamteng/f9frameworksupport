@@ -37,6 +37,7 @@ public class GenerateCodeDialog extends JDialog {
     private JCheckBox editAction;
     private JCheckBox listAction;
     private JCheckBox detailAction;
+    private JCheckBox All;
 
     private final Project project;
     private final DbTable dbTable;
@@ -109,6 +110,18 @@ public class GenerateCodeDialog extends JDialog {
                 if (selectedPackage != null) {
                     packageText.setText(selectedPackage.getQualifiedName());
                 }
+            }
+        });
+
+        All.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                entity.setSelected(All.isSelected());
+                service.setSelected(All.isSelected());
+                addAction.setSelected(All.isSelected());
+                editAction.setSelected(All.isSelected());
+                listAction.setSelected(All.isSelected());
+                detailAction.setSelected(All.isSelected());
             }
         });
     }

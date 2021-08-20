@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.tengfei.f9framework.module.setting.F9CustomizeModuleSetting;
 import com.tengfei.f9framework.module.setting.F9ProjectSetting;
 import com.tengfei.f9framework.module.setting.F9StandardModuleSetting;
+import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -41,6 +42,11 @@ public class F9ModuleFacade {
 
     private void init() {
         List<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
+        if(standardModuleSettings == null) {
+            F9Notifier.notifyWarning(project,"未检测到配置文件，请及时配置");
+
+            return;
+        }
         for (F9StandardModuleSetting standardModuleSetting : standardModuleSettings) {
             F9StandardModule standardModule = new F9StandardModule();
             standardModule.setName(standardModuleSetting.name);

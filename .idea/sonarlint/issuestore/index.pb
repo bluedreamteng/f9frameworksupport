@@ -145,3 +145,7 @@ s
 Csrc/com/tengfei/f9framework/service/impl/ActionCodeServiceBase.java,4\d\4d49bb194a32838ef479f5c8fb9cbda16220dabd
 f
 6src/com/tengfei/f9framework/util/F9JavaFileFacade.java,f\e\feae75013ad88056a72b7326b5367982f5f73792
+T
+$.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
+n
+>resources/postfixTemplates/F9DataGridTemplate/description.html,8\0\801fb8bacf53eebf2a1afaa29a105a972b054078
