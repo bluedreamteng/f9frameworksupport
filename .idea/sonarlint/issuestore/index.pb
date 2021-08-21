@@ -67,8 +67,6 @@ m
 =src/com/tengfei/f9framework/action/GenerateRequestAction.java,5\a\5acde0a6f693dae0fe43081695137a2ca5767b16
 o
 ?src/com/tengfei/f9framework/service/impl/EntityCodeService.java,e\8\e8ae053892371eff1b15f0e7d756f9f8a72cbb55
-f
-6src/com/tengfei/f9framework/ui/GenerateCodeDialog.java,9\a\9a9769b36fbab12682dca59391a070fcf390df7d
 _
 /src/com/tengfei/f9framework/util/NameUtils.java,8\e\8eabc7576ab26ab5289422cb74707243ee6ce957
 b
@@ -129,8 +127,6 @@ Osrc/com/tengfei/f9framework/postcompletetemplate/F9PostfixTemplateProvider.java
 esrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplateBase.java,1\4\147b9c050f51e89e4047f23a0a32e6e9681d91a7
 Ž
 ^src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9CheckboxTemplate.java,9\b\9b4f079f304db5f3dc1f99402f0e80c7ccb0ff6c
-f
-6src/com/tengfei/f9framework/ui/GenerateCodeDialog.form,e\8\e8db8d3326432fe5178ebee77e47a09e099d35fb
 r
 Bsrc/com/tengfei/f9framework/service/impl/AddActionCodeService.java,4\c\4c07ff04f4661e3fc1b39c1ef4d93f99a6c46e54
 t

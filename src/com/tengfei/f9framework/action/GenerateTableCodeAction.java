@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiElement;
-import com.tengfei.f9framework.ui.GenerateCodeDialog;
+import com.tengfei.f9framework.ui.GenerateJavaCodeDialog;
 
 public class GenerateTableCodeAction extends AnAction {
 
@@ -17,7 +17,7 @@ public class GenerateTableCodeAction extends AnAction {
             return;
         }
         DbTable selectTable = (DbTable)data;
-        GenerateCodeDialog generateCodeDialog = new GenerateCodeDialog(e.getProject(),selectTable);
+        GenerateJavaCodeDialog generateCodeDialog = new GenerateJavaCodeDialog(e.getProject(),selectTable);
         generateCodeDialog.open();
     }
 }

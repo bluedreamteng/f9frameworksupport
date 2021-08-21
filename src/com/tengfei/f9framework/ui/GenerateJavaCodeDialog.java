@@ -14,7 +14,6 @@ import com.tengfei.f9framework.service.TableCodeGenerateService;
 import com.tengfei.f9framework.util.StringUtil;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +21,7 @@ import java.util.List;
 /**
  * @author ztf
  */
-public class GenerateCodeDialog extends JDialog {
+public class GenerateJavaCodeDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
@@ -44,14 +43,14 @@ public class GenerateCodeDialog extends JDialog {
     private final TableCodeGenerateService codeGenerateService;
 
 
-    public GenerateCodeDialog(Project project, DbTable dbTable) {
+    public GenerateJavaCodeDialog(Project project, DbTable dbTable) {
         this.project = project;
         this.dbTable = dbTable;
         codeGenerateService = TableCodeGenerateService.getInstance(project);
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        setTitle("Generate Code");
+        setTitle("Generate Java Code");
 
         buttonOK.addActionListener(new ActionListener() {
             @Override
