@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
@@ -23,7 +23,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
 
     @Override
     PsiClass createClass() {
-        PsiClass interfaceClass = javaPsiFacade.findClass(tableInfo.getServiceInterfaceQualifiedName(), GlobalSearchScope.allScope(project));
+        PsiClass interfaceClass = javaPsiFacade.findClass(tableInfo.getServiceInterfaceName(), GlobalSearchScope.allScope(project));
         PsiClass result = elementFactory.createClass(tableInfo.getServiceImplName());
         if(interfaceClass != null) {
             result.getImplementsList().add(elementFactory.createClassReferenceElement(interfaceClass));
@@ -44,7 +44,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
         String methodText = String.format("public int insert(%s record) {" +
                         "return new %s().insert(record);" +
                         "}",
-                tableInfo.getEntityQualifiedName(), tableInfo.getServiceName());
+                tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -72,7 +72,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createUpdateMethod(PsiClass context) {
         String methodText = String.format("public int update(%s record) {" +
                 "return new %s().update(record);" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getServiceName());
+                "}", tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -100,7 +100,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createFindByPrimaryKeyMethod(PsiClass context) {
         String methodText = String.format("public %s find(Object primaryKey) {" +
                 "return new %s().find(primaryKey);" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getServiceName());
+                "}", tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -114,7 +114,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createFindWithConditionMethod(PsiClass context) {
         String methodText = String.format("public %s find(java.util.Map<String, Object> conditionMap) {" +
                 "return new %s().find(conditionMap);" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getServiceName());
+                "}", tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -128,7 +128,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createFindListWithConditionMethod(PsiClass context) {
         String methodText = String.format("public java.util.List<%s> findList(java.util.Map<String, Object> conditionMap) {" +
                 "return new %s().findList(conditionMap);" +
-                "}",tableInfo.getEntityQualifiedName(),tableInfo.getServiceName());
+                "}",tableInfo.getEntityName(),tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -142,7 +142,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createPaginatorListMethod(PsiClass context) {
         String methodText = String.format("public com.epoint.database.peisistence.crud.impl.model.PageData<%s> paginatorList(java.util.Map<String, Object> conditionMap, int pageNumber, int pageSize) {" +
                 "return new %s().paginatorList(conditionMap, pageNumber, pageSize);" +
-                "}",tableInfo.getEntityQualifiedName(),tableInfo.getServiceName());
+                "}",tableInfo.getEntityName(),tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 

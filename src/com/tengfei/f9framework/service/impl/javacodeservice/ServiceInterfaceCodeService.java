@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
@@ -23,7 +23,7 @@ public class ServiceInterfaceCodeService extends ServiceCodeServiceBase {
 
     @Override
     public PsiMethod createInsertMethod(PsiClass context) {
-        String methodText = String.format("public int insert(%s record);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public int insert(%s record);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -35,7 +35,7 @@ public class ServiceInterfaceCodeService extends ServiceCodeServiceBase {
 
     @Override
     public PsiMethod createUpdateMethod(PsiClass context) {
-        String methodText = String.format("public int update(%s record);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public int update(%s record);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -47,25 +47,25 @@ public class ServiceInterfaceCodeService extends ServiceCodeServiceBase {
 
     @Override
     public PsiMethod createFindByPrimaryKeyMethod(PsiClass context) {
-        String methodText = String.format("public %s find(Object primaryKey);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public %s find(Object primaryKey);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
     @Override
     public PsiMethod createFindWithConditionMethod(PsiClass context) {
-        String methodText = String.format("public %s find(java.util.Map<String, Object> conditionMap);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public %s find(java.util.Map<String, Object> conditionMap);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
     @Override
     public PsiMethod createFindListWithConditionMethod(PsiClass context) {
-        String methodText = String.format("public java.util.List<%s> findList(java.util.Map<String, Object> conditionMap);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public java.util.List<%s> findList(java.util.Map<String, Object> conditionMap);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
     @Override
     public PsiMethod createPaginatorListMethod(PsiClass context) {
-        String methodText = String.format("public com.epoint.database.peisistence.crud.impl.model.PageData<%s> paginatorList(java.util.Map<String, Object> conditionMap, int pageNumber, int pageSize);", tableInfo.getEntityQualifiedName());
+        String methodText = String.format("public com.epoint.database.peisistence.crud.impl.model.PageData<%s> paginatorList(java.util.Map<String, Object> conditionMap, int pageNumber, int pageSize);", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 

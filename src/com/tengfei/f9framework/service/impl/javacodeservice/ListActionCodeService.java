@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;

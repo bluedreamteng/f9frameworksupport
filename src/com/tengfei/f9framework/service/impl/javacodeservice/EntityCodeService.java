@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -7,7 +7,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.tengfei.f9framework.entity.ColumnInfo;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
-import com.tengfei.f9framework.util.F9JavaFileFacade;
+import com.tengfei.f9framework.util.F9FileFacade;
 import com.tengfei.f9framework.util.NameUtils;
 
 import java.util.List;
@@ -63,7 +63,7 @@ public class EntityCodeService {
             }
             entityClass.add(getterMethod);
         }
-        F9JavaFileFacade.getInstance(project).createJavaFile(pathConfig.getModuleName(), pathConfig.getEntityPackageName(), entityClass);
+        F9FileFacade.getInstance(project).createJavaFile(pathConfig.getModuleName(), pathConfig.getEntityPackageName(), entityClass);
     }
 
     private PsiAnnotation createGetterAnnotationByColumnInfo(ColumnInfo columnInfo, PsiClass entityClass) {

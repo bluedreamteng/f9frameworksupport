@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
@@ -8,7 +8,7 @@ import com.intellij.psi.PsiMethod;
 import com.intellij.psi.javadoc.PsiDocComment;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
-import com.tengfei.f9framework.util.F9JavaFileFacade;
+import com.tengfei.f9framework.util.F9FileFacade;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -79,7 +79,7 @@ public abstract class ServiceCodeServiceBase {
         paginatorListMethod.addBefore(createPaginatorDocComment(),paginatorListMethod.getFirstChild());
         result.add(paginatorListMethod);
         
-        F9JavaFileFacade.getInstance(project).createJavaFile(getModuleName(), getPackageName(), result);
+        F9FileFacade.getInstance(project).createJavaFile(getModuleName(), getPackageName(), result);
         return result;
     }
 

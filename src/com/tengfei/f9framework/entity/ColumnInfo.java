@@ -1,6 +1,7 @@
 package com.tengfei.f9framework.entity;
 
 import com.intellij.database.model.DasColumn;
+import com.intellij.openapi.util.text.StringUtil;
 
 import java.util.Map;
 
@@ -34,9 +35,15 @@ public class ColumnInfo {
      * 标记是否为自定义附加列
      */
     private boolean custom;
+
+    ColumnInfo() {
+    }
+
     /**
      * 扩展数据
      */
+
+
     private Map<String, Object> ext;
 
     public DasColumn getObj() {
@@ -51,11 +58,18 @@ public class ColumnInfo {
         return name;
     }
 
+    public String getNameWithLowerCase() {
+        return StringUtil.toLowerCase(name);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public String getComment() {
+        if(comment == null) {
+            return "";
+        }
         return comment;
     }
 

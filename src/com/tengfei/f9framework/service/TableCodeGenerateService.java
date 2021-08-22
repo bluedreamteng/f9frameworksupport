@@ -2,6 +2,7 @@ package com.tengfei.f9framework.service;
 
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
 import org.jetbrains.annotations.NotNull;
@@ -22,26 +23,67 @@ public interface TableCodeGenerateService {
      * @param tableInfo 表信息
      * @param pathConfig 路径配置
      */
-    void generateEntity(TableInfo tableInfo, PathConfig pathConfig);
+    void generateEntityFile(TableInfo tableInfo, PathConfig pathConfig);
 
     /**
      * 构造service类文件
      * @param tableInfo 表信息
      * @param pathConfig 路径配置
      */
-    void generateService(TableInfo tableInfo, PathConfig pathConfig);
+    void generateServiceFile(TableInfo tableInfo, PathConfig pathConfig);
 
 
     /**
      * 构造Add action文件
-     * @param tableInfo
+     * @param tableInfo 表信息
      */
-    void generateAddAction(TableInfo tableInfo,PathConfig pathConfig);
+    void generateAddActionFile(TableInfo tableInfo, PathConfig pathConfig);
 
-    void generateEditAction(TableInfo tableInfo,PathConfig pathConfig);
+    /**
+     * 构造Edit action文件
+     * @param tableInfo 表信息
+     */
+    void generateEditActionFile(TableInfo tableInfo, PathConfig pathConfig);
 
-    void generateListAction(TableInfo tableInfo,PathConfig pathConfig);
+    /**
+     * 构造List action文件
+     * @param tableInfo 表信息
+     */
+    void generateListActionFile(TableInfo tableInfo, PathConfig pathConfig);
 
-    void generateDetailAction(TableInfo tableInfo,PathConfig pathConfig);
+    /**
+     * 构造Detail action文件
+     * @param tableInfo 表信息
+     */
+    void generateDetailActionFile(TableInfo tableInfo, PathConfig pathConfig);
+
+    /**
+     * 构造 add html 文件
+     * @param tableInfo 表信息
+     * @param directory 目录
+     */
+    void generateAddHtmlFile(TableInfo tableInfo, VirtualFile directory);
+
+
+    /**
+     * 构造 list html 文件
+     * @param tableInfo 表信息
+     * @param directory 目录
+     */
+    void generateListHtmlFile(TableInfo tableInfo, VirtualFile directory);
+
+    /**
+     * 构造 edit html 文件
+     * @param tableInfo 表信息
+     * @param directory 目录
+     */
+    void generateEditHtmlFile(TableInfo tableInfo, VirtualFile directory);
+
+    /**
+     * 构造 detail html 文件
+     * @param tableInfo 表信息
+     * @param directory 目录
+     */
+    void generateDetailHtmlFile(TableInfo tableInfo, VirtualFile directory);
 
 }

@@ -14,6 +14,7 @@ import com.tengfei.f9framework.service.TableCodeGenerateService;
 import com.tengfei.f9framework.util.StringUtil;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 import java.util.List;
@@ -130,35 +131,35 @@ public class GenerateJavaCodeDialog extends JDialog {
         dispose();
         if (StringUtil.isNotBlank(getSelectedModule()) && getSelectedPackage() != null) {
             PathConfig pathConfig = new PathConfig(getSelectedModule(), getSelectedPackage(), isCreateDefaultPackage());
-            TableInfo tableInfo = new TableInfo(dbTable, pathConfig);
+            TableInfo tableInfo = new TableInfo(dbTable);
             if (isEntitySelected()) {
-                codeGenerateService.generateEntity(tableInfo, pathConfig);
+                codeGenerateService.generateEntityFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "entity生成完毕");
             }
 
             if (isServiceSelected()) {
                 //生成service
-                codeGenerateService.generateService(tableInfo, pathConfig);
+                codeGenerateService.generateServiceFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "service生成完毕");
             }
 
             if (isAddActionSelected()) {
-                codeGenerateService.generateAddAction(tableInfo, pathConfig);
+                codeGenerateService.generateAddActionFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "add action 生成完毕");
             }
 
             if (isEditActionSelected()) {
-                codeGenerateService.generateEditAction(tableInfo, pathConfig);
+                codeGenerateService.generateEditActionFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "edit action 生成完毕");
             }
 
             if (isListActionSelected()) {
-                codeGenerateService.generateListAction(tableInfo, pathConfig);
+                codeGenerateService.generateListActionFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "list action 生成完毕");
             }
 
             if (isDetailActionSelected()) {
-                codeGenerateService.generateDetailAction(tableInfo, pathConfig);
+                codeGenerateService.generateDetailActionFile(tableInfo, pathConfig);
                 F9Notifier.notifyMessage(project, "detail action 生成完毕");
             }
 
@@ -210,5 +211,10 @@ public class GenerateJavaCodeDialog extends JDialog {
 
     public boolean isDetailActionSelected() {
         return detailAction.isSelected();
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(530,340);
     }
 }

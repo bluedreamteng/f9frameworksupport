@@ -4,6 +4,7 @@ package com.tengfei.f9framework.entity;
 import com.intellij.database.model.DasColumn;
 import com.intellij.database.psi.DbTable;
 import com.intellij.database.util.DasUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.JBIterable;
 import com.tengfei.f9framework.util.NameUtils;
 
@@ -21,8 +22,6 @@ public class TableInfo {
      * 原始对象
      */
     private DbTable original;
-
-    private PathConfig pathConfig;
 
     /**
      * 表名（首字母大写）
@@ -46,12 +45,11 @@ public class TableInfo {
      */
     private List<ColumnInfo> otherColumn;
 
-    public TableInfo(DbTable original, PathConfig pathConfig) {
+    public TableInfo(DbTable original) {
         if (original == null) {
             throw new RuntimeException("表信息为空");
         }
         this.original = original;
-        this.pathConfig = pathConfig;
         // 设置原属对象
         setOriginal(original);
         // 设置类名
@@ -85,8 +83,7 @@ public class TableInfo {
             // 主键列添加到主键列，否则添加到其他列
             if (DasUtil.isPrimary(column)) {
                 getPkColumn().add(columnInfo);
-            }
-            else {
+            } else {
                 getOtherColumn().add(columnInfo);
             }
         }
@@ -94,21 +91,6 @@ public class TableInfo {
 
     public String getEntityName() {
         return name;
-    }
-
-    public String getEntityQualifiedName() {
-        if ("".equals(pathConfig.getEntityPackageName())) {
-            return getEntityName();
-        }
-        return pathConfig.getEntityPackageName() + "." + getEntityName();
-    }
-
-
-    public String getServiceInterfaceQualifiedName() {
-        if ("".equals(pathConfig.getServiceInterfacePackageName())) {
-            return getServiceInterfaceName();
-        }
-        return pathConfig.getServiceInterfacePackageName() + "." + getServiceInterfaceName();
     }
 
     public String getServiceInterfaceName() {
@@ -137,6 +119,25 @@ public class TableInfo {
 
     public String getDetailActionName() {
         return name + "DetailAction";
+    }
+
+    public String getAddHtmlName() {
+        return StringUtil.toLowerCase(name + "add");
+    }
+
+    public String getListHtmlName() {
+        return StringUtil.toLowerCase(name + "list");
+
+    }
+
+    public String getEditHtmlName() {
+        return StringUtil.toLowerCase(name + "edit");
+
+    }
+
+    public String getDetailHtmlName() {
+        return StringUtil.toLowerCase(name + "detail");
+
     }
 
 

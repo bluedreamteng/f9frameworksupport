@@ -7,7 +7,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.ui.GenerateJavaCodeDialog;
 
-public class GenerateTableCodeAction extends AnAction {
+public class GenerateTableJavaCodeAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {

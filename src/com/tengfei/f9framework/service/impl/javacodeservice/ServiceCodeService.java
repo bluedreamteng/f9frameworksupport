@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
@@ -40,7 +40,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
     PsiMethod createInsertMethod(PsiClass context) {
         String methodText = String.format("public int insert(%s record) {" +
                 "return baseDao.insert(record);" +
-                "}", tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -55,7 +55,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
         String methodText = String.format("public <T extends com.epoint.core.grammar.Record> int deleteByGuid(String guid) {" +
                 "T t = baseDao.find(%s.class, guid);" +
                 "return baseDao.delete(t);" +
-                "}", tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -69,7 +69,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
     PsiMethod createUpdateMethod(PsiClass context) {
         String methodText = String.format("public int update(%s record) {" +
                 "return baseDao.update(record);" +
-                "}", tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -87,7 +87,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
                 "List<Object> params = new java.util.ArrayList<>();" +
                 "return baseDao.queryInt(new com.epoint.core.utils.sql.SqlHelper().getSqlComplete(%s.class, conditionUtil.getMap(), params)," +
                 "params.toArray());" +
-                "}", tableInfo.getEntityName(), tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName(), tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -101,7 +101,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
     PsiMethod createFindByPrimaryKeyMethod(PsiClass context) {
         String methodText = String.format("public %s find(Object primaryKey) {" +
                 "return baseDao.find(%s.class, primaryKey);" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName(), tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -117,7 +117,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
                 "java.util.List<Object> params = new java.util.ArrayList<>();" +
                 "return baseDao.find(new com.epoint.core.utils.sql.SqlHelper().getSqlComplete(%s.class, conditionMap, params), %s.class," +
                 "params.toArray());" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -133,7 +133,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
                 "java.util.List<Object> params = new java.util.ArrayList<>();" +
                 "return baseDao.findList(new com.epoint.core.utils.sql.SqlHelper().getSqlComplete(%s.class, conditionMap, params), %s.class," +
                 "params.toArray());" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -152,7 +152,7 @@ public class ServiceCodeService extends ServiceCodeServiceBase {
                 "int count = count%s(conditionMap);" +
                 "com.epoint.database.peisistence.crud.impl.model.PageData<%s> pageData = new com.epoint.database.peisistence.crud.impl.model.PageData<%s>(list, count);" +
                 "return pageData;" +
-                "}", tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityName(), tableInfo.getEntityQualifiedName(), tableInfo.getEntityQualifiedName());
+                "}", tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName(), tableInfo.getEntityName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 

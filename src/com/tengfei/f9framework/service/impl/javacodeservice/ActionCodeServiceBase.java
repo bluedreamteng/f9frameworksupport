@@ -1,11 +1,11 @@
-package com.tengfei.f9framework.service.impl;
+package com.tengfei.f9framework.service.impl.javacodeservice;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiElementFactory;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
-import com.tengfei.f9framework.util.F9JavaFileFacade;
+import com.tengfei.f9framework.util.F9FileFacade;
 
 /**
  * @author ztf
@@ -48,7 +48,7 @@ public abstract class ActionCodeServiceBase {
     }
 
     public void generateActionCode() {
-        F9JavaFileFacade.getInstance(project).
+        F9FileFacade.getInstance(project).
                 createJavaFile(pathConfig.getModuleName(),
                         pathConfig.getActionPackageName(),
                         getClassName(),buildActionTemplate());

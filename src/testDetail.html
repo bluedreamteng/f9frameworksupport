@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+
+<!-- 内容区域 -->
+<div class="fui-content">
+    <div id="fui-form" class="fui-form" style="width:90%">
+        <div role="form">
+            <div role="row">
+                <div role="control" label="多行文本框">
+                    <div class="mini-outputtext" bind="dataBean.multilinetexttype"></div>
+                </div>
+                <div role="control" label="单选按钮租">
+                    <div class="mini-outputtext" bind="dataBean.raddiobuttontype" data-options="{code:'处罚种类'}"></div>
+                </div>
+            </div>
+            <div role="row">
+                <div role="control" label="复选框组">
+                    <div class="mini-outputtext" bind="dataBean.checkboxgroup" data-options="{code:'处罚种类'}"></div>
+                </div>
+                <div role="control" label="复选框">
+                    <div class="mini-outputtext" bind="dataBean.checkboxtype" data-options="{code:'学历'}"></div>
+                </div>
+            </div>
+            <div role="row">
+                <div role="control" label="文本输入框">
+                    <div class="mini-outputtext" bind="dataBean.textboxtype"></div>
+                </div>
+                <div role="control" label="下拉列表">
+                    <div class="mini-outputtext" bind="dataBean.comboboxtype" data-options="{code:'事故性质认定'}"></div>
+                </div>
+            </div>
+            <div role="row">
+                <div role="control" label="字符串类型">
+                    <div class="mini-outputtext" bind="dataBean.stringtype"></div>
+                </div>
+                <div role="control" label="文本类型">
+                    <div class="mini-outputtext" bind="dataBean.texttype"></div>
+                </div>
+            </div>
+            <div role="row">
+                <div role="control" label="整数类型">
+                    <div class="mini-outputtext" bind="dataBean.integertype"></div>
+                </div>
+                <div role="control" label="数字类型">
+                    <div class="mini-outputtext" bind="dataBean.numrictype"></div>
+                </div>
+            </div>
+            <div role="row">
+                <div role="control" label="日期类型">
+                    <div class="mini-outputtext" bind="dataBean.datetype"
+                         data-options="{format:'yyyy-MM-dd HH:mm:ss'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 请修改相对路径 -->
+<script src="../../../../../rest/resource/jsboot"></script>
+
+<script>
+    // 初始化页面
+    epoint.initPage('testcolumninfodetailaction');
+</script>
+</body>
+</html>

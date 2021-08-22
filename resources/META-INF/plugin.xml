@@ -88,13 +88,19 @@
             <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="GenerateTableCodeAction" class="com.tengfei.f9framework.action.GenerateTableCodeAction"
-                text="Generate Table Code" description="Generate table code">
+        <action id="GenerateTableCodeAction" class="com.tengfei.f9framework.action.GenerateTableJavaCodeAction"
+                text="Generate Table Java Code" description="Generate table Java code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
         <action id="TestAction" class="test.TestAction" text="TestAction" description="TestAction">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+        <action id="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction"
+                class="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction" text="Generate Table Html Code"
+                description="Generate Table Html Code">
+            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
+        </action>
+
     </actions>
 
 </idea-plugin>
