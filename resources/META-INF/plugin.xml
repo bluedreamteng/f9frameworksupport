@@ -101,6 +101,10 @@
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
 
+        <action id="CopyWebRelativePathAction" class="com.tengfei.f9framework.action.CopyWebRelativePathAction"
+                text="Copy Web Relative Path" description="Copy web relative path">
+            <add-to-group group-id="CopyGroup" anchor="first"/>
+        </action>
     </actions>
 
 </idea-plugin>
