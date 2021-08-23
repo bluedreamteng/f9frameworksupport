@@ -28,7 +28,7 @@ class F9StandardWebappFile extends F9WebappFile {
         if (moduleForFile == null) {
             throw new RuntimeException("该文件未找到对应模块");
         }
-        standardModule = moduleFacade.findStandardModuleByName(moduleForFile.getName());
+        standardModule = moduleFacade.findContainingStandardModule(virtualFile);
         if (standardModule == null) {
             throw new RuntimeException("该文件未找到对应配置模块");
         }

@@ -3,12 +3,12 @@ package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-public class F9CheckboxTemplate extends F9JavaPostfixTemplateBase{
+public class F9ComboboxTemplate extends F9JavaPostfixTemplateBase{
     /**
      * @param name    name of postfixTemplate
      * @param example 示例
      */
-    protected F9CheckboxTemplate(@NotNull String name, @NotNull String example) {
+    public F9ComboboxTemplate() {
         super("combobox", "下拉列表组件");
     }
 

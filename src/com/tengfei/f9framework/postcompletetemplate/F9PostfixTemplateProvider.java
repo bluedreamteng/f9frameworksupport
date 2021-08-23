@@ -2,10 +2,7 @@ package com.tengfei.f9framework.postcompletetemplate;
 
 import com.intellij.codeInsight.template.postfix.templates.JavaPostfixTemplateProvider;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplate;
-import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9DataGridTemplate;
-import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9DeleteTemplate;
-import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9ExportTemplate;
-import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9allSetTemplate;
+import com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -24,6 +21,7 @@ public class F9PostfixTemplateProvider extends JavaPostfixTemplateProvider {
        templates.add(new F9DataGridTemplate());
        templates.add(new F9DeleteTemplate());
        templates.add(new F9ExportTemplate());
+       templates.add(new F9ComboboxTemplate());
     }
 
     @NotNull

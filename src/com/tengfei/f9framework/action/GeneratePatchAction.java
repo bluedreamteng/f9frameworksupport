@@ -38,8 +38,15 @@ public class GeneratePatchAction extends AnAction {
         WriteCommandAction.runWriteCommandAction(project, () -> {
             F9FileFactory fileFactory = F9FileFactory.getInstance(project);
             for (VirtualFile file : data) {
-                F9File file1 = fileFactory.createF9File(file, project);
-                file1.copyToPatch(directory);
+                F9File f9file;
+                try {
+                    f9file = fileFactory.createF9File(file, project);
+                }
+                catch (Exception exception) {
+                    F9Notifier.notifyWarning(project,String.format("文件：%s 不支持此操作！",file.getPresentableUrl()));
+                    continue;
+                }
+                f9file.copyToPatch(directory);
             }
             F9Notifier.notifyMessage(project, "补丁包制作完成");
         });

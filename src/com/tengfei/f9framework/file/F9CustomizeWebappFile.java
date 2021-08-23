@@ -21,7 +21,7 @@ class F9CustomizeWebappFile extends F9WebappFile {
         if (moduleForFile == null) {
             throw new RuntimeException("该文件未找到对应模块");
         }
-        customizeModule = moduleFacade.findCustomizeModuleByName(moduleForFile.getName());
+        customizeModule = moduleFacade.findContainingCustomizeModule(virtualFile);
         if (customizeModule == null) {
             throw new RuntimeException("该文件未找到对应配置模块");
         }

@@ -10,6 +10,7 @@ import com.tengfei.f9framework.file.F9WebappFile;
 import com.tengfei.f9framework.notification.F9Notifier;
 
 import java.awt.datatransfer.StringSelection;
+import java.util.Objects;
 
 public class CopyWebRelativePathAction extends AnAction {
 
@@ -18,12 +19,12 @@ public class CopyWebRelativePathAction extends AnAction {
         // TODO: insert action logic here
         VirtualFile virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE);
         if(virtualFile == null) {
-            F9Notifier.notifyWarning(e.getProject(),"为获取到虚拟文件");
+            F9Notifier.notifyWarning(e.getProject(),"未获取到虚拟文件");
             return;
         }
-        F9WebappFile f9WebAppFile = null;
+        F9WebappFile f9WebAppFile;
         try {
-            f9WebAppFile = F9FileFactory.getInstance(e.getProject()).createF9WebAppFile(virtualFile, e.getProject());
+            f9WebAppFile = F9FileFactory.getInstance(e.getProject()).createF9WebAppFile(virtualFile, Objects.requireNonNull(e.getProject()));
         } catch (Exception exception) {
             F9Notifier.notifyError(e.getProject(),"不支持的文件类型");
             return;
@@ -31,6 +32,5 @@ public class CopyWebRelativePathAction extends AnAction {
         String webRelativePath = f9WebAppFile.getWebRelativePath();
         CopyPasteManager.getInstance().setContents(new StringSelection(webRelativePath));
         F9Notifier.notifyMessage(e.getProject(),"web相对路径已复制进剪切板");
-
     }
 }

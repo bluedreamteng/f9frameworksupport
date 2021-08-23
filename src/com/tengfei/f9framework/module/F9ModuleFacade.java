@@ -5,6 +5,7 @@ import com.intellij.javaee.web.facet.WebFacet;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.module.setting.F9CustomizeModuleSetting;
 import com.tengfei.f9framework.module.setting.F9ProjectSetting;
 import com.tengfei.f9framework.module.setting.F9StandardModuleSetting;
@@ -26,6 +27,7 @@ public class F9ModuleFacade {
 
     private final List<F9StandardModule> standardModules = new ArrayList<>();
     private final List<F9CustomizeModule> customizeModules = new ArrayList<>();
+    private VirtualFile virtualFile;
 
 
     public static F9ModuleFacade getInstance(Project project) {
@@ -95,6 +97,24 @@ public class F9ModuleFacade {
         return null;
     }
 
+    public F9CustomizeModule findContainingCustomizeModule(VirtualFile virtualFile) {
+        for (F9CustomizeModule customizeModule : customizeModules) {
+            if(!(virtualFile.getPresentableUrl().equals(customizeModule.getWebRoot())) && virtualFile.getPresentableUrl().startsWith(customizeModule.getWebRoot())) {
+                return customizeModule;
+            }
+        }
+        return null;
+    }
+
+    public F9StandardModule findContainingStandardModule(VirtualFile virtualFile) {
+        for (F9StandardModule standardModule : standardModules) {
+            if(!(virtualFile.getPresentableUrl().equals(standardModule.getWebRootPath())) && virtualFile.getPresentableUrl().startsWith(standardModule.getWebRootPath())) {
+                return standardModule;
+            }
+        }
+        return null;
+    }
+
 
     @Nullable
     private String findWebRootPathByModuleName(String moduleName) {
@@ -127,4 +147,5 @@ public class F9ModuleFacade {
         }
         return result;
     }
+
 }
