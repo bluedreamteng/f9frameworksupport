@@ -5,7 +5,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.tengfei.f9framework.util.FileUtils;
+import com.tengfei.f9framework.util.FileManager;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -34,7 +34,7 @@ public abstract class F9File {
         PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
         assert targetDirectory != null;
         String containingFileDirPath = targetDirectory.getVirtualFile().getPath() + "/" + getPatchDirRelativePath();
-        FileUtils.copyFileToTargetDirectory(containingFileDirPath, psiFile);
+        FileManager.getInstance(project).copyFileToTargetDirectory(containingFileDirPath,virtualFile);
     }
 
     /**
