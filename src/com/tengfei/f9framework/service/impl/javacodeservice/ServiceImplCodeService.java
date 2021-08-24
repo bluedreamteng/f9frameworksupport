@@ -4,7 +4,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.JavaPsiFacade;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
 
@@ -13,7 +12,7 @@ import com.tengfei.f9framework.entity.TableInfo;
  */
 public class ServiceImplCodeService extends ServiceCodeServiceBase {
 
-    private Project project;
+    private final Project project;
 
     public ServiceImplCodeService(Project project, TableInfo tableInfo, PathConfig pathConfig) {
         super(project, tableInfo, pathConfig);
@@ -23,11 +22,9 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
 
     @Override
     PsiClass createClass() {
-        PsiClass interfaceClass = javaPsiFacade.findClass(tableInfo.getServiceInterfaceName(), GlobalSearchScope.allScope(project));
+        PsiClass interfaceClass = elementFactory.createClass(tableInfo.getServiceInterfaceName());
         PsiClass result = elementFactory.createClass(tableInfo.getServiceImplName());
-        if(interfaceClass != null) {
-            result.getImplementsList().add(elementFactory.createClassReferenceElement(interfaceClass));
-        }
+        result.getImplementsList().add(elementFactory.createClassReferenceElement(interfaceClass));
         //加入注解
         result.getModifierList().addAnnotation("org.springframework.stereotype.Component");
         return result;
@@ -128,7 +125,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createFindListWithConditionMethod(PsiClass context) {
         String methodText = String.format("public java.util.List<%s> findList(java.util.Map<String, Object> conditionMap) {" +
                 "return new %s().findList(conditionMap);" +
-                "}",tableInfo.getEntityName(),tableInfo.getServiceName());
+                "}", tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 
@@ -142,7 +139,7 @@ public class ServiceImplCodeService extends ServiceCodeServiceBase {
     public PsiMethod createPaginatorListMethod(PsiClass context) {
         String methodText = String.format("public com.epoint.database.peisistence.crud.impl.model.PageData<%s> paginatorList(java.util.Map<String, Object> conditionMap, int pageNumber, int pageSize) {" +
                 "return new %s().paginatorList(conditionMap, pageNumber, pageSize);" +
-                "}",tableInfo.getEntityName(),tableInfo.getServiceName());
+                "}", tableInfo.getEntityName(), tableInfo.getServiceName());
         return elementFactory.createMethodFromText(methodText, context);
     }
 

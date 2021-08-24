@@ -1,6 +1,7 @@
 package com.tengfei.f9framework.service.impl.htmlcodeservice;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.tengfei.f9framework.entity.ColumnInfo;
 import com.tengfei.f9framework.entity.TableInfo;
@@ -49,9 +50,9 @@ public class DetailHtmlCodeService extends HtmlCodeServiceBase {
 
     @Override
     protected String getHtmlJavaScript() {
-        return "<script>\n" +
+        return String.format("<script>\n" +
                 "    // 初始化页面\n" +
-                "    epoint.initPage('testcolumninfodetailaction');\n" +
-                "</script>";
+                "    epoint.initPage('%s');\n" +
+                "</script>", StringUtil.toLowerCase(tableInfo.getDetailActionName()));
     }
 }
