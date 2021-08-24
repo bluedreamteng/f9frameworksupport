@@ -6,8 +6,10 @@ import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.module.setting.F9ProjectSetting;
 import com.tengfei.f9framework.module.setting.F9StandardModuleSetting;
-import com.tengfei.f9framework.util.FileManager;
+import com.tengfei.f9framework.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 /**
  * @author ztf
@@ -18,13 +20,11 @@ class F9JarFile extends F9File {
     }
 
     @Override
-    public void copyToPatch(@NotNull VirtualFile directory) {
-        PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
-        assert targetDirectory != null;
+    public void copyToPatch(@NotNull VirtualFile directory) throws IOException {
         F9ProjectSetting projectSetting = F9ProjectSetting.getInstance(project);
         for (F9StandardModuleSetting standardModule : projectSetting.standardModules) {
-            String containingFileDir = targetDirectory + "/" + standardModule.getName() + "/" + "WEB-INF/lib";
-            FileManager.getInstance(project).copyFileToTargetDirectory(containingFileDir, virtualFile);
+            String containingFileDir = directory.getPresentableUrl()  + "/" + standardModule.getName() + "/" + "WEB-INF/lib";
+            FileUtil.copyFileToTargetDirectory(containingFileDir, virtualFile);
         }
     }
 

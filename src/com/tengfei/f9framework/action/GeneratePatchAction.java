@@ -13,6 +13,8 @@ import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 /**
  * @author ztf
  */
@@ -46,7 +48,11 @@ public class GeneratePatchAction extends AnAction {
                     F9Notifier.notifyWarning(project,String.format("文件：%s 不支持此操作！",file.getPresentableUrl()));
                     continue;
                 }
-                f9file.copyToPatch(directory);
+                try {
+                    f9file.copyToPatch(directory);
+                } catch (IOException ioException) {
+                    F9Notifier.notifyWarning(project,String.format("文件：%s 未能成功复制！" + ioException.getMessage(),file.getPresentableUrl()));
+                }
             }
             F9Notifier.notifyMessage(project, "补丁包制作完成");
         });

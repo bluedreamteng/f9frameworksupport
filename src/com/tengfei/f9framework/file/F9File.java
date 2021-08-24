@@ -5,8 +5,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
-import com.tengfei.f9framework.util.FileManager;
+import com.tengfei.f9framework.util.FileUtil;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 /**
  * F9文件的基类
@@ -30,11 +32,11 @@ public abstract class F9File {
      *
      * @param directory 补丁包目录
      */
-    public void copyToPatch(@NotNull VirtualFile directory) {
+    public void copyToPatch(@NotNull VirtualFile directory) throws IOException {
         PsiDirectory targetDirectory = PsiManager.getInstance(project).findDirectory(directory);
         assert targetDirectory != null;
         String containingFileDirPath = targetDirectory.getVirtualFile().getPath() + "/" + getPatchDirRelativePath();
-        FileManager.getInstance(project).copyFileToTargetDirectory(containingFileDirPath,virtualFile);
+        FileUtil.copyFileToTargetDirectory(containingFileDirPath,virtualFile);
     }
 
     /**
