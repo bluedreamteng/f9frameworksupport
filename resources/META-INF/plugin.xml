@@ -61,6 +61,8 @@
         <projectService serviceInterface="com.tengfei.f9framework.service.TableCodeGenerateService"
                         serviceImplementation="com.tengfei.f9framework.service.impl.TableCodeGenerateServiceImpl"/>
 
+        <completion.contributor language="HTML"
+                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlCompletionContributor"/>
     </extensions>
 
     <actions>

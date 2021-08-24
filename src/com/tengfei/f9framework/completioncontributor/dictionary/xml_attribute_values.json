@@ -1,0 +1,22 @@
+{
+  "data-options": [
+    "{code:''}",
+    "{format:'yyyy-MM-dd HH:mm:ss'}",
+    "{format:'yyyy-MM-dd'}",
+    "{format:'yyyy-MM-dd HH:mm'}"
+  ],
+  "class": [
+    "mini-outputtext",
+    "mini-datepicker",
+    "mini-textarea",
+    "mini-radiobuttonlist",
+    "mini-checkboxlist",
+    "mini-checkbox",
+    "mini-textbox"
+  ],
+  "readonly": [
+    "true",
+    "false"
+  ]
+
+}
