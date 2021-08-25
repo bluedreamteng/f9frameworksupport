@@ -1,7 +1,6 @@
 package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 
 public class F9ComboboxTemplate extends F9JavaPostfixTemplateBase{
     /**

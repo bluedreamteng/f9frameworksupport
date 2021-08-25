@@ -12,7 +12,7 @@ import com.tengfei.f9framework.util.F9ChooseFileUtil;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
 public class GenerateHtmlCodeDialog extends DialogWrapper {
     private final Project project;
