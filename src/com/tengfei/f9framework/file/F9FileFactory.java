@@ -88,7 +88,7 @@ public class F9FileFactory {
             }
 
             //必须是目录底下的文件
-            if (file.getPresentableUrl().startsWith(standardModule.getWebRootPath()) && !file.getPresentableUrl().equals(standardModule.getWebRootPath())) {
+            if (file.getPresentableUrl().startsWith(standardModule.getWebRootPath())) {
                 return true;
             }
         }
