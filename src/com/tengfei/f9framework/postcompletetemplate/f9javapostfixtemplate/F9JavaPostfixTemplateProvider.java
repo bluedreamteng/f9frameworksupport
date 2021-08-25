@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.postcompletetemplate;
+package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
 import com.intellij.codeInsight.template.postfix.templates.JavaPostfixTemplateProvider;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplate;
@@ -11,11 +11,11 @@ import java.util.Set;
 /**
  * @author ztf
  */
-public class F9PostfixTemplateProvider extends JavaPostfixTemplateProvider {
+public class F9JavaPostfixTemplateProvider extends JavaPostfixTemplateProvider {
 
     private final Set<PostfixTemplate> templates = new HashSet<>();
 
-    public F9PostfixTemplateProvider() {
+    public F9JavaPostfixTemplateProvider() {
         //
        templates.add(new F9allSetTemplate());
        templates.add(new F9DataGridTemplate());
