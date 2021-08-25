@@ -1,0 +1,145 @@
+{
+  "data-options": [
+    {
+      "attributeValue": "{code:''}",
+      "description": "代码项"
+    },
+    {
+      "attributeValue": "{format:'yyyy-MM-dd HH:mm:ss'}",
+      "description": "日期格式"
+    },
+    {
+      "attributeValue": "{format:'yyyy-MM-dd'}",
+      "description": "日期格式"
+    },
+    {
+      "attributeValue": "{format:'yyyy-MM-dd HH:mm'}",
+      "description": "日期格式"
+    }
+  ],
+  "class": [
+    {
+      "attributeValue": "mini-outputtext",
+      "description": "输出文本"
+    },
+    {
+      "attributeValue": "mini-datepicker",
+      "description": "日期选择组件"
+    },
+    {
+      "attributeValue": "mini-textarea",
+      "description": "多行文本框"
+    },
+    {
+      "attributeValue": "mini-radiobuttonlist",
+      "description": "单选按钮组"
+    },
+    {
+      "attributeValue": "mini-checkboxlist",
+      "description": "复选框组"
+    },
+    {
+      "attributeValue": "mini-checkbox",
+      "description": "复选框"
+    },
+    {
+      "attributeValue": "mini-textbox",
+      "description": "文本框"
+    }
+  ],
+  "readonly": [
+    {
+      "attributeValue": "true"
+    },
+    {
+      "attributeValue": "false"
+    }
+  ],
+  "vtype": [
+    {
+      "attributeValue": "int",
+      "description": "必须是整数"
+    },
+    {
+      "attributeValue": "float",
+      "description": "必须是数字"
+    },
+    {
+      "attributeValue": "url",
+      "description": "必须是url"
+    },
+    {
+      "attributeValue": "email",
+      "description": "必须是email地址"
+    },
+    {
+      "attributeValue": "maxLength:6",
+      "description": "字符长度<=6"
+    },
+    {
+      "attributeValue": "minLength:8",
+      "description": "字符长度>=8"
+    },
+    {
+      "attributeValue": "rangeLength:6,13",
+      "description": "字符串长度（6-13）"
+    },
+    {
+      "attributeValue": "rangeChar:6,13",
+      "description": "字符数个数（6-13）"
+    },
+    {
+      "attributeValue": "range:0,100",
+      "description": "数字范围（0,100）"
+    },
+    {
+      "attributeValue": "date:yyyy-MM-dd",
+      "description": "必须是日期格式（yyyy-MM-dd）"
+    },
+    {
+      "attributeValue": "date:MM/dd/yyyy",
+      "description": "必须是日期格式（MM/dd/yyyy）"
+    },
+    {
+      "attributeValue": "email;rangeLength:5,20;",
+      "description": "邮箱格式，5~20个字符（组合）"
+    },
+    {
+      "attributeValue": "mobile",
+      "description": "必须是手机号码"
+    },
+    {
+      "attributeValue": "tel",
+      "description": "必须是固定电话号码"
+    },
+    {
+      "attributeValue": "phone",
+      "description": "必须是电话号码"
+    },
+    {
+      "attributeValue": "postCode",
+      "description": "必须是邮政编码"
+    },
+    {
+      "attributeValue": "orgCode",
+      "description": "必须是组织机构代码"
+    },
+    {
+      "attributeValue": "idCard",
+      "description": "必须是身份证号码"
+    },
+    {
+      "attributeValue": "decimalLength:6",
+      "description": "小数位数长度(只能输入6位)"
+    }
+  ],
+  "required": [
+    {
+      "attributeValue": "true",
+      "description": "不允许为空"
+    },
+    {
+      "attributeValue": "false"
+    }
+  ]
+}

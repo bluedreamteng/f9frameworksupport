@@ -10,59 +10,50 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author ztf
  */
 public class F9HtmlDictionary {
-    private static Map<String, List<String>> xmlAttributeValues;
-    private static List<String> xmlAttributes;
+    private static Map<String, List<F9HtmlAttributeValueDocumentation>> xmlattributDocumentation;
+    private static Set<String> xmlAttributes;
 
     @NotNull
-    public static synchronized Map<String, List<String>> getXmlAttributeValues() {
-        if(xmlAttributeValues == null) {
-            xmlAttributeValues = readXmlAttributeValues();
+    public static synchronized Map<String, List<F9HtmlAttributeValueDocumentation>> getXmlAttributeDocumentation() {
+        if (xmlattributDocumentation == null) {
+            xmlattributDocumentation = readXmlAttributeValues();
         }
-        return xmlAttributeValues;
+        return xmlattributDocumentation;
     }
 
     @NotNull
-    public static synchronized List<String> getXmlAttributes() {
-        if(xmlAttributes == null) {
+    public static synchronized Set<String> getXmlAttributes() {
+        if (xmlAttributes == null) {
             xmlAttributes = readXmlAttributes();
         }
         return xmlAttributes;
     }
 
-    private static List<String> readXmlAttributes() {
-        List<String> result = new ArrayList<>();
-        InputStream stream = F9HtmlDictionary.class.getResourceAsStream("xml_attribute_values.json");
-        try {
-            String file = stream != null ? FileUtil.loadTextAndClose(stream) : "";
-            if (StringUtil.isNotEmpty(file)) {
-                Gson gson = new Gson();
-                Map<String,String> map = gson.fromJson(file,new TypeToken<Map<String,List<String>>>(){}.getType());
-                result.addAll(map.keySet());
-            }
-        } catch (IOException exception) {
-            Logger.getInstance(HttpHeadersDictionary.class).error(exception);
-        }
-        return result;
+    private static Set<String> readXmlAttributes() {
+        Map<String, List<F9HtmlAttributeValueDocumentation>> xmlAttributeDocumentation = getXmlAttributeDocumentation();
+        return xmlAttributeDocumentation.keySet();
+
     }
 
     @NotNull
-    private static Map<String, List<String>> readXmlAttributeValues() {
-        Map<String, List<String>> result = new HashMap<>();
-        InputStream stream = F9HtmlDictionary.class.getResourceAsStream("xml_attribute_values.json");
+    private static Map<String, List<F9HtmlAttributeValueDocumentation>> readXmlAttributeValues() {
+        Map<String, List<F9HtmlAttributeValueDocumentation>> result = new HashMap<>();
+        InputStream stream = F9HtmlDictionary.class.getResourceAsStream("xml_attribute_documentation.json");
         try {
             String file = stream != null ? FileUtil.loadTextAndClose(stream) : "";
             if (StringUtil.isNotEmpty(file)) {
                 Gson gson = new Gson();
-                result = gson.fromJson(file,new TypeToken<Map<String,List<String>>>(){}.getType());
+                result = gson.fromJson(file, new TypeToken<Map<String, List<F9HtmlAttributeValueDocumentation>>>() {
+                }.getType());
             }
         } catch (IOException exception) {
             Logger.getInstance(HttpHeadersDictionary.class).error(exception);
