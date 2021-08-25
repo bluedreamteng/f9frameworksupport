@@ -137,3 +137,5 @@ Xsrc/com/tengfei/f9framework/miniuicomponent/typecomponent/F9DateSimpleFormCompo
 [src/com/tengfei/f9framework/miniuicomponent/typecomponent/F9IntegerSimpleFormComponent.java,3\8\38373694ecf627fcdb5335f1bb958a24f3a4eb4d
 ‹
 [src/com/tengfei/f9framework/miniuicomponent/typecomponent/F9NumericSimpleFormComponent.java,2\8\288cd9df9535fbac58d6995445161ee1b622c6a9
+‚
+Rsrc/com/tengfei/f9framework/completioncontributor/dictionary/F9HtmlDictionary.java,5\b\5bb129a005a95aab04521b0a8a4b7740325a8187

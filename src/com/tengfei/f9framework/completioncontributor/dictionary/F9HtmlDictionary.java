@@ -15,6 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author ztf
+ */
 public class F9HtmlDictionary {
     private static Map<String, List<String>> xmlAttributeValues;
     private static List<String> xmlAttributes;

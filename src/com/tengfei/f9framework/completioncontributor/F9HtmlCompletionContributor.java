@@ -5,6 +5,7 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.codeInsight.lookup.LookupElementRenderer;
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.patterns.PlatformPatterns;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -15,8 +16,12 @@ import com.tengfei.f9framework.completioncontributor.dictionary.F9HtmlDictionary
 import com.tengfei.f9framework.icons.F9Icons;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.List;
 
+/**
+ * @author ztf
+ */
 public class F9HtmlCompletionContributor extends CompletionContributor {
     private F9HtmlCompletionContributor() {
         this.extend(CompletionType.BASIC, PlatformPatterns.psiElement().withParent(XmlAttributeValue.class), new XmlAttributeValueProvider());
@@ -65,9 +70,10 @@ public class F9HtmlCompletionContributor extends CompletionContributor {
 
         @Override
         public void renderElement(LookupElement element, LookupElementPresentation presentation) {
-            presentation.setIcon(F9Icons.SPRINGWEB);
+            presentation.setIcon(F9Icons.DOG);
             presentation.setItemTextBold(true);
             presentation.setItemText(element.getLookupString());
+            presentation.setTailText("         mini ui ", true);
         }
     }
 }
