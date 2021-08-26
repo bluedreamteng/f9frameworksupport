@@ -7,6 +7,7 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvid
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.util.EditorManage;
 import org.jetbrains.annotations.NotNull;
@@ -15,12 +16,15 @@ import org.jetbrains.annotations.NotNull;
  * @author ztf
  */
 public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
+
+    private String template;
     /**
      * @param name    name of postfixTemplate
      * @param example 示例
      */
-    protected F9AbstractPostfixTemplate(@NotNull String name, @NotNull String example,PostfixTemplateProvider provider) {
+    protected F9AbstractPostfixTemplate(@NotNull String name, @NotNull String example,@NotNull String template,PostfixTemplateProvider provider) {
        super(null,name,example, provider);
+       this.template = template;
     }
 
     /**
@@ -49,5 +53,8 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
      * @param context psielement
      * @return string 模板
      */
-    public abstract String buildStringTemplate(PsiElement context);
+    public String buildStringTemplate(PsiElement context){
+        //替换模板变量
+        return template.replaceAll("\\$capitalexpr\\$", StringUtil.capitalize(context.getText())).replaceAll("\\$expr\\$",context.getText());
+    }
 }

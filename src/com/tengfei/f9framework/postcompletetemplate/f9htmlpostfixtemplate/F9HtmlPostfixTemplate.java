@@ -10,13 +10,13 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author ztf
  */
-public abstract class F9HtmlPostfixTemplateBase extends F9AbstractPostfixTemplate {
+public class F9HtmlPostfixTemplate extends F9AbstractPostfixTemplate {
     /**
      * @param name    name of postfixTemplate
      * @param example 示例
      */
-    protected F9HtmlPostfixTemplateBase(@NotNull String name, @NotNull String example,PostfixTemplateProvider provider) {
-        super(name, example, provider);
+    protected F9HtmlPostfixTemplate(@NotNull String name, @NotNull String example, String template, PostfixTemplateProvider provider) {
+        super(name, example,template, provider);
     }
 
 

@@ -17,7 +17,7 @@ public class F9HtmlPostfixTemplateProvider implements PostfixTemplateProvider {
     private final Set<PostfixTemplate> myBuiltinTemplates = ContainerUtil.newHashSet();
 
     public F9HtmlPostfixTemplateProvider() {
-        myBuiltinTemplates.add(new F9TestHtmlTemplate(this));
+
     }
 
     @Override

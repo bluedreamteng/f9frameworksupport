@@ -17,8 +17,8 @@ public abstract class F9JavaPostfixTemplateBase extends F9AbstractPostfixTemplat
      * @param name    name of postfixTemplate
      * @param example 示例
      */
-    protected F9JavaPostfixTemplateBase(@NotNull String name, @NotNull String example, PostfixTemplateProvider provider) {
-        super(name, example,provider);
+    protected F9JavaPostfixTemplateBase(@NotNull String name, @NotNull String example,String template, PostfixTemplateProvider provider) {
+        super(name, example,template,provider);
     }
 
 

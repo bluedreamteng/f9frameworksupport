@@ -89,12 +89,6 @@ b
 2src/com/tengfei/f9framework/util/EditorManage.java,5\2\529354ce6e297c4dee1125431ae198e5d4ae570b
 å
 \src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9allSetTemplate.java,0\5\0509f7a24afad76b23ed81db74476af16c9e4e8b
-é
-^src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9DataGridTemplate.java,8\0\80ae0a89d5064305475960c7bf5e90d3c6e10093
-å
-\src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9DeleteTemplate.java,d\a\da0a885ec5ac2845274e7996b87bb6215fa7c44c
-å
-\src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9ExportTemplate.java,9\f\9fdbdc5f5a268a00f8211b8d76d4ac31a5df3968
 ï
 esrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplateBase.java,1\4\147b9c050f51e89e4047f23a0a32e6e9681d91a7
 T
@@ -103,8 +97,6 @@ n
 >resources/postfixTemplates/F9DataGridTemplate/description.html,8\0\801fb8bacf53eebf2a1afaa29a105a972b054078
 j
 :src/com/tengfei/f9framework/ui/GenerateJavaCodeDialog.form,d\7\d72a18a7fe03471e92465eadcc39ead83862daf7
-é
-^src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9ComboboxTemplate.java,6\7\6716f13d0f99180b174caf7799b91e5dfde04ed3
 Ç
 Rsrc/com/tengfei/f9framework/completioncontributor/F9HtmlCompletionContributor.java,d\8\d84401ce17b6425ee42d12b38dea614c0166d7b7
 j
@@ -129,12 +121,8 @@ Rsrc/com/tengfei/f9framework/completioncontributor/dictionary/F9HtmlDictionary.j
 src/test.html,6\8\68fdc6af60a9a222a5cb5b77c79d0e9cc8ee0797
 ì
 csrc/com/tengfei/f9framework/completioncontributor/dictionary/F9HtmlAttributeValueDocumentation.java,f\d\fd885724ced8248deaca9d42b2882800a024e686
-ç
-]src/com/tengfei/f9framework/completioncontributor/dictionary/xml_attribute_documentation.json,b\a\ba3158566cf7ee95abf02ab209da3b2c2dee4b4d
 
 Osrc/com/tengfei/f9framework/postcompletetemplate/F9AbstractPostfixTemplate.java,7\7\7710e654c93fa82f7c98f590e7695089d85a084f
-ï
-esrc/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9HtmlPostfixTemplateBase.java,7\1\719ad06fe88df58ebdc9214ed6d2426f864fc0fb
 ô
 isrc/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9HtmlPostfixTemplateProvider.java,0\6\0639e6a75b9b990882768dc42d64933bcfcd146f
 ô
@@ -145,13 +133,25 @@ s
 Csrc/com/tengfei/f9framework/projectsetting/F9SettingsComponent.java,e\7\e7f06501061c62ce2a2a3261863426ddccbf0d22
 v
 Fsrc/com/tengfei/f9framework/projectsetting/F9SettingsConfigurable.java,7\8\788fce25826f2ba48f2250224922eb5947704531
-o
-?src/com/tengfei/f9framework/projectsetting/F9SettingsState.java,2\3\23360dfb20eb7acf995e5c86dc2f678150511bd9
 á
 Wsrc/com/tengfei/f9framework/projectsetting/f9modulesetting/F9StandardModuleSetting.java,6\d\6d795c1397bcabe7cb28ec82bbed812ee281a958
-é
-^src/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9TestHtmlTemplate.java,3\1\31e1551ad1355de4e54b96a772aaefcc117d0d52
 à
 Xsrc/com/tengfei/f9framework/projectsetting/f9modulesetting/F9CustomizeModuleSetting.java,f\d\fd356d57ee6027c9de6978b1020c35113c7b4c88
 =
 src/test.json,8\9\8915c702aadaba5baefd4db3f8934a82d4a480a6
+b
+2src/com/tengfei/f9framework/util/F9FileFacade.java,c\4\c4060bd9e069b3c8e1b0b9be8260e54813b15744
+y
+Isrc/com/tengfei/f9framework/projectsetting/F9ApplicationSettingState.java,0\f\0fc877554961c083774eff8bae37a3f8f85c3fd0
+f
+6src/com/tengfei/f9framework/util/F9ChooseFileUtil.java,d\2\d2099b1e13396ee39ed3bb63a7ad0f5b2d343dde
+v
+Fsrc/com/tengfei/f9framework/projectsetting/F9ProjectSettingsState.java,3\a\3ae73aac0a00e79767cad24fb21231c4d957acc6
+\
+,libraryfile/xml_attribute_documentation.json,a\0\a078c48e02c0242580d949970ff9f655bb6c5bc0
+ç
+]src/com/tengfei/f9framework/postcompletetemplate/templatelibray/F9PostfixTemplateLibrary.java,d\d\dd1aab790cc273d8e8cddb88f427e1a5ba3fa460
+Ñ
+Tsrc/com/tengfei/f9framework/postcompletetemplate/templatelibray/PostfixTemplate.java,3\2\320725de18297147512e7bdbc13367d1a4f95ddb
+ë
+asrc/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9HtmlPostfixTemplate.java,4\c\4cd16f152e59e211a2d5c4a869be7bd5fc1261ca
