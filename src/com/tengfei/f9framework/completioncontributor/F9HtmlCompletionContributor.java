@@ -38,17 +38,19 @@ public class F9HtmlCompletionContributor extends CompletionContributor {
             String xmlAttributeName = xmlAttribute != null ? xmlAttribute.getName() : null;
             if (StringUtil.isNotEmpty(xmlAttributeName)) {
                 List<F9HtmlAttributeValueDocumentation> xmlAttributeDocumentation = F9HtmlDictionary.getXmlAttributeDocumentation().get(xmlAttributeName);
-                for (F9HtmlAttributeValueDocumentation attributeDocumentation : xmlAttributeDocumentation) {
-                    LookupElement lookupElement = PrioritizedLookupElement.withPriority(LookupElementBuilder.create(attributeDocumentation.getAttributeValue()).withRenderer(new LookupElementRenderer<LookupElement>() {
-                        @Override
-                        public void renderElement(LookupElement element, LookupElementPresentation presentation) {
-                            presentation.setItemText(element.getLookupString());
-                            presentation.setItemTextBold(true);
-                            presentation.setTailText("   " + attributeDocumentation.getDescription());
-                            presentation.setIcon(AllIcons.Ide.Gift);
-                        }
-                    }), 1);
-                    result.addElement(lookupElement);
+                if(xmlAttributeDocumentation != null) {
+                    for (F9HtmlAttributeValueDocumentation attributeDocumentation : xmlAttributeDocumentation) {
+                        LookupElement lookupElement = PrioritizedLookupElement.withPriority(LookupElementBuilder.create(attributeDocumentation.getAttributeValue()).withRenderer(new LookupElementRenderer<LookupElement>() {
+                            @Override
+                            public void renderElement(LookupElement element, LookupElementPresentation presentation) {
+                                presentation.setItemText(element.getLookupString());
+                                presentation.setItemTextBold(true);
+                                presentation.setTailText("   " + attributeDocumentation.getDescription());
+                                presentation.setIcon(AllIcons.Ide.Gift);
+                            }
+                        }), 1);
+                        result.addElement(lookupElement);
+                    }
                 }
             }
         }

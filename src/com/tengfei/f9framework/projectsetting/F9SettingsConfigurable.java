@@ -42,21 +42,33 @@ public class F9SettingsConfigurable implements Configurable {
 
     @Override
     public boolean isModified() {
-        F9SettingsState settings = F9SettingsState.getInstance(project);
-        return f9SettingsComponent.getEnableF9ChromeSupport() != settings.enableChromeSupport;
+        F9ProjectSettingsState projectSettingsState = F9ProjectSettingsState.getInstance(project);
+        F9ApplicationSettingState applicationSettingState = F9ApplicationSettingState.getInstance();
+        return (f9SettingsComponent.getEnableF9ChromeSupport() != projectSettingsState.enableChromeSupport) ||
+                !f9SettingsComponent.getHtmlAttributeDictionaryPath().equals(applicationSettingState.htmlAttributeDictionaryPath) ||
+                !f9SettingsComponent.getHtmlPostfixLibraryPath().equals(applicationSettingState.htmlPostfixLibraryPath) ||
+                !f9SettingsComponent.getJavaPostfixLibraryPath().equals(applicationSettingState.javaPostfixLibraryPath);
     }
 
     @Override
     public void apply() {
-        F9SettingsState settings = F9SettingsState.getInstance(project);
-        settings.enableChromeSupport = f9SettingsComponent.getEnableF9ChromeSupport();
-
+        F9ProjectSettingsState projectSettings = F9ProjectSettingsState.getInstance(project);
+        projectSettings.enableChromeSupport = f9SettingsComponent.getEnableF9ChromeSupport();
+        F9ApplicationSettingState applicationSettingState = F9ApplicationSettingState.getInstance();
+        applicationSettingState.htmlAttributeDictionaryPath = f9SettingsComponent.getHtmlAttributeDictionaryPath();
+        applicationSettingState.htmlPostfixLibraryPath = f9SettingsComponent.getHtmlPostfixLibraryPath();
+        applicationSettingState.javaPostfixLibraryPath = f9SettingsComponent.getJavaPostfixLibraryPath();
     }
 
     @Override
     public void reset() {
-        F9SettingsState settings = F9SettingsState.getInstance(project);
+        F9ProjectSettingsState settings = F9ProjectSettingsState.getInstance(project);
+        F9ApplicationSettingState applicationSettingState = F9ApplicationSettingState.getInstance();
         f9SettingsComponent.setEnableF9ChromeSupport(settings.enableChromeSupport);
+        f9SettingsComponent.setHtmlPostfixLibraryPath(applicationSettingState.htmlPostfixLibraryPath);
+        f9SettingsComponent.setJavaPostfixLibraryPath(applicationSettingState.javaPostfixLibraryPath);
+        f9SettingsComponent.setHtmlAttributeDictionaryPath(applicationSettingState.htmlAttributeDictionaryPath);
+
     }
 
     @Override

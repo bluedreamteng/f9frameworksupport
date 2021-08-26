@@ -1,4 +1,8 @@
 import com.google.gson.Gson;
+import com.intellij.openapi.options.Configurable;
+import com.intellij.terminal.JBTerminalStarter;
+import com.intellij.terminal.TerminalSettingsListener;
+import com.jediterm.terminal.ui.TerminalPanel;
 import com.tengfei.f9framework.completioncontributor.dictionary.F9HtmlAttributeValueDocumentation;
 
 import java.util.ArrayList;

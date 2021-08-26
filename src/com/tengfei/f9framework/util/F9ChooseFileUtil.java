@@ -10,4 +10,9 @@ public class F9ChooseFileUtil {
         FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(false, true, false, false, false, false);
         return FileChooser.chooseFile(fileChooserDescriptor, project, null);
     }
+
+    public static VirtualFile chooseFile() {
+        FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, false, false, false, false, false);
+        return FileChooser.chooseFile(fileChooserDescriptor, null, null);
+    }
 }

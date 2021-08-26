@@ -4,7 +4,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,25 +16,27 @@ import org.jetbrains.annotations.Nullable;
  * @author ztf
  */
 @State(
-        name = "com.tengfei.f9framework.setting.F9SettingsState",
-        storages = {@Storage("f9framework.xml")}
+        name = "com.tengfei.f9framework.projectsetting.F9ApplicationSettingState",
+        storages = {@Storage("f9framework_application.xml")}
 )
-public class F9SettingsState implements PersistentStateComponent<F9SettingsState> {
+public class F9ApplicationSettingState implements PersistentStateComponent<F9ApplicationSettingState> {
 
-    public boolean enableChromeSupport = false;
+    public String htmlPostfixLibraryPath = "";
+    public String javaPostfixLibraryPath = "";
+    public String htmlAttributeDictionaryPath = "";
 
-    public static F9SettingsState getInstance(Project project) {
-        return ServiceManager.getService(project, F9SettingsState.class);
+    public static F9ApplicationSettingState getInstance() {
+        return ServiceManager.getService(F9ApplicationSettingState.class);
     }
 
     @Nullable
     @Override
-    public F9SettingsState getState() {
+    public F9ApplicationSettingState getState() {
         return this;
     }
 
     @Override
-    public void loadState(@NotNull F9SettingsState state) {
+    public void loadState(@NotNull F9ApplicationSettingState state) {
         XmlSerializerUtil.copyBean(state, this);
     }
 

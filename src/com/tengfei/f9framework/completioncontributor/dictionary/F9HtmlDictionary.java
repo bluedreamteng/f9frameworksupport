@@ -6,8 +6,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ws.rest.client.header.HttpHeadersDictionary;
+import com.tengfei.f9framework.projectsetting.F9ApplicationSettingState;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -42,9 +44,13 @@ public class F9HtmlDictionary {
     @NotNull
     private static Map<String, List<F9HtmlAttributeValueDocumentation>> readXmlAttributeValues() {
         Map<String, List<F9HtmlAttributeValueDocumentation>> result = new HashMap<>();
-        InputStream stream = F9HtmlDictionary.class.getResourceAsStream("xml_attribute_documentation.json");
+        String htmlAttributeDictionaryPath = F9ApplicationSettingState.getInstance().htmlAttributeDictionaryPath;
+        if(StringUtil.isEmpty(htmlAttributeDictionaryPath)) {
+            return result;
+        }
         try {
-            String file = stream != null ? FileUtil.loadTextAndClose(stream) : "";
+            InputStream stream = new FileInputStream(htmlAttributeDictionaryPath);
+            String file = FileUtil.loadTextAndClose(stream);
             if (StringUtil.isNotEmpty(file)) {
                 Gson gson = new Gson();
                 result = gson.fromJson(file, new TypeToken<Map<String, List<F9HtmlAttributeValueDocumentation>>>() {
@@ -52,6 +58,7 @@ public class F9HtmlDictionary {
             }
         } catch (IOException exception) {
             Logger.getInstance(HttpHeadersDictionary.class).error(exception);
+            throw new RuntimeException("读取文件错误,请检查相关文件配置： " + htmlAttributeDictionaryPath,exception);
         }
 
         return result;
