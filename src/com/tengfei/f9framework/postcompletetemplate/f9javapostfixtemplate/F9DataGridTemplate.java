@@ -1,5 +1,6 @@
 package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
+import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvider;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -9,8 +10,8 @@ import com.intellij.psi.PsiElement;
 public class F9DataGridTemplate extends F9JavaPostfixTemplateBase {
 
 
-    public F9DataGridTemplate() {
-        super("datagrid", "getDataGridData");
+    public F9DataGridTemplate( PostfixTemplateProvider provider) {
+        super("datagrid", "getDataGridData",provider);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
+import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvider;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -7,8 +8,8 @@ import com.intellij.psi.PsiElement;
  */
 public class F9ExportTemplate extends F9JavaPostfixTemplateBase {
 
-    public F9ExportTemplate() {
-        super("export", "getExportModel");
+    public F9ExportTemplate(PostfixTemplateProvider provider) {
+        super("export", "getExportModel",provider);
     }
 
     @Override

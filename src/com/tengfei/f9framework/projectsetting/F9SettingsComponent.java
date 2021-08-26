@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.module.setting;
+package com.tengfei.f9framework.projectsetting;
 
 import com.intellij.ui.components.JBCheckBox;
 import com.intellij.util.ui.FormBuilder;

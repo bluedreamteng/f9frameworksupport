@@ -3,9 +3,9 @@ package com.tengfei.f9framework.action;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
-import com.tengfei.f9framework.module.setting.F9CustomizeModuleSetting;
-import com.tengfei.f9framework.module.setting.F9ProjectSetting;
-import com.tengfei.f9framework.module.setting.F9StandardModuleSetting;
+import com.tengfei.f9framework.projectsetting.f9modulesetting.F9CustomizeModuleSetting;
+import com.tengfei.f9framework.projectsetting.f9modulesetting.F9ProjectSetting;
+import com.tengfei.f9framework.projectsetting.f9modulesetting.F9StandardModuleSetting;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.NotNull;
 

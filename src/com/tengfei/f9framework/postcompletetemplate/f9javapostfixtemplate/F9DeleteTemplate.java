@@ -1,6 +1,7 @@
 package com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate;
 
 
+import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvider;
 import com.intellij.psi.PsiElement;
 
 
@@ -8,8 +9,8 @@ import com.intellij.psi.PsiElement;
  * @author ztf
  */
 public class F9DeleteTemplate extends F9JavaPostfixTemplateBase {
-    public F9DeleteTemplate() {
-        super("deleteselect", "delete Selected items");
+    public F9DeleteTemplate(PostfixTemplateProvider provider) {
+        super("deleteselect", "delete Selected items",provider);
     }
 
     @Override

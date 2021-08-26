@@ -5,7 +5,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Url;
 import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.file.F9WebappFile;
-import com.tengfei.f9framework.module.setting.F9SettingsState;
+import com.tengfei.f9framework.projectsetting.F9SettingsState;
 import org.jetbrains.annotations.NotNull;
 
 /**

@@ -18,10 +18,10 @@ public class F9JavaPostfixTemplateProvider extends JavaPostfixTemplateProvider {
     public F9JavaPostfixTemplateProvider() {
         //
        templates.add(new F9allSetTemplate());
-       templates.add(new F9DataGridTemplate());
-       templates.add(new F9DeleteTemplate());
-       templates.add(new F9ExportTemplate());
-       templates.add(new F9ComboboxTemplate());
+       templates.add(new F9DataGridTemplate(this));
+       templates.add(new F9DeleteTemplate(this));
+       templates.add(new F9ExportTemplate(this));
+       templates.add(new F9ComboboxTemplate(this));
     }
 
     @NotNull

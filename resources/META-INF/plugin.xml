@@ -51,10 +51,10 @@
         <webBrowserUrlProvider implementation="com.tengfei.f9framework.webbrowser.F9WebBrowserUrlProvider">
         </webBrowserUrlProvider>
 
-        <projectService serviceImplementation="com.tengfei.f9framework.module.setting.F9SettingsState"/>
-        <projectService serviceImplementation="com.tengfei.f9framework.module.setting.F9ProjectSetting"/>
-        <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.module.setting.F9SettingsConfigurable"
-                             id="com.tengfei.f9framework.module.setting.F9SettingsConfigurable"
+        <projectService serviceImplementation="com.tengfei.f9framework.projectsetting.F9SettingsState"/>
+        <projectService serviceImplementation="com.tengfei.f9framework.projectsetting.f9modulesetting.F9ProjectSetting"/>
+        <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.projectsetting.F9SettingsConfigurable"
+                             id="com.tengfei.f9framework.projectsetting.F9SettingsConfigurable"
                              displayName="F9 Framework Support" nonDefaultProject="true"
         />
 

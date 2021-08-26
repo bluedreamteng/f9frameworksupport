@@ -33,15 +33,10 @@ public class F9HtmlDictionary {
     @NotNull
     public static synchronized Set<String> getXmlAttributes() {
         if (xmlAttributes == null) {
-            xmlAttributes = readXmlAttributes();
+            Map<String, List<F9HtmlAttributeValueDocumentation>> xmlAttributeDocumentation = getXmlAttributeDocumentation();
+            xmlAttributes = xmlAttributeDocumentation.keySet();
         }
         return xmlAttributes;
-    }
-
-    private static Set<String> readXmlAttributes() {
-        Map<String, List<F9HtmlAttributeValueDocumentation>> xmlAttributeDocumentation = getXmlAttributeDocumentation();
-        return xmlAttributeDocumentation.keySet();
-
     }
 
     @NotNull
