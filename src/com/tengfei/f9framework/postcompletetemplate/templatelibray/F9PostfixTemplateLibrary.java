@@ -18,12 +18,12 @@ import java.util.List;
  * @author ztf
  */
 public class F9PostfixTemplateLibrary {
-    private static List<PostfixTemplate> htmlPostfixTemplates;
+    private static List<PostfixTemplateInfo> htmlPostfixTemplates;
 
-    private static List<PostfixTemplate> javaPostfixTemplates;
+    private static List<PostfixTemplateInfo> javaPostfixTemplates;
 
 
-    public static synchronized List<PostfixTemplate> getHtmlPostfixTemplates() {
+    public static synchronized List<PostfixTemplateInfo> getHtmlPostfixTemplates() {
         String htmlPostfixLibraryPath = F9ApplicationSettingState.getInstance().htmlPostfixLibraryPath;
         if (htmlPostfixTemplates == null) {
             htmlPostfixTemplates = readPostfixTemplates(htmlPostfixLibraryPath);
@@ -31,7 +31,7 @@ public class F9PostfixTemplateLibrary {
         return htmlPostfixTemplates;
     }
 
-    public static synchronized List<PostfixTemplate> getJavaPostfixTemplates() {
+    public static synchronized List<PostfixTemplateInfo> getJavaPostfixTemplates() {
         String javaPostfixLibraryPath = F9ApplicationSettingState.getInstance().javaPostfixLibraryPath;
         if (javaPostfixTemplates == null) {
             javaPostfixTemplates = readPostfixTemplates(javaPostfixLibraryPath);
@@ -39,8 +39,8 @@ public class F9PostfixTemplateLibrary {
         return javaPostfixTemplates;
     }
 
-    private static List<PostfixTemplate> readPostfixTemplates(String filePath) {
-        List<PostfixTemplate> result = new ArrayList<>();
+    private static List<PostfixTemplateInfo> readPostfixTemplates(String filePath) {
+        List<PostfixTemplateInfo> result = new ArrayList<>();
         if (StringUtil.isEmpty(filePath)) {
             return result;
         }
@@ -49,7 +49,7 @@ public class F9PostfixTemplateLibrary {
             String file = FileUtil.loadTextAndClose(stream);
             if (StringUtil.isNotEmpty(file)) {
                 Gson gson = new Gson();
-                result = gson.fromJson(file, new TypeToken<List<PostfixTemplate>>() {
+                result = gson.fromJson(file, new TypeToken<List<PostfixTemplateInfo>>() {
                 }.getType());
             }
         }

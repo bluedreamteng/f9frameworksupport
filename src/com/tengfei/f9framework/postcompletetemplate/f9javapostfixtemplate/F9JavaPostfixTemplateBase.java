@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author ztf
  */
-public abstract class F9JavaPostfixTemplateBase extends F9AbstractPostfixTemplate {
+public  class F9JavaPostfixTemplateBase extends F9AbstractPostfixTemplate {
 
 
     /**

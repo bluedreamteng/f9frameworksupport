@@ -3,7 +3,7 @@ package com.tengfei.f9framework.postcompletetemplate.templatelibray;
 /**
  * @author ztf
  */
-public class PostfixTemplate {
+public class PostfixTemplateInfo {
     private String name;
     private String template;
 

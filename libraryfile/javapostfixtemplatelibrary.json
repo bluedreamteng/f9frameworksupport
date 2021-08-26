@@ -1,0 +1,6 @@
+[
+  {
+    "name": "export",
+    "template": "hello world $expr$;"
+  }
+]
