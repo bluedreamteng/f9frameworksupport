@@ -55,7 +55,6 @@ public class F9PostfixTemplateLibrary {
         }
         catch (IOException exception) {
             Logger.getInstance(HttpHeadersDictionary.class).error(exception);
-            throw new RuntimeException("读取文件错误,请检查相关文件配置： " + filePath, exception);
         }
         return result;
 

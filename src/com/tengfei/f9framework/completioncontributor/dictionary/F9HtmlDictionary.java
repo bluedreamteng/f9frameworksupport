@@ -58,7 +58,6 @@ public class F9HtmlDictionary {
             }
         } catch (IOException exception) {
             Logger.getInstance(HttpHeadersDictionary.class).error(exception);
-            throw new RuntimeException("读取文件错误,请检查相关文件配置： " + htmlAttributeDictionaryPath,exception);
         }
 
         return result;

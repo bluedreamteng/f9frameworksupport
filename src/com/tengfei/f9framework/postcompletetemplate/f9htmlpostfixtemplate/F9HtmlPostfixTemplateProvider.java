@@ -5,9 +5,12 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvid
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.containers.ContainerUtil;
+import com.tengfei.f9framework.postcompletetemplate.templatelibray.F9PostfixTemplateLibrary;
+import com.tengfei.f9framework.postcompletetemplate.templatelibray.PostfixTemplateInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,7 +20,10 @@ public class F9HtmlPostfixTemplateProvider implements PostfixTemplateProvider {
     private final Set<PostfixTemplate> myBuiltinTemplates = ContainerUtil.newHashSet();
 
     public F9HtmlPostfixTemplateProvider() {
-
+        List<PostfixTemplateInfo> htmlPostfixTemplates = F9PostfixTemplateLibrary.getHtmlPostfixTemplates();
+        for (PostfixTemplateInfo htmlPostfixTemplate : htmlPostfixTemplates) {
+            myBuiltinTemplates.add(new F9HtmlPostfixTemplate(htmlPostfixTemplate.getName(),"",htmlPostfixTemplate.getTemplate(),this));
+        }
     }
 
     @Override

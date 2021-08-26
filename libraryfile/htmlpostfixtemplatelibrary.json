@@ -1,0 +1,6 @@
+[
+  {
+    "name": "combobox",
+    "template": "<div role=\"control\" label=\"下拉列表\" starred=\"true\">\n<input class=\"mini-combobox\" action=\"get$camelexpr$eModel\" id=\"$expr$\" bind=\"dataBean.$expr$\" textField=\"text\" valueField=\"id\" emptyText=\"请选择...\" required=\"true\" requiredErrorText=\"下拉列表不能为空!\" /></div>"
+  }
+]
