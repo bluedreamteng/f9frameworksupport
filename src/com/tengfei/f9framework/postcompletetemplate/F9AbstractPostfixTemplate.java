@@ -17,7 +17,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
 
-    private String template;
+    private final String template;
+    protected final String name;
     /**
      * @param name    name of postfixTemplate
      * @param example 示例
@@ -25,6 +26,7 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
     protected F9AbstractPostfixTemplate(@NotNull String name, @NotNull String example,@NotNull String template,PostfixTemplateProvider provider) {
        super(null,name,example, provider);
        this.template = template;
+       this.name = name;
     }
 
     /**
@@ -56,5 +58,22 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
     public String buildStringTemplate(PsiElement context){
         //替换模板变量
         return template.replaceAll("\\$capitalexpr\\$", StringUtil.capitalize(context.getText())).replaceAll("\\$expr\\$",context.getText());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) {
+            return true;
+        }
+        if(!(o instanceof F9AbstractPostfixTemplate)) {
+            return false;
+        }
+        F9AbstractPostfixTemplate  postfixTemplate = (F9AbstractPostfixTemplate)o;
+        return StringUtil.equals(name,postfixTemplate.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }

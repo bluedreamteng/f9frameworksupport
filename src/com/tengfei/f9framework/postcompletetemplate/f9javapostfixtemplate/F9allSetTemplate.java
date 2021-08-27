@@ -6,6 +6,7 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateWithEx
 import com.intellij.codeInsight.template.postfix.util.JavaPostfixTemplatesUtils;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.tengfei.f9framework.util.EditorManage;
@@ -24,6 +25,7 @@ public class F9allSetTemplate extends PostfixTemplateWithExpressionSelector {
 
     public static final Pattern SETTERMETHODPATTERN = Pattern.compile("^set[A-Z]\\w*");
 
+    private String name;
     public F9allSetTemplate() {
         super(
                 "allset",
@@ -31,6 +33,7 @@ public class F9allSetTemplate extends PostfixTemplateWithExpressionSelector {
                 JavaPostfixTemplatesUtils.selectorTopmost(element ->
                         element instanceof PsiReferenceExpression && ((PsiReferenceExpression) element).getType() != null)
         );
+        name = "allset";
     }
 
 
@@ -71,5 +74,22 @@ public class F9allSetTemplate extends PostfixTemplateWithExpressionSelector {
             }
         }
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == this) {
+            return true;
+        }
+        if(!(o instanceof F9allSetTemplate)) {
+            return false;
+        }
+        F9allSetTemplate postfixTemplate = (F9allSetTemplate)o;
+        return StringUtil.equals(name,postfixTemplate.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
