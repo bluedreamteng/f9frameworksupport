@@ -38,7 +38,7 @@ public class F9HtmlCompletionContributor extends CompletionContributor {
             String xmlAttributeName = xmlAttribute != null ? xmlAttribute.getName() : null;
             if (StringUtil.isNotEmpty(xmlAttributeName)) {
                 List<F9HtmlAttributeValueDocumentation> xmlAttributeDocumentation = F9HtmlDictionary.getXmlAttributeDocumentation().get(xmlAttributeName);
-                if(xmlAttributeDocumentation != null) {
+                if (xmlAttributeDocumentation != null) {
                     for (F9HtmlAttributeValueDocumentation attributeDocumentation : xmlAttributeDocumentation) {
                         LookupElement lookupElement = PrioritizedLookupElement.withPriority(LookupElementBuilder.create(attributeDocumentation.getAttributeValue()).withRenderer(new LookupElementRenderer<LookupElement>() {
                             @Override
@@ -55,7 +55,6 @@ public class F9HtmlCompletionContributor extends CompletionContributor {
             }
         }
     }
-
 
     private static class XmlAttributeProvider extends CompletionProvider<CompletionParameters> {
         @Override
@@ -74,4 +73,6 @@ public class F9HtmlCompletionContributor extends CompletionContributor {
             }
         }
     }
+
+
 }

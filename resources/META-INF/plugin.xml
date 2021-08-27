@@ -66,6 +66,8 @@
                 implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlCompletionContributor"/>
         <codeInsight.template.postfixTemplateProvider language="HTML"
                                                       implementationClass="com.tengfei.f9framework.postcompletetemplate.f9htmlpostfixtemplate.F9HtmlPostfixTemplateProvider"/>
+        <completion.confidence language="HTML" order="before htmlText"
+                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
     </extensions>
 
     <actions>

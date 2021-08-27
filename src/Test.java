@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.intellij.codeInsight.daemon.impl.analysis.HtmlFileReferenceHelper;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.terminal.JBTerminalStarter;
 import com.intellij.terminal.TerminalSettingsListener;

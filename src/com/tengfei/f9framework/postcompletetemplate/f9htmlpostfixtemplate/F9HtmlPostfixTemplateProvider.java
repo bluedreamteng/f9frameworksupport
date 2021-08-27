@@ -24,7 +24,7 @@ public class F9HtmlPostfixTemplateProvider implements PostfixTemplateProvider {
         List<PostfixTemplateInfo> htmlPostfixTemplates = F9PostfixTemplateLibrary.getHtmlPostfixTemplates();
         for (PostfixTemplateInfo htmlPostfixTemplate : htmlPostfixTemplates) {
             if (StringUtil.isNotEmpty(htmlPostfixTemplate.getName()) && StringUtil.isNotEmpty(htmlPostfixTemplate.getTemplate())) {
-                myBuiltinTemplates.add(new F9HtmlPostfixTemplate(htmlPostfixTemplate.getName(), "", htmlPostfixTemplate.getTemplate(), this));
+                myBuiltinTemplates.add(new F9HtmlPostfixTemplate(htmlPostfixTemplate.getName(), htmlPostfixTemplate.getExample(), htmlPostfixTemplate.getTemplate(), this));
             }
         }
     }

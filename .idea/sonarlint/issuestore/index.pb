@@ -89,8 +89,6 @@ b
 2src/com/tengfei/f9framework/util/EditorManage.java,5\2\529354ce6e297c4dee1125431ae198e5d4ae570b
 å
 \src/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9allSetTemplate.java,0\5\0509f7a24afad76b23ed81db74476af16c9e4e8b
-ï
-esrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplateBase.java,1\4\147b9c050f51e89e4047f23a0a32e6e9681d91a7
 T
 $.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
 n
@@ -151,7 +149,13 @@ Fsrc/com/tengfei/f9framework/projectsetting/F9ProjectSettingsState.java,3\a\3ae
 ,libraryfile/xml_attribute_documentation.json,a\0\a078c48e02c0242580d949970ff9f655bb6c5bc0
 ç
 ]src/com/tengfei/f9framework/postcompletetemplate/templatelibray/F9PostfixTemplateLibrary.java,d\d\dd1aab790cc273d8e8cddb88f427e1a5ba3fa460
-Ñ
-Tsrc/com/tengfei/f9framework/postcompletetemplate/templatelibray/PostfixTemplate.java,3\2\320725de18297147512e7bdbc13367d1a4f95ddb
 ë
 asrc/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9HtmlPostfixTemplate.java,4\c\4cd16f152e59e211a2d5c4a869be7bd5fc1261ca
+[
++libraryfile/javapostfixtemplatelibrary.json,3\9\39b1e8a6154beb33b7ebd29fb919cfd51a2120af
+[
++libraryfile/htmlpostfixtemplatelibrary.json,b\9\b98d603861fbeae2e29698987aed17665d5a3498
+à
+Xsrc/com/tengfei/f9framework/postcompletetemplate/templatelibray/PostfixTemplateInfo.java,c\9\c92a47e38dd039a71908ddd07ec1c0bf73def73c
+ë
+asrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplate.java,a\1\a1d5432f811e8b934ac9178ba1002eaa98c63792
