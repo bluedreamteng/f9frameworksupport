@@ -75,16 +75,12 @@ z
 Jsrc/com/tengfei/f9framework/service/impl/TableCodeGenerateServiceImpl.java,4\e\4e9f05a58cfb729740a6b3848b783d892fcab92c
 a
 1src/com/tengfei/f9framework/entity/TableInfo.java,3\7\37c85b27a4cebfb1a1569cf846f6336d2850a683
-H
-src/test/TestAction.java,b\8\b8bcb11dd99bfc41fd35c86494a1c8db9e3ba192
 i
 9src/com/tengfei/f9framework/module/F9CustomizeModule.java,9\f\9f8ad46922693e0f24af548167c5bc146210a9bd
 h
 8src/com/tengfei/f9framework/module/F9StandardModule.java,6\8\68f69eb71f620572cd7ca928278b50b42d3cccd5
 f
 6src/com/tengfei/f9framework/module/F9ModuleFacade.java,1\b\1b314ca12b9e9be55aeab5e4888f6b144d1fad1d
-=
-src/Test.java,a\8\a862b92d10f810e224187403c322cb8e01f5e244
 b
 2src/com/tengfei/f9framework/util/EditorManage.java,5\2\529354ce6e297c4dee1125431ae198e5d4ae570b
 Œ
@@ -115,8 +111,6 @@ Xsrc/com/tengfei/f9framework/miniuicomponent/typecomponent/F9DateSimpleFormCompo
 Rsrc/com/tengfei/f9framework/completioncontributor/dictionary/F9HtmlDictionary.java,5\b\5bb129a005a95aab04521b0a8a4b7740325a8187
 `
 0resources/icons/HtmlTagAttributeValue(Color).svg,3\6\368e7a6829c46b2777ec32a988f9359d07b964b5
-=
-src/test.html,6\8\68fdc6af60a9a222a5cb5b77c79d0e9cc8ee0797
 “
 csrc/com/tengfei/f9framework/completioncontributor/dictionary/F9HtmlAttributeValueDocumentation.java,f\d\fd885724ced8248deaca9d42b2882800a024e686
 
@@ -135,8 +129,6 @@ Fsrc/com/tengfei/f9framework/projectsetting/F9SettingsConfigurable.java,7\8\788
 Wsrc/com/tengfei/f9framework/projectsetting/f9modulesetting/F9StandardModuleSetting.java,6\d\6d795c1397bcabe7cb28ec82bbed812ee281a958
 ˆ
 Xsrc/com/tengfei/f9framework/projectsetting/f9modulesetting/F9CustomizeModuleSetting.java,f\d\fd356d57ee6027c9de6978b1020c35113c7b4c88
-=
-src/test.json,8\9\8915c702aadaba5baefd4db3f8934a82d4a480a6
 b
 2src/com/tengfei/f9framework/util/F9FileFacade.java,c\4\c4060bd9e069b3c8e1b0b9be8260e54813b15744
 y
@@ -159,3 +151,5 @@ asrc/com/tengfei/f9framework/postcompletetemplate/f9htmlpostfixtemplate/F9HtmlPo
 Xsrc/com/tengfei/f9framework/postcompletetemplate/templatelibray/PostfixTemplateInfo.java,c\9\c92a47e38dd039a71908ddd07ec1c0bf73def73c
 ‘
 asrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplate.java,a\1\a1d5432f811e8b934ac9178ba1002eaa98c63792
+…
+Usrc/com/tengfei/f9framework/completioncontributor/F9HtmlTextCompletionConfidence.java,9\6\964950788f9162a4ddcafe01ae0b0784b94fa1ad

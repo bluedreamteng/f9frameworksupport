@@ -1,6 +1,43 @@
 [
   {
-    "name": "combobox",
-    "template": "<div role=\"control\" label=\"下拉列表\" starred=\"true\">\n<input class=\"mini-combobox\" action=\"get$camelexpr$eModel\" id=\"$expr$\" bind=\"dataBean.$expr$\" textField=\"text\" valueField=\"id\" emptyText=\"请选择...\" required=\"true\" requiredErrorText=\"下拉列表不能为空!\" /></div>"
+    "name": "mini-combobox",
+    "template": "<input class=\"mini-combobox\" action=\"get$cexpr$Model\" id=\"$expr$\" bind=\"dataBean.$expr$\" textField=\"text\" valueField=\"id\" emptyText=\"请选择...\" required=\"true\" requiredErrorText=\"下拉列表不能为空!\"/>",
+    "example":"下拉列表"
+  },
+  {
+    "name": "mini-radiobuttonlist",
+    "template": " <div class=\"mini-radiobuttonlist\" action=\"get$cexpr$Model\" id=\"$expr$\"\n bind=\"dataBean.$expr$\" required=\"true\" requiredErrorText=\"不能为空!\"/>",
+    "example":"单选按钮组"
+  },
+  {
+    "name": "",
+    "template": "<div class=\"mini-checkboxlist\" action=\"get$cexpr$Model\" id=\"$expr$\"\n  bind=\"dataBean.$expr$\" required=\"true\" requiredErrorText=\"复选框组不能为空!\"/>",
+    "example":"复选框组"
+  },
+  {
+    "name": "",
+    "template": "",
+    "example":""
+  },
+  {
+    "name": "",
+    "template": "",
+    "example":""
+  },
+  {
+    "name": "",
+    "template": "",
+    "example":""
+  },
+  {
+    "name": "",
+    "template": "",
+    "example":""
+  },
+  {
+    "name": "",
+    "template": "",
+    "example":""
   }
+
 ]

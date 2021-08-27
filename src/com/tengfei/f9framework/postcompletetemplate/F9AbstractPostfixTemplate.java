@@ -57,7 +57,7 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
      */
     public String buildStringTemplate(PsiElement context){
         //替换模板变量
-        return template.replaceAll("\\$capitalexpr\\$", StringUtil.capitalize(context.getText())).replaceAll("\\$expr\\$",context.getText());
+        return template.replaceAll("\\$cexpr\\$", StringUtil.capitalize(context.getText())).replaceAll("\\$expr\\$",context.getText());
     }
 
     @Override

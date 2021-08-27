@@ -6,7 +6,6 @@
 
     <description><![CDATA[
       Add html custom attributes and attribute value code completion support, as well as custom html suffix expressions!<br>
-      <em>Follow-up features are being added</em>
     ]]></description>
 
     <change-notes><![CDATA[
@@ -55,7 +54,8 @@
 
         <projectService serviceImplementation="com.tengfei.f9framework.projectsetting.F9ProjectSettingsState"/>
         <applicationService serviceImplementation="com.tengfei.f9framework.projectsetting.F9ApplicationSettingState"/>
-        <projectService serviceImplementation="com.tengfei.f9framework.projectsetting.f9modulesetting.F9ProjectSetting"/>
+        <projectService
+                serviceImplementation="com.tengfei.f9framework.projectsetting.f9modulesetting.F9ProjectSetting"/>
         <projectConfigurable parentId="tools" instance="com.tengfei.f9framework.projectsetting.F9SettingsConfigurable"
                              id="com.tengfei.f9framework.projectsetting.F9SettingsConfigurable"
                              displayName="F9 Framework Support" nonDefaultProject="true"
@@ -65,11 +65,11 @@
                         serviceImplementation="com.tengfei.f9framework.service.impl.TableCodeGenerateServiceImpl"/>
 
         <completion.contributor language="HTML"
-                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlCompletionContributor"/>
+                                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlCompletionContributor"/>
         <codeInsight.template.postfixTemplateProvider language="HTML"
                                                       implementationClass="com.tengfei.f9framework.postcompletetemplate.f9htmlpostfixtemplate.F9HtmlPostfixTemplateProvider"/>
         <completion.confidence language="HTML" order="before htmlText"
-                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
+                               implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
     </extensions>
 
     <actions>
