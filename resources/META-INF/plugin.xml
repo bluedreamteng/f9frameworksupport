@@ -99,9 +99,6 @@
                 text="Generate Table Java Code" description="Generate table Java code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
-        <action id="TestAction" class="test.TestAction" text="TestAction" description="TestAction">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
         <action id="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction"
                 class="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction" text="Generate Table Html Code"
                 description="Generate Table Html Code">
