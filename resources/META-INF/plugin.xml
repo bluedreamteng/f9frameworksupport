@@ -70,29 +70,31 @@
                                                       implementationClass="com.tengfei.f9framework.postcompletetemplate.f9htmlpostfixtemplate.F9HtmlPostfixTemplateProvider"/>
         <completion.confidence language="HTML" order="before htmlText"
                                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
+
+        <searchEverywhereContributor implementation="com.tengfei.f9framework.TestFactory" id="test" os="windows"></searchEverywhereContributor>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
         <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
                 class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
-                text="copy standard file" description="copy standard file to customize">
+                text="Copy Standard File" description="copy standard file to customize">
             <keyboard-shortcut first-keystroke="alt V" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="com.tengfei.f9framework.action.GeneratePatchAction"
                 class="com.tengfei.f9framework.action.GeneratePatchAction"
-                text="generatepatch" description="generatepatch">
+                text="Generate Patch" description="generatepatch">
             <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
                 class="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
-                text="GenerateProjectSettingTemplate" description="GenerateProjectSettingTemplate">
+                text="Generate ProjectSetting Template" description="GenerateProjectSettingTemplate">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
         <action id="com.tengfei.f9framework.action.GenerateRequestAction"
-                class="com.tengfei.f9framework.action.GenerateRequestAction" text="generaterequestaction"
+                class="com.tengfei.f9framework.action.GenerateRequestAction" text="Generate Request Code"
                 description="generaterequestaction">
             <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>

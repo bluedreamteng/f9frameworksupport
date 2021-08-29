@@ -29,8 +29,9 @@ public class CopyWebRelativePathAction extends AnAction {
             F9Notifier.notifyError(e.getProject(),"不支持的文件类型");
             return;
         }
-        String webRelativePath = f9WebAppFile.getWebRelativePath();
+        String webRelativePath = f9WebAppFile.getWebRelativePath().replaceAll("\\\\","/");
         CopyPasteManager.getInstance().setContents(new StringSelection(webRelativePath));
         F9Notifier.notifyMessage(e.getProject(),"web相对路径已复制进剪切板");
+        //http://localhost:8011/smart-site/frame/basedata/attachconfiginfo/djgmainstepadd
     }
 }
