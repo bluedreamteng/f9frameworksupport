@@ -42,32 +42,42 @@
 
   {
     "name": "mini-combobox_search",
-    "template": "<input class=\"mini-combobox\" action=\"get$cexpr$Model\" id=\"$expr$\" bind=\"dataBean.$expr$\" textField=\"text\" valueField=\"id\" emptyText=\"请选择...\" required=\"true\" requiredErrorText=\"下拉列表不能为空!\"/>",
+    "template": "<input class=\"mini-combobox\" action=\"get$cexpr$Model\" id=\"search_$expr$\" bind=\"dataBean.$expr$\" textField=\"text\" valueField=\"id\" emptyText=\"请选择...\"/>",
     "example":"下拉列表"
   },
   {
     "name": "mini-radiobuttonlist_search",
-    "template": " <div class=\"mini-radiobuttonlist\" action=\"get$cexpr$Model\" id=\"$expr$\"\n bind=\"dataBean.$expr$\" required=\"true\" requiredErrorText=\"不能为空!\"/>",
+    "template": " <div class=\"mini-radiobuttonlist\" action=\"get$cexpr$Model\" id=\"search_$expr$\"\n bind=\"dataBean.$expr$\" />",
     "example":"单选按钮组"
   },
   {
     "name": "mini-checkboxlist_search",
-    "template": " <div class=\"mini-checkboxlist\" action=\"get$cexpr$Model\" id=\"$expr$\"\n  bind=\"dataBean.$expr$\" required=\"true\" requiredErrorText=\"不能为空!\"/>",
+    "template": " <div class=\"mini-checkboxlist\" action=\"get$cexpr$Model\" id=\"search_$expr$\"\n  bind=\"dataBean.$expr$\"/>",
     "example":"复选框组"
   },
   {
     "name": "mini-checkbox_search",
-    "template": "<div class=\"mini-checkbox\" id=\"$expr$\" bind=\"dataBean.$expr$\" required=\"true\"\n requiredErrorText=\"不能为空!\"/>",
+    "template": "<div class=\"mini-checkbox\" id=\"search_$expr$\" bind=\"dataBean.$expr$\" />",
     "example":"复选框"
   },
   {
     "name": "mini-textbox_search",
-    "template": "<input id=\"$expr$\" class=\"mini-textbox\" bind=\"dataBean.$expr$\" required=\"true\"\n  requiredErrorText=\"不能为空!\"/></div>",
+    "template": "<input id=\"search_$expr$\" class=\"mini-textbox\" bind=\"dataBean.$expr$\" /></div>",
     "example":"文本输入框"
   },
   {
     "name": "mini-datepicker_search",
-    "template": "<input class=\"mini-datepicker\" bind=\"dataBean.$expr$\" id=\"$expr$\" required=\"true\"\n    requiredErrorText=\"不能为空!\"/>",
+    "template": "<input class=\"mini-datepicker\" bind=\"dataBean.$expr$\" id=\"search_$expr$\"/>",
     "example":"日期选择器"
+  },
+  {
+    "name": "mini-number_search",
+    "template": "<input id=\"search_$expr_number$\" class=\"mini-textbox\" bind=\"dataBean.$expr$\"  vtype=\"float\"/></div>",
+    "example":"文本输入框"
+  },
+  {
+    "name": "mini-integer_search",
+    "template": "<input id=\"search_$expr$_integer\" class=\"mini-textbox\" bind=\"dataBean.$expr$\"  vtype=\"integer\"/></div>",
+    "example":"文本输入框"
   }
 ]
