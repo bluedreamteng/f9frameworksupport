@@ -27,7 +27,6 @@ public class F9ModuleFacade {
 
     private final List<F9StandardModule> standardModules = new ArrayList<>();
     private final List<F9CustomizeModule> customizeModules = new ArrayList<>();
-    private VirtualFile virtualFile;
 
 
     public static F9ModuleFacade getInstance(Project project) {
@@ -44,9 +43,8 @@ public class F9ModuleFacade {
 
     private void init() {
         List<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
-        if(standardModuleSettings == null) {
+        if(standardModuleSettings.isEmpty()) {
             F9Notifier.notifyWarning(project,"未检测到配置文件，请及时配置");
-
             return;
         }
         for (F9StandardModuleSetting standardModuleSetting : standardModuleSettings) {

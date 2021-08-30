@@ -20,8 +20,8 @@ import java.util.List;
         storages = {@Storage("f9projectSetting.xml")}
 )
 public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetting> {
-
     public List<F9StandardModuleSetting> standardModules = new ArrayList<>();
+
 
     public static F9ProjectSetting getInstance(Project project) {
         return ServiceManager.getService(project, F9ProjectSetting.class);
@@ -39,4 +39,20 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
         XmlSerializerUtil.copyBean(state, this);
     }
 
+    public List<F9StandardModuleSetting> getStandardModules() {
+        if(standardModules.isEmpty()) {
+            //引导用户去配置
+            F9StandardModuleSetting standardModule = new F9StandardModuleSetting();
+            standardModule.name = "smart-site";
+            standardModule.deployHost = "localhost:8011";
+            standardModule.productCustomizeName = "zhgd";
+
+            F9CustomizeModuleSetting customizeModule = new F9CustomizeModuleSetting();
+            customizeModule.name = "szjs-custom-sfzhgd";
+            customizeModule.customizeProjectPath = "szjs_sfzhgd";
+            standardModule.customizeModuleList.add(customizeModule);
+            standardModules.add(standardModule);
+        }
+        return standardModules;
+    }
 }

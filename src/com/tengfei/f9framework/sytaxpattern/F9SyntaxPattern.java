@@ -4,6 +4,7 @@ import com.intellij.lang.javascript.psi.JSCallExpression;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.xml.XmlAttribute;
+import com.intellij.psi.xml.XmlAttributeValue;
 
 /**
  * @author ztf
@@ -44,12 +45,16 @@ public class F9SyntaxPattern {
     }
 
     public static boolean isSupportedAttributeValueOfHtmlTag(PsiElement element) {
-        XmlAttribute xmlAttribute = PsiTreeUtil.getParentOfType(element, XmlAttribute.class);
-        if (xmlAttribute != null) {
-            for (String f9xmlAttribute : F9HtmlTagAttribute.getSupportHtmlTagAttr()) {
-                if (xmlAttribute.getText().contains(f9xmlAttribute)) {
-                    return true;
-                }
+        if (!(element.getParent() instanceof XmlAttributeValue)) {
+            return false;
+        }
+        if (!(element.getParent().getParent() instanceof XmlAttribute)) {
+            return false;
+        }
+        XmlAttribute xmlAttribute = (XmlAttribute) element.getParent().getParent();
+        for (String f9xmlAttribute : F9HtmlTagAttribute.getSupportHtmlTagAttr()) {
+            if (xmlAttribute.getText().equals(f9xmlAttribute)) {
+                return true;
             }
         }
         return false;

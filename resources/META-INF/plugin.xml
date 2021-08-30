@@ -88,11 +88,6 @@
             <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
-        <action id="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
-                class="com.tengfei.f9framework.action.GenerateProjectSettingTemplateAction"
-                text="Generate ProjectSetting Template" description="GenerateProjectSettingTemplate">
-            <add-to-group group-id="ToolsMenu" anchor="first"/>
-        </action>
         <action id="com.tengfei.f9framework.action.GenerateRequestAction"
                 class="com.tengfei.f9framework.action.GenerateRequestAction" text="Generate Request Code"
                 description="generaterequestaction">
