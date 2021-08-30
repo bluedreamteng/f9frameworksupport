@@ -153,3 +153,9 @@ Xsrc/com/tengfei/f9framework/postcompletetemplate/templatelibray/PostfixTemplate
 asrc/com/tengfei/f9framework/postcompletetemplate/f9javapostfixtemplate/F9JavaPostfixTemplate.java,a\1\a1d5432f811e8b934ac9178ba1002eaa98c63792
 …
 Usrc/com/tengfei/f9framework/completioncontributor/F9HtmlTextCompletionConfidence.java,9\6\964950788f9162a4ddcafe01ae0b0784b94fa1ad
+\
+,src/com/tengfei/f9framework/TestFactory.java,7\0\70c1f18707244c4957294f34f98f2749fe8b773f
+=
+src/Test.java,a\8\a862b92d10f810e224187403c322cb8e01f5e244
+e
+5src/com/tengfei/f9framework/TestSearchEveryWhere.java,6\7\677044baaa8a6adf9c487f2d3b16e9b6db0d3811

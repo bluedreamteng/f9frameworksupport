@@ -71,7 +71,7 @@
         <completion.confidence language="HTML" order="before htmlText"
                                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
 
-        <searchEverywhereContributor implementation="com.tengfei.f9framework.TestFactory" id="test" os="windows"></searchEverywhereContributor>
+        <searchEverywhereContributor implementation="com.tengfei.f9framework.filesearch.UrlFilesSearchEverywhereFactory" id="test" os="windows"></searchEverywhereContributor>
     </extensions>
 
     <actions>

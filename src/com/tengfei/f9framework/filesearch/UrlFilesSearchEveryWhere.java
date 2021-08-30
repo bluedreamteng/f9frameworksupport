@@ -1,5 +1,5 @@
 // Copyright 2000-2018 JetBrains s.r.o. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-package com.tengfei.f9framework;
+package com.tengfei.f9framework.filesearch;
 
 import com.intellij.ide.actions.searcheverywhere.AbstractGotoSEContributor;
 import com.intellij.ide.actions.searcheverywhere.FoundItemDescriptor;
@@ -49,13 +49,13 @@ import java.util.regex.Pattern;
  * @author Konstantin Bulenkov
  * @author Mikhail Sokolov
  */
-public class TestSearchEveryWhere extends AbstractGotoSEContributor {
+public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     private final GotoFileModel myModelForRenderer;
     private final PersistentSearchEverywhereContributorFilter<FileType> myFilter;
 
     static Pattern urlCompilePattern = Pattern.compile("^https?://\\w+:\\d+/([\\w-]+)((/\\w+)+$)");
 
-    public TestSearchEveryWhere(@NotNull AnActionEvent event) {
+    public UrlFilesSearchEveryWhere(@NotNull AnActionEvent event) {
         super(event);
         Project project = event.getRequiredData(CommonDataKeys.PROJECT);
         myModelForRenderer = new GotoFileModel(project);
