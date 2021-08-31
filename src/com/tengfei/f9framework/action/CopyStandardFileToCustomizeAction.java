@@ -17,6 +17,7 @@ import com.intellij.psi.PsiJavaFile;
 import com.intellij.psi.PsiManager;
 import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.file.F9WebappFile;
+import com.tengfei.f9framework.file.UnsupportedFileException;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.apache.commons.collections.CollectionUtils;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +49,14 @@ public class CopyStandardFileToCustomizeAction extends AnAction {
     }
 
     private void copyWebFileToCustomize(@NotNull PsiFile psiFile) {
-        F9WebappFile f9WebAppFile = F9FileFactory.getInstance(psiFile.getProject()).createF9WebAppFile(psiFile.getVirtualFile(), psiFile.getProject());
+        F9WebappFile f9WebAppFile = null;
+        try {
+            f9WebAppFile = F9FileFactory.getInstance(psiFile.getProject()).createF9WebAppFile(psiFile.getVirtualFile(), psiFile.getProject());
+        } catch (UnsupportedFileException e) {
+            e.printStackTrace();
+            F9Notifier.notifyError(psiFile.getProject(),"此文件不是f9webapp文件 故不支持此操作");
+            return;
+        }
         f9WebAppFile.copyToCustomize();
     }
 

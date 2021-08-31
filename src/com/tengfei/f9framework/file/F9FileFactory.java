@@ -29,7 +29,7 @@ public class F9FileFactory {
         f9ModuleFacade = F9ModuleFacade.getInstance(project);
     }
 
-    public F9File createF9File(@NotNull VirtualFile file, @NotNull Project project) {
+    public F9File createF9File(@NotNull VirtualFile file, @NotNull Project project) throws UnsupportedFileException {
 
         PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
 
@@ -46,12 +46,12 @@ public class F9FileFactory {
             return new F9CustomizeWebappFile(file, project);
         }
         else {
-            return new F9UnSupportFile(file, project);
+           throw new UnsupportedFileException();
         }
     }
 
 
-    public F9WebappFile createF9WebAppFile(@NotNull VirtualFile file, @NotNull Project project) {
+    public F9WebappFile createF9WebAppFile(@NotNull VirtualFile file, @NotNull Project project) throws UnsupportedFileException {
         if (isStandardWebappFile(file)) {
             return new F9StandardWebappFile(file, project);
         }
@@ -59,7 +59,7 @@ public class F9FileFactory {
             return new F9CustomizeWebappFile(file, project);
         }
         else {
-            throw new RuntimeException("unsupported file, please check your operation");
+            throw new UnsupportedFileException();
         }
 
     }
