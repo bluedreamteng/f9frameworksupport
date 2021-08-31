@@ -23,7 +23,7 @@
     </change-notes>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="173.0"/>
+    <idea-version since-build="201"/>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
@@ -41,7 +41,7 @@
                                                       implementationClass="com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9JavaPostfixTemplateProvider"/>
         <liveTemplateMacro implementation="com.tengfei.f9framework.macro.LowerCaseMacro"/>
         <intentionAction>
-            <category>f9framework</category>
+            <category>F9framework</category>
             <className>com.tengfei.f9framework.intentionaction.F9QuartzJobRegisterIntention</className>
         </intentionAction>
         <intentionAction>
@@ -71,36 +71,46 @@
         <completion.confidence language="HTML" order="before htmlText"
                                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
 
-        <searchEverywhereContributor implementation="com.tengfei.f9framework.filesearch.UrlFilesSearchEverywhereFactory" id="test" os="windows"></searchEverywhereContributor>
+        <searchEverywhereContributor implementation="com.tengfei.f9framework.filesearch.UrlFilesSearchEverywhereFactory"
+                                     id="test" os="windows"/>
     </extensions>
+
+    <projectListeners>
+        <listener class="com.tengfei.f9framework.listener.ProjectOpenListener" topic="com.intellij.ide.startup.ProjectLoadListener"/>
+    </projectListeners>
+
 
     <actions>
         <!-- Add your actions here -->
         <action id="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
                 class="com.tengfei.f9framework.action.CopyStandardFileToCustomizeAction"
-                text="Copy Standard File" description="copy standard file to customize">
+                text="Copy Standard File" description="Copy standard file to customize">
             <keyboard-shortcut first-keystroke="alt V" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+
         <action id="com.tengfei.f9framework.action.GeneratePatchAction"
                 class="com.tengfei.f9framework.action.GeneratePatchAction"
-                text="Generate Patch" description="generatepatch">
+                text="Generate Patch" description="Generate patch">
             <keyboard-shortcut first-keystroke="alt P" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+
         <action id="com.tengfei.f9framework.action.GenerateRequestAction"
                 class="com.tengfei.f9framework.action.GenerateRequestAction" text="Generate Request Code"
-                description="generaterequestaction">
+                description="Generate request action">
             <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+
         <action id="GenerateTableCodeAction" class="com.tengfei.f9framework.action.GenerateTableJavaCodeAction"
                 text="Generate Table Java Code" description="Generate table Java code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
+
         <action id="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction"
                 class="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction" text="Generate Table Html Code"
-                description="Generate Table Html Code">
+                description="Generate table html code">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
         </action>
 
