@@ -1,17 +1,12 @@
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 public class Test {
-    public static void main(String[] args) {
-        String s = "http://localhost:8011/smart-site/szjs/index/videoinfo/environmentalMonitoring";
-        String regex = "^https?://\\w+:\\d+/([\\w-]+)((/\\w+)+$)";
-        Pattern compile = Pattern.compile(regex);
-        Matcher matcher = compile.matcher(s);
-        System.out.println(matcher.matches());
-        System.out.println(matcher.group(0));
-        System.out.println(matcher.group(1));
-        System.out.println(matcher.group(2));
-
-
+    public static void main(String[] args) throws IOException {
+       File file = new File("E:\\tools\\frp_0.35.1_linux_amd64");
+       System.out.println(file.toPath().toRealPath());
+       List<Object> objects = Collections.emptyList();
     }
 }
