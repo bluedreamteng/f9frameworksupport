@@ -2,6 +2,7 @@ package com.tengfei.f9framework.postcompletetemplate;
 
 import com.intellij.codeInsight.template.Template;
 import com.intellij.codeInsight.template.TemplateManager;
+import com.intellij.codeInsight.template.impl.TemplateImpl;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplate;
 import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvider;
 import com.intellij.openapi.editor.Document;
@@ -19,6 +20,8 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
 
     private final String template;
     protected final String name;
+
+    protected TemplateImpl myLiveTemplate;
     /**
      * @param name    name of postfixTemplate
      * @param example 示例
@@ -27,6 +30,22 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
        super(null,name,example, provider);
        this.template = template;
        this.name = name;
+        myLiveTemplate = createTemplate(template);
+
+    }
+
+    protected F9AbstractPostfixTemplate(@NotNull String id,@NotNull String name, @NotNull String example,@NotNull String template,PostfixTemplateProvider provider) {
+        super(id,name,example, provider);
+        this.template = template;
+        this.name = name;
+        myLiveTemplate = createTemplate(template);
+    }
+
+    protected F9AbstractPostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, @NotNull String template, TemplateImpl liveTemplate, PostfixTemplateProvider provider) {
+        super(id,name,example, provider);
+        this.template = template;
+        this.name = name;
+        this.myLiveTemplate = liveTemplate;
     }
 
     /**
@@ -72,8 +91,19 @@ public abstract class F9AbstractPostfixTemplate extends PostfixTemplate {
         return StringUtil.equals(name,postfixTemplate.name);
     }
 
+    protected static TemplateImpl createTemplate(@NotNull String templateText) {
+        TemplateImpl template = new TemplateImpl("fakeKey", templateText, "");
+        template.setToReformat(true);
+        template.parseSegments();
+        return template;
+    }
+
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    public TemplateImpl getLiveTemplate() {
+        return myLiveTemplate;
     }
 }
