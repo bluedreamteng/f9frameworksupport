@@ -6,6 +6,9 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ztf
  */
@@ -13,15 +16,19 @@ public class F9JavaEditablePostfixTemplate extends F9AbstractPostfixTemplate{
     /**
      * @param name     name of postfixTemplate
      * @param example  示例
-     * @param template
      * @param provider
      */
-    protected F9JavaEditablePostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, @NotNull String template, TemplateImpl liveTemplate, PostfixTemplateProvider provider) {
-        super(id,name, example, template,liveTemplate, provider);
+    protected F9JavaEditablePostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, TemplateImpl liveTemplate, PostfixTemplateProvider provider) {
+        super(id,name, example,liveTemplate, provider);
     }
 
     protected F9JavaEditablePostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, @NotNull String template, PostfixTemplateProvider provider) {
-        super(id,name, example, template, provider);
+        super(id,name, example,createTemplate(template), provider);
+    }
+
+    @Override
+    protected List<PsiElement> getExpressions(@NotNull PsiElement context, @NotNull Document document, int offset) {
+        return new ArrayList<>();
     }
 
     /**
@@ -34,6 +41,6 @@ public class F9JavaEditablePostfixTemplate extends F9AbstractPostfixTemplate{
      */
     @Override
     public boolean isApplicable(@NotNull PsiElement context, @NotNull Document copyDocument, int newOffset) {
-        return false;
+        return true;
     }
 }

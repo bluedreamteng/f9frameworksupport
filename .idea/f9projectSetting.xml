@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.tengfei.f9framework.setting.F9ProjectSetting">
+    <option name="standardModules">
+      <list>
+        <F9StandardModuleSetting>
+          <option name="name" value="smart-site" />
+          <option name="deployHost" value="localhost:8011" />
+          <option name="productCustomizeName" value="zhgd" />
+          <option name="customizeModuleList">
+            <list>
+              <F9CustomizeModuleSetting>
+                <option name="name" value="szjs-custom-sfzhgd" />
+                <option name="customizeProjectPath" value="szjs_sfzhgd" />
+              </F9CustomizeModuleSetting>
+            </list>
+          </option>
+        </F9StandardModuleSetting>
+      </list>
+    </option>
+  </component>
+</project>

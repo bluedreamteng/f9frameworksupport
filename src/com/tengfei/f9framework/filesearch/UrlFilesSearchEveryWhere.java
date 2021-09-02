@@ -53,7 +53,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     private final GotoFileModel myModelForRenderer;
     private final PersistentSearchEverywhereContributorFilter<FileType> myFilter;
 
-    static Pattern urlCompilePattern = Pattern.compile("^https?://\\w+:\\d+/([\\w-]+)((/\\w+)+$)");
+    static Pattern urlCompilePattern = Pattern.compile("^(view-source:)?https?://\\w+:\\d+/([\\w-]+)((/\\w+)+$)");
 
     public UrlFilesSearchEveryWhere(@NotNull AnActionEvent event) {
         super(event);
@@ -173,7 +173,6 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
         if (!urlCompilePattern.matcher(pattern).matches()) {
             return;
         }
-        String urlPattern = pattern;
         String simplePattern = pattern.substring(pattern.lastIndexOf('/'));
         if (myProject == null) {
             return; //nowhere to search
@@ -205,19 +204,19 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
                     FindSymbolParameters parameters = FindSymbolParameters.wrap(simplePattern, scope);
                     ((ChooseByNameInScopeItemProvider) provider).filterElementsWithWeights(popup, parameters, progressIndicator,
                             item -> processElement(progressIndicator, consumer, model,
-                                    item.getItem(), item.getWeight(), urlPattern)
+                                    item.getItem(), item.getWeight(), pattern)
                     );
                 }
                 else if (provider instanceof ChooseByNameWeightedItemProvider) {
                     ((ChooseByNameWeightedItemProvider) provider).filterElementsWithWeights(popup, simplePattern, everywhere, progressIndicator,
                             item -> processElement(progressIndicator, consumer, model,
-                                    item.getItem(), item.getWeight(), urlPattern)
+                                    item.getItem(), item.getWeight(), pattern)
                     );
                 }
                 else {
                     provider.filterElements(popup, simplePattern, everywhere, progressIndicator,
                             element -> processElement(progressIndicator, consumer, model, element,
-                                    getElementPriority(element, simplePattern), urlPattern)
+                                    getElementPriority(element, simplePattern), pattern)
                     );
                 }
             }
@@ -263,9 +262,19 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     }
 
     private VirtualFile getMatcherFileByUrl(String url) {
-        VirtualFile customizeFileByUrl = getCustomizeFileByUrl(url);
-        VirtualFile productFileByUrl = getProductFileByUrl(url);
-        VirtualFile standardFileByUrl = getStandardFileByUrl(url);
+        Matcher matcher = urlCompilePattern.matcher(url);
+        if(!matcher.matches()) {
+            return null;
+        }
+        String moduleName = matcher.group(2);
+        String relativePath = matcher.group(3);
+        if (!relativePath.contains(".")) {
+            relativePath = relativePath + ".html";
+        }
+
+        VirtualFile customizeFileByUrl = getCustomizeFileByUrl(moduleName,relativePath);
+        VirtualFile productFileByUrl = getProductFileByUrl(moduleName,relativePath);
+        VirtualFile standardFileByUrl = getStandardFileByUrl(moduleName,relativePath);
 
         if(customizeFileByUrl != null) {
             return customizeFileByUrl;
@@ -277,11 +286,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     }
 
 
-    private VirtualFile getStandardFileByUrl(String url) {
-        Matcher matcher = urlCompilePattern.matcher(url);
-        matcher.matches();
-        String moduleName = matcher.group(1);
-        String relativePath = matcher.group(2);
+    private VirtualFile getStandardFileByUrl(String moduleName,String relativePath) {
         if (!relativePath.contains(".")) {
             relativePath = relativePath + ".html";
         }
@@ -290,14 +295,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
         return VfsUtil.findFileByIoFile(new File(standardFilePath), false);
     }
 
-    private VirtualFile getProductFileByUrl(String url) {
-        Matcher matcher = urlCompilePattern.matcher(url);
-        matcher.matches();
-        String moduleName = matcher.group(1);
-        String relativePath = matcher.group(2);
-        if (!relativePath.contains(".")) {
-            relativePath = relativePath + ".html";
-        }
+    private VirtualFile getProductFileByUrl(String moduleName,String relativePath) {
         F9StandardModule standardModuleByName = F9ModuleFacade.getInstance(myProject).findStandardModuleByName(moduleName);
         if (StringUtil.isEmpty(standardModuleByName.getProductCustomizeName())) {
             return null;
@@ -306,16 +304,8 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
         return VfsUtil.findFileByIoFile(new File(productUrlPath), false);
     }
 
-    private VirtualFile getCustomizeFileByUrl(String url) {
-        Matcher matcher = urlCompilePattern.matcher(url);
-        matcher.matches();
-        String moduleName = matcher.group(1);
-        String relativePath = matcher.group(2);
-        if (!relativePath.contains(".")) {
-            relativePath = relativePath + ".html";
-        }
+    private VirtualFile getCustomizeFileByUrl(String moduleName,String relativePath) {
         F9StandardModule standardModuleByName = F9ModuleFacade.getInstance(myProject).findStandardModuleByName(moduleName);
-
         if (standardModuleByName.getCustomizeModuleList().isEmpty()) {
             return null;
         }

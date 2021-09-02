@@ -37,8 +37,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
         <psi.referenceContributor implementation="com.tengfei.f9framework.reference.F9ReferenceContributor"/>
-        <codeInsight.template.postfixTemplateProvider language="JAVA"
-                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9JavaPostfixTemplateProvider"/>
+        <!--<codeInsight.template.postfixTemplateProvider language="JAVA"
+                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.f9javapostfixtemplate.F9JavaPostfixTemplateProvider"/>-->
         <liveTemplateMacro implementation="com.tengfei.f9framework.macro.LowerCaseMacro"/>
         <intentionAction>
             <category>F9framework</category>
@@ -66,13 +66,15 @@
 
         <completion.contributor language="HTML"
                                 implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlCompletionContributor"/>
-        <codeInsight.template.postfixTemplateProvider language="HTML"
-                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.f9htmlpostfixtemplate.F9HtmlPostfixTemplateProvider"/>
+       <!-- <codeInsight.template.postfixTemplateProvider language="HTML"
+                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.f9htmlpostfixtemplate.F9HtmlPostfixTemplateProvider"/>-->
         <completion.confidence language="HTML" order="before htmlText"
                                implementationClass="com.tengfei.f9framework.completioncontributor.F9HtmlTextCompletionConfidence"/>
 
         <searchEverywhereContributor implementation="com.tengfei.f9framework.filesearch.UrlFilesSearchEverywhereFactory"
                                      id="test" os="windows"/>
+        <codeInsight.template.postfixTemplateProvider language="JAVA"
+                                                      implementationClass="com.tengfei.f9framework.postcompletetemplate.F9JavaEditablePostfixTemplateProvider"/>
     </extensions>
 
     <projectListeners>
