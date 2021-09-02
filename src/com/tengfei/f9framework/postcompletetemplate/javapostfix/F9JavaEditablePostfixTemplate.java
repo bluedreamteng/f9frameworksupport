@@ -8,9 +8,6 @@ import com.intellij.psi.PsiIdentifier;
 import com.tengfei.f9framework.postcompletetemplate.F9AbstractPostfixTemplate;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author ztf
  */
@@ -26,11 +23,6 @@ public class F9JavaEditablePostfixTemplate extends F9AbstractPostfixTemplate {
 
     protected F9JavaEditablePostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, @NotNull String template, PostfixTemplateProvider provider) {
         super(id,name, example,template, provider);
-    }
-
-    @Override
-    protected List<PsiElement> getExpressions(@NotNull PsiElement context, @NotNull Document document, int offset) {
-        return new ArrayList<>();
     }
 
     /**

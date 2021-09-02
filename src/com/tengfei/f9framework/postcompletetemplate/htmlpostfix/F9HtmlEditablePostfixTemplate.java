@@ -28,11 +28,6 @@ public class F9HtmlEditablePostfixTemplate extends F9AbstractPostfixTemplate {
         super(id,name, example,template, provider);
     }
 
-    @Override
-    protected List<PsiElement> getExpressions(@NotNull PsiElement context, @NotNull Document document, int offset) {
-        return new ArrayList<>();
-    }
-
     /**
      * 元素是否适用此模板
      *

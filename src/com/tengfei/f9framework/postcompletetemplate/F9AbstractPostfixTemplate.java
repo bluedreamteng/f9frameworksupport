@@ -11,6 +11,9 @@ import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.util.EditorManage;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author ztf
  */
@@ -22,6 +25,11 @@ public abstract class F9AbstractPostfixTemplate extends F9EditablePostfixTemplat
 
     protected F9AbstractPostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, String templateText, PostfixTemplateProvider provider) {
         super(id,name,createTemplate(templateText),example, provider);
+    }
+
+    @Override
+    protected List<PsiElement> getExpressions(@NotNull PsiElement context, @NotNull Document document, int offset) {
+        return new ArrayList<>();
     }
 
     /**

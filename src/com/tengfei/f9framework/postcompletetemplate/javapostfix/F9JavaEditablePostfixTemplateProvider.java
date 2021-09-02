@@ -145,7 +145,7 @@ public class F9JavaEditablePostfixTemplateProvider implements PostfixTemplatePro
         if (liveTemplate == null) {
             return null;
         }
-        return new F9JavaEditablePostfixTemplate(id, name, "",liveTemplate, this);
+        return new F9JavaEditablePostfixTemplate(id, name, "", liveTemplate, this);
     }
 
     /**
@@ -159,7 +159,7 @@ public class F9JavaEditablePostfixTemplateProvider implements PostfixTemplatePro
         if (template instanceof F9JavaEditablePostfixTemplate) {
 
             Element templateTag = TemplateSettings.serializeTemplate(((F9JavaEditablePostfixTemplate) template).getLiveTemplate(), null,
-                                                                     LazyKt.lazyOf(Collections.emptyMap()));
+                    LazyKt.lazyOf(Collections.emptyMap()));
             parentElement.addContent(templateTag);
         }
     }
