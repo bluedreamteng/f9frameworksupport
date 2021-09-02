@@ -20,6 +20,10 @@ public abstract class F9AbstractPostfixTemplate extends F9EditablePostfixTemplat
         super(id,name,liveTemplate,example, provider);
     }
 
+    protected F9AbstractPostfixTemplate(@NotNull String id, @NotNull String name, @NotNull String example, String templateText, PostfixTemplateProvider provider) {
+        super(id,name,createTemplate(templateText),example, provider);
+    }
+
     /**
      * 元素是否适用此模板
      * @param context context
@@ -39,10 +43,9 @@ public abstract class F9AbstractPostfixTemplate extends F9EditablePostfixTemplat
         final Template template = manager.createTemplate("", "", getLiveTemplate().getTemplateText());
         template.setToReformat(true);
         manager.startTemplate(editor, template);
-        System.out.println("helloworld");
     }
 
-    protected static TemplateImpl createTemplate(@NotNull String templateText) {
+    private static TemplateImpl createTemplate(@NotNull String templateText) {
         TemplateImpl template = new TemplateImpl("fakeKey", templateText, "");
         template.setToReformat(true);
         template.parseSegments();

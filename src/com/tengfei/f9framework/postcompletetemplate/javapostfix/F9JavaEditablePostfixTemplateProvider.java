@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.postcompletetemplate;
+package com.tengfei.f9framework.postcompletetemplate.javapostfix;
 
 import com.intellij.codeInsight.template.impl.TemplateImpl;
 import com.intellij.codeInsight.template.impl.TemplateSettings;
