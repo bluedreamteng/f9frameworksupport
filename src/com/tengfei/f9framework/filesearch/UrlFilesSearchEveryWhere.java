@@ -53,7 +53,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     private final GotoFileModel myModelForRenderer;
     private final PersistentSearchEverywhereContributorFilter<FileType> myFilter;
 
-    static Pattern urlCompilePattern = Pattern.compile("^(view-source:)?https?://\\w+:\\d+/([\\w-]+)((/\\w+)+$)");
+    static Pattern urlCompilePattern = Pattern.compile("^(view-source:)?https?://\\w+:\\d+/([\\w-]+)((/\\w+)+)(\\?.*)?");
 
     public UrlFilesSearchEveryWhere(@NotNull AnActionEvent event) {
         super(event);
@@ -170,10 +170,12 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     public void fetchWeightedElements(@NotNull String pattern,
                                       @NotNull ProgressIndicator progressIndicator,
                                       @NotNull Processor<? super FoundItemDescriptor<Object>> consumer) {
-        if (!urlCompilePattern.matcher(pattern).matches()) {
+        Matcher urlMatcher = urlCompilePattern.matcher(pattern);
+        if (!urlMatcher.matches()) {
             return;
         }
-        String simplePattern = pattern.substring(pattern.lastIndexOf('/'));
+        String relativePath = urlMatcher.group(3);
+        String simplePattern = relativePath.substring(relativePath.lastIndexOf('/'));
         if (myProject == null) {
             return; //nowhere to search
         }
