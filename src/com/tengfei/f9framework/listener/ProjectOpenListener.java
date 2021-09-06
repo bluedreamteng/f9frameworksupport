@@ -3,9 +3,9 @@ package com.tengfei.f9framework.listener;
 import com.intellij.ide.startup.ProjectLoadListener;
 import com.intellij.openapi.project.Project;
 import com.tengfei.f9framework.notification.F9Notifier;
-import com.tengfei.f9framework.projectsetting.f9modulesetting.F9CustomizeModuleSetting;
-import com.tengfei.f9framework.projectsetting.f9modulesetting.F9ProjectSetting;
-import com.tengfei.f9framework.projectsetting.f9modulesetting.F9StandardModuleSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 
 public class ProjectOpenListener implements ProjectLoadListener {
     private Project project;

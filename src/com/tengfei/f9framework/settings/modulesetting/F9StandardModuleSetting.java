@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.projectsetting.f9modulesetting;
+package com.tengfei.f9framework.settings.modulesetting;
 
 import java.util.ArrayList;
 import java.util.List;

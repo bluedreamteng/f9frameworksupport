@@ -6,7 +6,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ws.rest.client.header.HttpHeadersDictionary;
-import com.tengfei.f9framework.projectsetting.F9ApplicationSettingState;
+import com.tengfei.f9framework.settings.normalsetting.F9ApplicationSettingState;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileInputStream;

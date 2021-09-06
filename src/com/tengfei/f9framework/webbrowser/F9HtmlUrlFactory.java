@@ -6,8 +6,7 @@ import com.intellij.util.Url;
 import com.tengfei.f9framework.file.F9FileFactory;
 import com.tengfei.f9framework.file.F9WebappFile;
 import com.tengfei.f9framework.file.UnsupportedFileException;
-import com.tengfei.f9framework.notification.F9Notifier;
-import com.tengfei.f9framework.projectsetting.F9ProjectSettingsState;
+import com.tengfei.f9framework.settings.normalsetting.F9ProjectSettingsState;
 import org.jetbrains.annotations.NotNull;
 
 /**

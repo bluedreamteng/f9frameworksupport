@@ -53,7 +53,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
     private final GotoFileModel myModelForRenderer;
     private final PersistentSearchEverywhereContributorFilter<FileType> myFilter;
 
-    static Pattern urlCompilePattern = Pattern.compile("^(view-source:)?https?://\\w+:\\d+/([\\w-]+)((/\\w+)+)(\\?.*)?");
+    static Pattern urlCompilePattern = Pattern.compile("^(view-source:)?https?://[\\w\\d.]+:\\d+/([\\w-]+)((/\\w+)+(\\.\\w+)?)(\\?.*)?");
 
     public UrlFilesSearchEveryWhere(@NotNull AnActionEvent event) {
         super(event);

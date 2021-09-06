@@ -1,4 +1,4 @@
-package com.tengfei.f9framework.projectsetting;
+package com.tengfei.f9framework.settings.normalsetting;
 
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
