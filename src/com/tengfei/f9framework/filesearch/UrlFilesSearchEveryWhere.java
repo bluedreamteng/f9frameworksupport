@@ -293,13 +293,16 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
             relativePath = relativePath + ".html";
         }
         F9StandardModule standardModuleByName = F9ModuleFacade.getInstance(myProject).findStandardModuleByName(moduleName);
+        if(standardModuleByName == null) {
+            return null;
+        }
         String standardFilePath = standardModuleByName.getWebRootPath() + relativePath;
         return VfsUtil.findFileByIoFile(new File(standardFilePath), false);
     }
 
     private VirtualFile getProductFileByUrl(String moduleName,String relativePath) {
         F9StandardModule standardModuleByName = F9ModuleFacade.getInstance(myProject).findStandardModuleByName(moduleName);
-        if (StringUtil.isEmpty(standardModuleByName.getProductCustomizeName())) {
+        if (standardModuleByName == null || StringUtil.isEmpty(standardModuleByName.getProductCustomizeName())) {
             return null;
         }
         String productUrlPath = standardModuleByName.getWebRootPath() + "/" + standardModuleByName.getProductCustomizeName() + relativePath;
@@ -308,7 +311,7 @@ public class UrlFilesSearchEveryWhere extends AbstractGotoSEContributor {
 
     private VirtualFile getCustomizeFileByUrl(String moduleName,String relativePath) {
         F9StandardModule standardModuleByName = F9ModuleFacade.getInstance(myProject).findStandardModuleByName(moduleName);
-        if (standardModuleByName.getCustomizeModuleList().isEmpty()) {
+        if (standardModuleByName == null || standardModuleByName.getCustomizeModuleList().isEmpty()) {
             return null;
         }
         String customizeModuleWebRootPath = standardModuleByName.getCustomizeModuleList().get(0).getWebRoot();
