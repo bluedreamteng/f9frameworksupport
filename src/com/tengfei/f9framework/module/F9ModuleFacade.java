@@ -77,6 +77,7 @@ public class F9ModuleFacade {
     }
 
 
+    @Nullable
     public F9StandardModule findStandardModuleByName(String moduleName) {
         for (F9StandardModule standardModule : standardModules) {
             if (standardModule.getName().equals(moduleName)) {
@@ -86,6 +87,7 @@ public class F9ModuleFacade {
         return null;
     }
 
+    @Nullable
     public F9CustomizeModule findCustomizeModuleByName(String moduleName) {
         for (F9CustomizeModule customizeModule : customizeModules) {
             if (customizeModule.getName().equals(moduleName)) {
@@ -95,6 +97,7 @@ public class F9ModuleFacade {
         return null;
     }
 
+    @Nullable
     public F9CustomizeModule findContainingCustomizeModule(VirtualFile virtualFile) {
         for (F9CustomizeModule customizeModule : customizeModules) {
             if(!(virtualFile.getPresentableUrl().equals(customizeModule.getWebRoot())) && virtualFile.getPresentableUrl().startsWith(customizeModule.getWebRoot())) {
@@ -104,6 +107,7 @@ public class F9ModuleFacade {
         return null;
     }
 
+    @Nullable
     public F9StandardModule findContainingStandardModule(VirtualFile virtualFile) {
         for (F9StandardModule standardModule : standardModules) {
             if(!(virtualFile.getPresentableUrl().equals(standardModule.getWebRootPath())) && virtualFile.getPresentableUrl().startsWith(standardModule.getWebRootPath())) {
