@@ -48,6 +48,9 @@ public class F9ReferenceFactory {
             }
         }
         else {
+            if(element.getText().length() == 0) {
+                return null;
+            }
             return new PsiReference[]{new F9MethodReference(element, new TextRange(1, element.getText().length() - 1))};
         }
     }

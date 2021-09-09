@@ -45,15 +45,15 @@ public class F9SyntaxPattern {
     }
 
     public static boolean isSupportedAttributeValueOfHtmlTag(PsiElement element) {
-        if (!(element.getParent() instanceof XmlAttributeValue)) {
+        if (!(element instanceof XmlAttributeValue)) {
             return false;
         }
-        if (!(element.getParent().getParent() instanceof XmlAttribute)) {
+        if (!(element.getParent() instanceof XmlAttribute)) {
             return false;
         }
-        XmlAttribute xmlAttribute = (XmlAttribute) element.getParent().getParent();
+        XmlAttribute xmlAttribute = (XmlAttribute) element.getParent();
         for (String f9xmlAttribute : F9HtmlTagAttribute.getSupportHtmlTagAttr()) {
-            if (xmlAttribute.getText().equals(f9xmlAttribute)) {
+            if (xmlAttribute.getName().equals(f9xmlAttribute)) {
                 return true;
             }
         }
