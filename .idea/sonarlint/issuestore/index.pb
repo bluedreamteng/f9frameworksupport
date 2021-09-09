@@ -157,3 +157,7 @@ s
 Csrc/com/tengfei/f9framework/settings/modulesetting/ui/TestForm.java,4\f\4f622f482b5594a2fa18aeec7b98ef31f76471ad
 ƒ
 Ssrc/com/tengfei/f9framework/settings/modulesetting/F9ModuleSettingConfigurable.java,b\c\bc917ef5f906dc4c7e18491336a01c2e9bc2aa32
+m
+=src/com/tengfei/f9framework/listener/ProjectOpenListener.java,c\c\cc48e6806faac2b6893fd513dd1ede6101940c86
+n
+>src/com/tengfei/f9framework/file/UnsupportedFileException.java,4\7\47552428d8e429c56dd65f7dc7059632fbf15172

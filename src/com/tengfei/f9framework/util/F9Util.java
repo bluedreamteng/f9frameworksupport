@@ -26,7 +26,7 @@ public class F9Util {
         List<PsiClass> allPsiClasses = findJavaClass(project, annotationValue);
 
         for (PsiClass psiClass : allPsiClasses) {
-            PsiMethod[] methods = psiClass.getMethods();
+            PsiMethod[] methods = psiClass.getAllMethods();
             for (PsiMethod psiMethod : methods) {
                 if (StringUtil.isEquals(psiMethod.getName(), StringUtil.trim(methodName))) {
                     psiMethods.add(psiMethod);
@@ -45,7 +45,7 @@ public class F9Util {
         List<PsiClass> allPsiClasses = findJavaClass(project, annotationValue);
 
         for (PsiClass psiClass : allPsiClasses) {
-            PsiMethod[] methods = psiClass.getMethods();
+            PsiMethod[] methods = psiClass.getAllMethods();
             psiMethods.addAll(Arrays.asList(methods));
         }
         return psiMethods;
