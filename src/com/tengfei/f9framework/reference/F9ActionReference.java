@@ -6,10 +6,10 @@ import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.codeInsight.lookup.LookupElementRenderer;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.tengfei.f9framework.icons.F9Icons;
-import com.tengfei.f9framework.util.F9Util;
-import com.tengfei.f9framework.util.StringUtil;
+import com.tengfei.f9framework.util.F9WebControllerFacade;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,17 +31,16 @@ public class F9ActionReference extends PsiReferenceBase<PsiElement> implements P
     public F9ActionReference(@NotNull PsiElement element, TextRange textRange, boolean isSoft) {
         super(element, textRange, isSoft);
         action = StringUtil.trim(element.getText().substring(textRange.getStartOffset(), textRange.getEndOffset()));
-
     }
 
     @NotNull
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiClass> psiElements = F9Util.findJavaClass(project, action);
         List<ResolveResult> results = new ArrayList<>();
-        for (PsiClass psiElement : psiElements) {
-            results.add(new PsiElementResolveResult(psiElement));
+        PsiClass controllerClass = F9WebControllerFacade.getInstance(project, action).getControllerClass();
+        if(controllerClass != null) {
+            results.add(new PsiElementResolveResult(controllerClass));
         }
         return results.toArray(new ResolveResult[0]);
     }
@@ -57,7 +56,7 @@ public class F9ActionReference extends PsiReferenceBase<PsiElement> implements P
     public Object[] getVariants() {
         Project project = myElement.getProject();
         List<LookupElement> result = new ArrayList<>();
-        List<PsiAnnotationMemberValue> allAnnotationValue = F9Util.findAllAnnotationValue(project);
+        List<PsiAnnotationMemberValue> allAnnotationValue = F9WebControllerFacade.findAllAnnotationValue(project);
         for (PsiAnnotationMemberValue annotationValue : allAnnotationValue) {
             LookupElementRenderer<LookupElement> renderer = new LookupElementRenderer<LookupElement>() {
                 @Override

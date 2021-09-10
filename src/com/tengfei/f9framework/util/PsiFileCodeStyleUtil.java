@@ -8,7 +8,7 @@ import com.intellij.psi.codeStyle.JavaCodeStyleManager;
 /**
  * @author ztf
  */
-public class PsiFileUtil {
+public class PsiFileCodeStyleUtil {
     public static void reformatJavaFile(PsiJavaFile javaFile) {
         JavaCodeStyleManager.getInstance(javaFile.getProject()).shortenClassReferences(javaFile);
         CodeStyleManager.getInstance(javaFile.getProject()).reformat(javaFile);

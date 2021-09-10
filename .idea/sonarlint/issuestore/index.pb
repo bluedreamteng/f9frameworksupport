@@ -7,8 +7,6 @@ Msrc/com/tengfei/f9framework/intentionaction/F9QuartzJobRegisterIntention.java,
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
 
 Osrc/com/tengfei/f9framework/intentionaction/F9ImplInterfaceIntentionAction.java,6\2\62c351034d32a38902cb93b8d6d344bbd45d49b9
-\
-,src/com/tengfei/f9framework/util/F9Util.java,2\a\2a3c1bb81f68eb1ed7610335974f0967d8d9c52a
 e
 5src/com/tengfei/f9framework/webbrowser/F9HtmlUrl.java,7\5\756ada2ad7db98efb7f7000df65a85129f351843
 s
@@ -39,8 +37,6 @@ k
 0src/com/tengfei/f9framework/file/F9JavaFile.java,2\d\2dfe1c59f6788e1e092f03744712fccafda73f88
 _
 /src/com/tengfei/f9framework/file/F9JarFile.java,d\b\db4cf514b3ab10fc9c85d5afa9db5dd41c5fe21c
-`
-0src/com/tengfei/f9framework/util/StringUtil.java,1\f\1f8da705171217619b563a83cce259779224f100
 l
 <src/com/tengfei/f9framework/reference/F9ActionReference.java,3\e\3ef866316f71124e358e2d52ee6405b05508eb4e
 p
@@ -55,8 +51,6 @@ q
 Asrc/com/tengfei/f9framework/reference/F9ReferenceContributor.java,8\f\8f82c0dfce6d814b174ffbacfbed2f292c99a766
 l
 <src/com/tengfei/f9framework/reference/F9MethodReference.java,2\f\2fbf242e080b5872f9437a8d31c65f15bda7baf0
-v
-Fsrc/com/tengfei/f9framework/reference/F9ActionMethodNullReference.java,b\1\b1bd574a53964a2530ac522920a9e428c37d5086
 e
 5src/com/tengfei/f9framework/macro/LowerCaseMacro.java,e\9\e9bf7ef304f6e2b25ec336ed9fe5cca4967da819
 m
@@ -161,3 +155,9 @@ m
 =src/com/tengfei/f9framework/listener/ProjectOpenListener.java,c\c\cc48e6806faac2b6893fd513dd1ede6101940c86
 n
 >src/com/tengfei/f9framework/file/UnsupportedFileException.java,4\7\47552428d8e429c56dd65f7dc7059632fbf15172
+j
+:src/com/tengfei/f9framework/ui/GenerateJavaCodeDialog.java,5\f\5f4a6ff253520789c46a448437cdc15ee1bdfaab
+j
+:src/com/tengfei/f9framework/reference/F9NullReference.java,0\d\0d4a8876d2a35c2026a9f7fa1348df95c671c4bb
+k
+;src/com/tengfei/f9framework/util/F9WebControllerFacade.java,d\1\d1b2b9238bbef21b77593bb926afe233b654bf2c

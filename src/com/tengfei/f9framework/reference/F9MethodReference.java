@@ -3,11 +3,11 @@ package com.tengfei.f9framework.reference;
 import com.intellij.lang.javascript.psi.JSCallExpression;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.tengfei.f9framework.sytaxpattern.F9JsMethod;
-import com.tengfei.f9framework.util.F9Util;
-import com.tengfei.f9framework.util.StringUtil;
+import com.tengfei.f9framework.util.F9WebControllerFacade;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -26,10 +26,22 @@ public class F9MethodReference extends PsiReferenceBase<PsiElement> implements P
     public F9MethodReference(@NotNull PsiElement element, TextRange textRange) {
         super(element, textRange);
         methodName = StringUtil.trim(element.getText().substring(textRange.getStartOffset(), textRange.getEndOffset()));
-        annotationValue = StringUtil.trim(getInitPageUrl());
+        annotationValue = StringUtil.trim(getInitPageUrl(),(ch -> ch != '"' && ch != '\''));
     }
 
-    public F9MethodReference(@NotNull PsiElement element, TextRange textRange, String annotationValue, String methodName) {
+    private String getInitPageUrl() {
+        PsiElement[] psiElements = PsiTreeUtil.collectElements(myElement.getContainingFile(), element -> element instanceof JSCallExpression);
+        for (PsiElement psiElement : psiElements) {
+            JSCallExpression jsCallExpression = (JSCallExpression) psiElement;
+            if (jsCallExpression.getText().contains(F9JsMethod.INITPAGE)) {
+                assert jsCallExpression.getArgumentList() != null;
+                return jsCallExpression.getArgumentList().getArguments()[0].getText();
+            }
+        }
+        return null;
+    }
+
+    public F9MethodReference(@NotNull PsiElement element, TextRange textRange, @NotNull String annotationValue, @NotNull String methodName) {
         super(element, textRange);
         this.methodName = StringUtil.trim(methodName);
         this.annotationValue = StringUtil.trim(annotationValue);
@@ -39,7 +51,7 @@ public class F9MethodReference extends PsiReferenceBase<PsiElement> implements P
     @Override
     public ResolveResult[] multiResolve(boolean incompleteCode) {
         Project project = myElement.getProject();
-        final List<PsiMethod> psiElements = F9Util.findJavaMethod(project, annotationValue, methodName);
+        final List<PsiMethod> psiElements = F9WebControllerFacade.getInstance(project,annotationValue).findMethodByMethodName(methodName);
         List<ResolveResult> results = new ArrayList<>();
         for (PsiMethod psiMethod : psiElements) {
             results.add(new PsiElementResolveResult(psiMethod));
@@ -57,19 +69,7 @@ public class F9MethodReference extends PsiReferenceBase<PsiElement> implements P
     @Override
     public Object[] getVariants() {
         Project project = myElement.getProject();
-        List<PsiMethod> javaMethodByAnnotationValue = F9Util.findAllJavaMethodsByAnnotationValue(project, annotationValue);
+        List<PsiMethod> javaMethodByAnnotationValue = F9WebControllerFacade.getInstance(project, annotationValue).findAllMethods();
         return javaMethodByAnnotationValue.toArray();
-    }
-
-    private String getInitPageUrl() {
-        PsiElement[] psiElements = PsiTreeUtil.collectElements(myElement.getContainingFile(), element -> element instanceof JSCallExpression);
-        for (PsiElement psiElement : psiElements) {
-            JSCallExpression jsCallExpression = (JSCallExpression) psiElement;
-            if (jsCallExpression.getText().contains(F9JsMethod.INITPAGE)) {
-                assert jsCallExpression.getArgumentList() != null;
-                return jsCallExpression.getArgumentList().getArguments()[0].getText();
-            }
-        }
-        return null;
     }
 }

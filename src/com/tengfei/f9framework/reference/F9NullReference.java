@@ -9,11 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * the reference of f9framework action method
+ * @author ztf
  */
-public class F9ActionMethodNullReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference {
+public class F9NullReference extends PsiReferenceBase<PsiElement> implements PsiPolyVariantReference {
 
 
-    public F9ActionMethodNullReference(@NotNull PsiElement element, TextRange textRange) {
+    public F9NullReference(@NotNull PsiElement element, TextRange textRange) {
         super(element, textRange);
     }
 
@@ -25,7 +26,6 @@ public class F9ActionMethodNullReference extends PsiReferenceBase<PsiElement> im
 
     @Override
     public PsiElement resolve() {
-        ResolveResult[] resolveResults = multiResolve(false);
-        return resolveResults.length == 1 ? resolveResults[0].getElement() : null;
+        return null;
     }
 }

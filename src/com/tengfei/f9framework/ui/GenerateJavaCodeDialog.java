@@ -6,12 +6,12 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiPackage;
 import com.tengfei.f9framework.entity.PathConfig;
 import com.tengfei.f9framework.entity.TableInfo;
 import com.tengfei.f9framework.notification.F9Notifier;
 import com.tengfei.f9framework.service.TableCodeGenerateService;
-import com.tengfei.f9framework.util.StringUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -129,7 +129,7 @@ public class GenerateJavaCodeDialog extends JDialog {
     private void onOK() {
         // add your code here
         dispose();
-        if (StringUtil.isNotBlank(getSelectedModule()) && getSelectedPackage() != null) {
+        if (StringUtil.isNotEmpty(getSelectedModule()) && getSelectedPackage() != null) {
             PathConfig pathConfig = new PathConfig(getSelectedModule(), getSelectedPackage(), isCreateDefaultPackage());
             TableInfo tableInfo = new TableInfo(dbTable);
             if (isEntitySelected()) {

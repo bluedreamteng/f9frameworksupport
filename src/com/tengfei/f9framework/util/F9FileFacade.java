@@ -48,7 +48,7 @@ public class F9FileFacade {
     }
 
     public void createJavaFile(String moduleName, String packageName, PsiJavaFile javafile) {
-        PsiFileUtil.reformatJavaFile(javafile);
+        PsiFileCodeStyleUtil.reformatJavaFile(javafile);
         Module moduleByName = ModuleManager.getInstance(javafile.getProject()).findModuleByName(moduleName);
         assert moduleByName != null;
         List<VirtualFile> sourceRoots = ModuleRootManager.getInstance(moduleByName).getSourceRoots(JavaSourceRootType.SOURCE);
@@ -66,7 +66,7 @@ public class F9FileFacade {
             throw new RuntimeException("directory must not be null and be a real directory");
         }
         PsiFile htmlFile = fileFactory.createFileFromText(fileName + HtmlFileType.DOT_DEFAULT_EXTENSION, HtmlFileType.INSTANCE, htmlFileText);
-        PsiFileUtil.reformatFile(htmlFile);
+        PsiFileCodeStyleUtil.reformatFile(htmlFile);
         PsiDirectory psiDirectory = PsiManager.getInstance(project).findDirectory(directory);
         WriteCommandAction.runWriteCommandAction(project, () -> {
             assert psiDirectory != null;
