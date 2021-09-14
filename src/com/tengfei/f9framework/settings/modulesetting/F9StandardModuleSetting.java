@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * @author ztf
  */
-public class F9StandardModuleSetting {
+public class F9StandardModuleSetting implements F9ModuleSetting{
     public String name;
 
     public String deployHost;

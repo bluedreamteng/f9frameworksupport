@@ -3,7 +3,7 @@ package com.tengfei.f9framework.settings.modulesetting;
 /**
  * @author ztf
  */
-public class F9CustomizeModuleSetting {
+public class F9CustomizeModuleSetting implements F9ModuleSetting{
     public String name;
     public String customizeProjectPath;
 

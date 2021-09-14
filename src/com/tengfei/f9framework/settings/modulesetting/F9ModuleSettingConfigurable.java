@@ -1,21 +1,32 @@
 package com.tengfei.f9framework.settings.modulesetting;
 
-import com.intellij.codeInsight.CodeInsightBundle;
-import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.ui.AnActionButton;
+import com.intellij.openapi.project.Project;
 import com.intellij.ui.ToolbarDecorator;
-import com.intellij.util.PlatformIcons;
-import com.intellij.util.ui.FormBuilder;
-import com.tengfei.f9framework.settings.modulesetting.ui.TestForm;
+import com.tengfei.f9framework.settings.modulesetting.ui.F9DescriptionPanel;
+import com.tengfei.f9framework.settings.modulesetting.ui.F9ModuleSettingCheckBoxTree;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
+/**
+ * @author ztf
+ */
 public class F9ModuleSettingConfigurable implements Configurable {
+
+    private final Project project;
+
+
+    public F9ModuleSettingConfigurable(Project project) {
+        this.project = project;
+    }
+
+    private final JSplitPane myPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+
+    private F9DescriptionPanel descriptionPanel = new F9DescriptionPanel();
+
     /**
      * Returns the visible name of the configurable component.
      * Note, that this method must return the display name
@@ -42,9 +53,17 @@ public class F9ModuleSettingConfigurable implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        return new TestForm().getPanel();
+        myPanel.add(ToolbarDecorator.createDecorator(new F9ModuleSettingCheckBoxTree(project))
+                .setAddActionUpdater(e -> true)
+                .setAddAction(button -> System.out.println("hello world"))
+                .setEditActionUpdater(e -> true)
+                .setEditAction(button -> System.out.println("hello world"))
+                .setRemoveActionUpdater(e -> true)
+                .setRemoveAction(button -> System.out.println("hello world"))
+                .createPanel());
+        myPanel.add(descriptionPanel.getPanel());
+        return myPanel;
     }
-
     /**
      * Indicates whether the Swing form was modified or not.
      * This method is called very often, so it should not take a long time.
@@ -65,20 +84,5 @@ public class F9ModuleSettingConfigurable implements Configurable {
     @Override
     public void apply() throws ConfigurationException {
 
-    }
-
-    private  static AnActionButton duplicateAction() {
-        AnActionButton button = new AnActionButton(CodeInsightBundle.messagePointer("action.AnActionButton.text.duplicate"), PlatformIcons.COPY_ICON) {
-            @Override
-            public void actionPerformed(@NotNull AnActionEvent e) {
-                System.out.println("hello wrold");
-            }
-
-            @Override
-            public void updateButton(@NotNull AnActionEvent e) {
-                e.getPresentation().setEnabled(true);
-            }
-        };
-        return button;
     }
 }

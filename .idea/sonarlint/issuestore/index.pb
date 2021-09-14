@@ -145,10 +145,6 @@ s
 Csrc/com/tengfei/f9framework/action/GenerateTableHtmlCodeAction.java,5\2\521f6135ac20eefde0c9edb85a398bca30341c3a
 s
 Csrc/com/tengfei/f9framework/action/GenerateTableJavaCodeAction.java,8\4\84e3446b5b313d1423398615ca0bc3b86ac6ab30
-s
-Csrc/com/tengfei/f9framework/settings/modulesetting/ui/TestForm.form,6\0\60e7962709ff327aacb19fd635ab3a80793dd2e1
-s
-Csrc/com/tengfei/f9framework/settings/modulesetting/ui/TestForm.java,4\f\4f622f482b5594a2fa18aeec7b98ef31f76471ad
 ƒ
 Ssrc/com/tengfei/f9framework/settings/modulesetting/F9ModuleSettingConfigurable.java,b\c\bc917ef5f906dc4c7e18491336a01c2e9bc2aa32
 m
@@ -161,3 +157,11 @@ j
 :src/com/tengfei/f9framework/reference/F9NullReference.java,0\d\0d4a8876d2a35c2026a9f7fa1348df95c671c4bb
 k
 ;src/com/tengfei/f9framework/util/F9WebControllerFacade.java,d\1\d1b2b9238bbef21b77593bb926afe233b654bf2c
+j
+:src/com/tengfei/f9framework/util/PsiFileCodeStyleUtil.java,c\4\c472a61f03d7941c1514acc9911c36f302c2ff6d
+T
+$src/swingtest/MessageDialogTest.java,9\d\9d84a1df060d1d760591e0a14b48db877e9d2695
+†
+Vsrc/com/tengfei/f9framework/settings/modulesetting/ui/F9StdModuleDescriptionPanel.java,a\2\a2619ade200c50d3ce2aceb36d31554600461bee
+†
+Vsrc/com/tengfei/f9framework/settings/modulesetting/ui/F9CusModuleDescriptionPanel.java,3\8\3844a9f0d1736e49d7457b5fa8056bcb8a82aa48
