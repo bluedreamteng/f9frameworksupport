@@ -18,14 +18,14 @@ public class F9ModuleSettingConfigurable implements Configurable {
 
     private final Project project;
 
+    private final JSplitPane myPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+
+    private F9DescriptionPanel descriptionPanel = new F9DescriptionPanel();
+
 
     public F9ModuleSettingConfigurable(Project project) {
         this.project = project;
     }
-
-    private final JSplitPane myPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-
-    private F9DescriptionPanel descriptionPanel = new F9DescriptionPanel();
 
     /**
      * Returns the visible name of the configurable component.
@@ -53,7 +53,12 @@ public class F9ModuleSettingConfigurable implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        myPanel.add(ToolbarDecorator.createDecorator(new F9ModuleSettingCheckBoxTree(project))
+        myPanel.add(ToolbarDecorator.createDecorator(new F9ModuleSettingCheckBoxTree(project){
+            @Override
+            protected void selectionChanged() {
+                selectTree();
+            }
+        })
                 .setAddActionUpdater(e -> true)
                 .setAddAction(button -> System.out.println("hello world"))
                 .setEditActionUpdater(e -> true)
@@ -64,6 +69,12 @@ public class F9ModuleSettingConfigurable implements Configurable {
         myPanel.add(descriptionPanel.getPanel());
         return myPanel;
     }
+
+    private void selectTree() {
+
+    }
+
+
     /**
      * Indicates whether the Swing form was modified or not.
      * This method is called very often, so it should not take a long time.

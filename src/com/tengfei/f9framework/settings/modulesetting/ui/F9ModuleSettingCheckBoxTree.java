@@ -17,6 +17,8 @@ import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.util.List;
@@ -41,6 +43,14 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         setRootVisible(false);
         setShowsRootHandles(true);
         initTree();
+
+        TreeSelectionListener selectionListener = new TreeSelectionListener() {
+            @Override
+            public void valueChanged(@NotNull TreeSelectionEvent event) {
+                selectionChanged();
+            }
+        };
+        getSelectionModel().addTreeSelectionListener(selectionListener);
     }
 
     public void initTree(){
@@ -48,7 +58,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         if(standardModules.isEmpty()) {
             return;
         }
-
         for (F9StandardModuleSetting f9StandardModuleSetting : standardModules) {
             F9StdModuleSettingNode stdModuleSettingNode = new F9StdModuleSettingNode(f9StandardModuleSetting);
             myRoot.add(stdModuleSettingNode);
@@ -58,7 +67,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
                 }
             }
         }
-
         TreeUtil.expandAll(this);
     }
 
