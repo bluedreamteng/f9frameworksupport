@@ -15,6 +15,11 @@ public class F9CusModuleSettingNode extends CheckedTreeNode {
         this.customizeModuleSetting = customizeModuleSetting;
     }
 
+    @NotNull
+    public F9CustomizeModuleSetting getCustomizeModuleSetting() {
+        return customizeModuleSetting;
+    }
+
     @Override
     public String toString() {
         return customizeModuleSetting.getName();

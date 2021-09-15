@@ -4,6 +4,7 @@ import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9ModuleSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +37,14 @@ public class F9DescriptionPanel {
         cardLayout.show(myPanel, NULL);
     }
 
-    public void setModuleDescription(@NotNull F9ModuleSetting moduleSetting) {
+    /**
+     *
+     * @param moduleSetting
+     */
+    public void setModuleDescription(@Nullable F9ModuleSetting moduleSetting) {
+        if(moduleSetting == null) {
+            return;
+        }
         if(moduleSetting instanceof F9StandardModuleSetting) {
             F9StandardModuleSetting stdModuleSetting = (F9StandardModuleSetting) moduleSetting;
             stdModuleDescriptionPanel.setStdModuleSetting(stdModuleSetting);

@@ -3,6 +3,7 @@ package com.tengfei.f9framework.settings.modulesetting;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.GuiUtils;
 import com.intellij.ui.ToolbarDecorator;
 import com.tengfei.f9framework.settings.modulesetting.ui.F9DescriptionPanel;
 import com.tengfei.f9framework.settings.modulesetting.ui.F9ModuleSettingCheckBoxTree;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author ztf
@@ -18,13 +20,36 @@ public class F9ModuleSettingConfigurable implements Configurable {
 
     private final Project project;
 
-    private final JSplitPane myPanel = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+    private final JPanel myPanel = new JPanel();
+    private final JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 
     private F9DescriptionPanel descriptionPanel = new F9DescriptionPanel();
+
+    private F9ModuleSettingCheckBoxTree moduleSettingCheckBoxTree;
 
 
     public F9ModuleSettingConfigurable(Project project) {
         this.project = project;
+
+        moduleSettingCheckBoxTree = new F9ModuleSettingCheckBoxTree(project) {
+            @Override
+            protected void selectionChanged() {
+                selectTreeNode();
+            }
+        };
+        myPanel.setLayout(new GridLayout(1,1));
+        splitPane.add(ToolbarDecorator.createDecorator(moduleSettingCheckBoxTree)
+                .setAddActionUpdater(e -> true)
+                .setAddAction(button -> System.out.println("hello world"))
+                .setEditActionUpdater(e -> true)
+                .setEditAction(button -> System.out.println("hello world"))
+                .setRemoveActionUpdater(e -> true)
+                .setRemoveAction(button -> System.out.println("hello world"))
+                .createPanel());
+        splitPane.add(descriptionPanel.getPanel());
+        myPanel.add(splitPane);
+        GuiUtils.replaceJSplitPaneWithIDEASplitter(myPanel);
+
     }
 
     /**
@@ -53,25 +78,12 @@ public class F9ModuleSettingConfigurable implements Configurable {
     @Nullable
     @Override
     public JComponent createComponent() {
-        myPanel.add(ToolbarDecorator.createDecorator(new F9ModuleSettingCheckBoxTree(project){
-            @Override
-            protected void selectionChanged() {
-                selectTree();
-            }
-        })
-                .setAddActionUpdater(e -> true)
-                .setAddAction(button -> System.out.println("hello world"))
-                .setEditActionUpdater(e -> true)
-                .setEditAction(button -> System.out.println("hello world"))
-                .setRemoveActionUpdater(e -> true)
-                .setRemoveAction(button -> System.out.println("hello world"))
-                .createPanel());
-        myPanel.add(descriptionPanel.getPanel());
         return myPanel;
     }
 
-    private void selectTree() {
-
+    private void selectTreeNode() {
+        F9ModuleSetting selectedModuleSetting = moduleSettingCheckBoxTree.getSelectedModuleSetting();
+        descriptionPanel.setModuleDescription(selectedModuleSetting);
     }
 
 

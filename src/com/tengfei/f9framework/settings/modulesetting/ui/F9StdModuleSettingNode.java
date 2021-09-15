@@ -14,6 +14,11 @@ public class F9StdModuleSettingNode extends CheckedTreeNode {
         this.standardModuleSetting = standardModuleSetting;
     }
 
+    @NotNull
+    public F9StandardModuleSetting getStandardModuleSetting() {
+        return standardModuleSetting;
+    }
+
     @Override
     public String toString() {
         return standardModuleSetting.getName();

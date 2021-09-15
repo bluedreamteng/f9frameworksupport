@@ -7,6 +7,9 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.ui.GenerateHtmlCodeDialog;
 
+/**
+ * @author ztf
+ */
 public class GenerateTableHtmlCodeAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {

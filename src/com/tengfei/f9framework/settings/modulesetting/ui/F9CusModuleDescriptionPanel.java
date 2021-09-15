@@ -16,8 +16,10 @@ public class F9CusModuleDescriptionPanel {
     public JTextField customizeProjectPathTextFiled = new JTextField();
 
     public F9CusModuleDescriptionPanel() {
-        myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称",nameTextField)
-                .addLabeledComponent("产品个性化目录",customizeProjectPathTextFiled)
+        nameTextField.setEnabled(false);
+        customizeProjectPathTextFiled.setEnabled(false);
+        myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:",nameTextField)
+                .addLabeledComponent("产品个性化目录:",customizeProjectPathTextFiled)
                 .getPanel();
     }
 

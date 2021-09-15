@@ -19,6 +19,9 @@ public class F9StdModuleDescriptionPanel {
 
 
     public F9StdModuleDescriptionPanel() {
+        nameTextFiled.setEnabled(false);
+        deployHostTextField.setEnabled(false);
+        productCustomizeNameTextField.setEnabled(false);
         myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:",nameTextFiled)
                 .addLabeledComponent("部署端口:",deployHostTextField)
                 .addLabeledComponent("产品个性化目录:",productCustomizeNameTextField)

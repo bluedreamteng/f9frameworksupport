@@ -38,4 +38,9 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
     public void loadState(@NotNull F9ProjectSetting state) {
         XmlSerializerUtil.copyBean(state, this);
     }
+
+    public void addStandardModuleSetting(F9StandardModuleSetting standardModuleSetting){
+
+    }
+
 }

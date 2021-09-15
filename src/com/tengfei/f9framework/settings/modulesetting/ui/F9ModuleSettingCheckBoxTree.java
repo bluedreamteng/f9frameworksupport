@@ -12,14 +12,17 @@ import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9ModuleSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.util.List;
 
@@ -43,7 +46,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         setRootVisible(false);
         setShowsRootHandles(true);
         initTree();
-
         TreeSelectionListener selectionListener = new TreeSelectionListener() {
             @Override
             public void valueChanged(@NotNull TreeSelectionEvent event) {
@@ -110,29 +112,26 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
     }
 
     protected void selectionChanged() {
-
+        //determine by subclass
     }
 
-    /*public void initTree(@NotNull MultiMap<PostfixTemplateProvider, PostfixTemplate> providerToTemplates) {
-        myRoot.removeAllChildren();
-        Map<String, Set<PostfixTemplateCheckedTreeNode>> languageToNodes = new HashMap<>();
-        for (Map.Entry<PostfixTemplateProvider, Collection<PostfixTemplate>> entry : providerToTemplates.entrySet()) {
-            PostfixTemplateProvider provider = entry.getKey();
-            String languageId = getProvidersToLanguages().get(provider);
-            Set<PostfixTemplateCheckedTreeNode> nodes = ContainerUtil.getOrCreate(languageToNodes, languageId, myNodesComparator);
-            for (PostfixTemplate template : entry.getValue()) {
 
-
-            }
+    @Nullable
+    public F9ModuleSetting getSelectedModuleSetting() {
+        TreePath path = getSelectionModel().getSelectionPath();
+        if(path == null) {
+            return null;
         }
-        for (Map.Entry<String, Set<PostfixTemplateCheckedTreeNode>> entry : languageToNodes.entrySet()) {
-            DefaultMutableTreeNode languageNode = findOrCreateLanguageNode(entry.getKey());
-            for (PostfixTemplateCheckedTreeNode node : entry.getValue()) {
-                languageNode.add(new PostfixTemplateCheckedTreeNode(node.getTemplate(), node.getTemplateProvider(), false));
-            }
+        Object lastPathComponent = path.getLastPathComponent();
+        if(lastPathComponent instanceof F9StdModuleSettingNode) {
+            return  ((F9StdModuleSettingNode) lastPathComponent).getStandardModuleSetting();
+        } else if(lastPathComponent instanceof F9CusModuleSettingNode) {
+            return ((F9CusModuleSettingNode) lastPathComponent).getCustomizeModuleSetting();
         }
+        return null;
+    }
 
-        myModel.nodeStructureChanged(myRoot);
-        TreeUtil.expandAll(this);
-    }*/
+    public void addModuleSetting() {
+
+    }
 }
