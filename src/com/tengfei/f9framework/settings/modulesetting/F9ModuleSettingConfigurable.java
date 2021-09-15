@@ -41,9 +41,9 @@ public class F9ModuleSettingConfigurable implements Configurable {
         splitPane.add(ToolbarDecorator.createDecorator(moduleSettingCheckBoxTree)
                 .setAddActionUpdater(e -> true)
                 .setAddAction(button -> System.out.println("hello world"))
-                .setEditActionUpdater(e -> true)
+                .setEditActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
                 .setEditAction(button -> System.out.println("hello world"))
-                .setRemoveActionUpdater(e -> true)
+                .setRemoveActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
                 .setRemoveAction(button -> System.out.println("hello world"))
                 .createPanel());
         splitPane.add(descriptionPanel.getPanel());

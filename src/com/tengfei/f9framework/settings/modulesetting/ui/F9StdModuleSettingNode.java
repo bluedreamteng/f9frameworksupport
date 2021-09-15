@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author ztf
  */
-public class F9StdModuleSettingNode extends CheckedTreeNode {
+public class F9StdModuleSettingNode extends CheckedTreeNode implements F9ModuleSettingNode{
     private F9StandardModuleSetting standardModuleSetting;
 
     public F9StdModuleSettingNode(@NotNull F9StandardModuleSetting standardModuleSetting) {

@@ -7,7 +7,7 @@ import org.jsoup.internal.StringUtil;
  * 模块配置校验器
  * @author ztf
  */
-public interface ModuleSettingValidator {
+public class ModuleSettingValidator {
 
     public static ModuleSettingValidatorResult validateStdModuleSetting(F9StandardModuleSetting standardModuleSetting) {
         String name = standardModuleSetting.getName();

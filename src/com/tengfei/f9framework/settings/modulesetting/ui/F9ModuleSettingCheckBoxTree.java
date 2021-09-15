@@ -3,11 +3,9 @@ package com.tengfei.f9framework.settings.modulesetting.ui;
 import com.intellij.codeInsight.template.postfix.settings.PostfixTemplateCheckedTreeNode;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.CheckboxTree;
-import com.intellij.ui.CheckedTreeNode;
-import com.intellij.ui.JBColor;
-import com.intellij.ui.SimpleTextAttributes;
+import com.intellij.ui.*;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
@@ -24,6 +22,7 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 /**
@@ -41,8 +40,8 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
     public F9ModuleSettingCheckBoxTree(@NotNull Project project) {
         super(getRenderer(), new CheckedTreeNode());
         this.project = project;
-        myModel = (DefaultTreeModel)getModel();
-        myRoot = (CheckedTreeNode)myModel.getRoot();
+        myModel = (DefaultTreeModel) getModel();
+        myRoot = (CheckedTreeNode) myModel.getRoot();
         setRootVisible(false);
         setShowsRootHandles(true);
         initTree();
@@ -53,17 +52,27 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
             }
         };
         getSelectionModel().addTreeSelectionListener(selectionListener);
+        Disposer.register(this, () -> getSelectionModel().removeTreeSelectionListener(selectionListener));
+        DoubleClickListener doubleClickListener = new DoubleClickListener() {
+            @Override
+            protected boolean onDoubleClick(MouseEvent event) {
+                clearSelection();
+                return true;
+            }
+        };
+        doubleClickListener.installOn(this);
+        Disposer.register(this, () -> doubleClickListener.uninstall(this));
     }
 
-    public void initTree(){
+    public void initTree() {
         List<F9StandardModuleSetting> standardModules = F9ProjectSetting.getInstance(project).standardModules;
-        if(standardModules.isEmpty()) {
+        if (standardModules.isEmpty()) {
             return;
         }
         for (F9StandardModuleSetting f9StandardModuleSetting : standardModules) {
             F9StdModuleSettingNode stdModuleSettingNode = new F9StdModuleSettingNode(f9StandardModuleSetting);
             myRoot.add(stdModuleSettingNode);
-            if(!f9StandardModuleSetting.getCustomizeModuleList().isEmpty()) {
+            if (!f9StandardModuleSetting.getCustomizeModuleList().isEmpty()) {
                 for (F9CustomizeModuleSetting customizeModuleSetting : f9StandardModuleSetting.getCustomizeModuleList()) {
                     stdModuleSettingNode.add(new F9CusModuleSettingNode(customizeModuleSetting));
                 }
@@ -86,7 +95,7 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
                 if (!(value instanceof CheckedTreeNode)) {
                     return;
                 }
-                CheckedTreeNode node = (CheckedTreeNode)value;
+                CheckedTreeNode node = (CheckedTreeNode) value;
 
                 Color background = UIUtil.getTreeBackground(selected, true);
                 PostfixTemplateCheckedTreeNode templateNode = ObjectUtils.tryCast(node, PostfixTemplateCheckedTreeNode.class);
@@ -119,19 +128,43 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
     @Nullable
     public F9ModuleSetting getSelectedModuleSetting() {
         TreePath path = getSelectionModel().getSelectionPath();
-        if(path == null) {
+        if (path == null) {
             return null;
         }
         Object lastPathComponent = path.getLastPathComponent();
-        if(lastPathComponent instanceof F9StdModuleSettingNode) {
-            return  ((F9StdModuleSettingNode) lastPathComponent).getStandardModuleSetting();
-        } else if(lastPathComponent instanceof F9CusModuleSettingNode) {
+        if (lastPathComponent instanceof F9StdModuleSettingNode) {
+            return ((F9StdModuleSettingNode) lastPathComponent).getStandardModuleSetting();
+        }
+        else if (lastPathComponent instanceof F9CusModuleSettingNode) {
             return ((F9CusModuleSettingNode) lastPathComponent).getCustomizeModuleSetting();
         }
         return null;
     }
 
+    @Nullable
+    public F9ModuleSettingNode getSelectedModuleSettingNode() {
+        TreePath path = getSelectionModel().getSelectionPath();
+        if (path == null) {
+            return null;
+        }
+        return (F9ModuleSettingNode) path.getLastPathComponent();
+    }
+
     public void addModuleSetting() {
+        //获取选中节点
+        F9ModuleSettingNode selectedModuleSettingNode = getSelectedModuleSettingNode();
+
+        if (selectedModuleSettingNode == null) {
+            //增加标版模块
+
+        }
+        else if (selectedModuleSettingNode instanceof F9StdModuleSettingNode) {
+            //增加该标版的个性化模块
+        }
+        else {
+            //do nothing
+        }
+
 
     }
 }
