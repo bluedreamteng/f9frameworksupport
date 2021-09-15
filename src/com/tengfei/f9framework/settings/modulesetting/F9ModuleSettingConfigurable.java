@@ -25,7 +25,7 @@ public class F9ModuleSettingConfigurable implements Configurable {
 
     private F9DescriptionPanel descriptionPanel = new F9DescriptionPanel();
 
-    private F9ModuleSettingCheckBoxTree moduleSettingCheckBoxTree;
+    private final F9ModuleSettingCheckBoxTree moduleSettingCheckBoxTree;
 
 
     public F9ModuleSettingConfigurable(Project project) {
@@ -40,7 +40,7 @@ public class F9ModuleSettingConfigurable implements Configurable {
         myPanel.setLayout(new GridLayout(1,1));
         splitPane.add(ToolbarDecorator.createDecorator(moduleSettingCheckBoxTree)
                 .setAddActionUpdater(e -> true)
-                .setAddAction(button -> System.out.println("hello world"))
+                .setAddAction(button -> moduleSettingCheckBoxTree.addModuleSetting())
                 .setEditActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
                 .setEditAction(button -> System.out.println("hello world"))
                 .setRemoveActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
