@@ -19,17 +19,14 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author ztf
- */
-public class F9StdModuleFormDialog extends DialogWrapper {
+public class F9CusModuleFormDialog extends DialogWrapper {
     private final Project project;
     private final JPanel myPanel;
     private FieldPanel moduleNameFiled;
     private final JTextField deployHostField = new JTextField();
     private final JTextField productCustomizeNameField = new JTextField();
 
-    public F9StdModuleFormDialog(@NotNull Project project, @NotNull String title) {
+    public F9CusModuleFormDialog(@NotNull Project project, @NotNull String title) {
         super(project);
         this.project = project;
         moduleNameFiled = new FieldPanel(null, null, (actionEvent) -> {
