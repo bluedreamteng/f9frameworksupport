@@ -174,7 +174,10 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         }
         else if (selectedModuleSettingNode instanceof F9StdModuleSettingNode) {
             //增加该标版的个性化模块
-
+            F9StdModuleSettingNode parent = (F9StdModuleSettingNode) selectedModuleSettingNode;
+            F9CusModuleFormDialog cusModuleFormDialog = new F9CusModuleFormDialog(project,"Add Customize Module Setting",parent.getStandardModuleSetting());
+            cusModuleFormDialog.open();
+            initTree();
         }
         else {
             //do nothing

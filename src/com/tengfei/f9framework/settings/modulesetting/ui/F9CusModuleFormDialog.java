@@ -9,6 +9,7 @@ import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.ui.FieldPanel;
 import com.intellij.util.ui.FormBuilder;
+import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
@@ -22,13 +23,15 @@ import java.util.List;
 public class F9CusModuleFormDialog extends DialogWrapper {
     private final Project project;
     private final JPanel myPanel;
+    private final F9StandardModuleSetting standardModuleSetting;
     private FieldPanel moduleNameFiled;
-    private final JTextField deployHostField = new JTextField();
-    private final JTextField productCustomizeNameField = new JTextField();
+    private final JTextField standardModuleNameField = new JTextField();
+    private final JTextField customizeNameField = new JTextField();
 
-    public F9CusModuleFormDialog(@NotNull Project project, @NotNull String title) {
+    public F9CusModuleFormDialog(@NotNull Project project, @NotNull String title, @NotNull F9StandardModuleSetting standardModuleSetting) {
         super(project);
         this.project = project;
+        this.standardModuleSetting = standardModuleSetting;
         moduleNameFiled = new FieldPanel(null, null, (actionEvent) -> {
             ChooseModulesDialog chooseModulesDialog = new ChooseModulesDialog(project, Arrays.asList(ModuleManager.getInstance(project).getModules()), "Choose Module", null);
             chooseModulesDialog.setSingleSelectionMode();
@@ -40,14 +43,15 @@ public class F9CusModuleFormDialog extends DialogWrapper {
             }
         }, EmptyRunnable.getInstance());
         moduleNameFiled.setEditable(false);
+        standardModuleNameField.setText(standardModuleSetting.getName());
+        standardModuleNameField.setEditable(false);
         myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:", moduleNameFiled)
-                .addLabeledComponent("部署端口:",deployHostField)
-                .addLabeledComponent("产品个性化目录:",productCustomizeNameField)
+                .addLabeledComponent("标版模块:", standardModuleNameField)
+                .addLabeledComponent("个性化目录:", customizeNameField)
                 .getPanel();
         setTitle(title);
         init();
         setSize(660, 500);
-
     }
 
 
@@ -65,8 +69,8 @@ public class F9CusModuleFormDialog extends DialogWrapper {
             return new ValidationInfo("模块名不能为空",moduleNameFiled.getTextField());
         }
 
-        if(StringUtil.isBlank(deployHostField.getText())) {
-            return new ValidationInfo("部署端口不能为空",deployHostField);
+        if(StringUtil.isBlank(customizeNameField.getText())) {
+            return new ValidationInfo("个性化目录不能为空", customizeNameField);
         }
 
         return super.doValidate();
@@ -85,15 +89,14 @@ public class F9CusModuleFormDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         String moduleName = moduleNameFiled.getText();
-        String deployHost = deployHostField.getText();
-        String productCusName = productCustomizeNameField.getText();
-        F9StandardModuleSetting f9StandardModuleSetting = new F9StandardModuleSetting();
-        f9StandardModuleSetting.setName(moduleName);
-        f9StandardModuleSetting.setDeployHost(deployHost);
-        f9StandardModuleSetting.setProductCustomizeName(productCusName);
-        F9ProjectSetting.getInstance(project).standardModules.add(f9StandardModuleSetting);
+        String standardModuleName = standardModuleNameField.getText();
+        String customizeName = customizeNameField.getText();
+        F9CustomizeModuleSetting f9CustomizeModuleSetting = new F9CustomizeModuleSetting();
+        f9CustomizeModuleSetting.setName(moduleName);
+        f9CustomizeModuleSetting.setStandardName(standardModuleName);
+        f9CustomizeModuleSetting.setCustomizeProjectPath(customizeName);
+        F9ProjectSetting.getInstance(project).addCusModuleSetting(standardModuleSetting,f9CustomizeModuleSetting);
         super.doOKAction();
-
     }
 
     @Override

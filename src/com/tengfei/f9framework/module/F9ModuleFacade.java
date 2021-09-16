@@ -42,7 +42,10 @@ public class F9ModuleFacade {
         init();
     }
 
-    private void init() {
+    public void init() {
+        //clear
+        standardModules.clear();
+        customizeModules.clear();
         Set<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
         if(standardModuleSettings.isEmpty()) {
             F9Notifier.notifyWarning(project,"未检测到配置文件，请及时配置");

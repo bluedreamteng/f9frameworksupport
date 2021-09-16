@@ -5,6 +5,7 @@ import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.ui.GuiUtils;
 import com.intellij.ui.ToolbarDecorator;
+import com.tengfei.f9framework.module.F9ModuleFacade;
 import com.tengfei.f9framework.settings.modulesetting.ui.F9DescriptionPanel;
 import com.tengfei.f9framework.settings.modulesetting.ui.F9ModuleSettingCheckBoxTree;
 import org.jetbrains.annotations.Nls;
@@ -95,7 +96,7 @@ public class F9ModuleSettingConfigurable implements Configurable {
      */
     @Override
     public boolean isModified() {
-        return false;
+        return true;
     }
 
     /**
@@ -106,6 +107,6 @@ public class F9ModuleSettingConfigurable implements Configurable {
      */
     @Override
     public void apply() throws ConfigurationException {
-
+        F9ModuleFacade.getInstance(project).init();
     }
 }
