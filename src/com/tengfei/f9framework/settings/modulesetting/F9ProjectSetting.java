@@ -9,7 +9,9 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,7 +22,7 @@ import java.util.Set;
         storages = {@Storage("f9projectSetting.xml")}
 )
 public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetting> {
-    public Set<F9StandardModuleSetting> standardModules = new HashSet<>();
+    public List<F9StandardModuleSetting> standardModules = new ArrayList<>();
 
 
     public static F9ProjectSetting getInstance(Project project) {

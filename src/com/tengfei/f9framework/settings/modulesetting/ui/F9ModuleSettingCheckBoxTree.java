@@ -24,6 +24,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -67,7 +68,7 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
 
     public void initTree() {
         myRoot.removeAllChildren();
-        Set<F9StandardModuleSetting> standardModules = F9ProjectSetting.getInstance(project).standardModules;
+        List<F9StandardModuleSetting> standardModules = F9ProjectSetting.getInstance(project).standardModules;
         if (!standardModules.isEmpty()) {
             for (F9StandardModuleSetting f9StandardModuleSetting : standardModules) {
                 F9StdModuleSettingNode stdModuleSettingNode = new F9StdModuleSettingNode(f9StandardModuleSetting);
