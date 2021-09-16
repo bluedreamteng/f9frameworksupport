@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author ztf
@@ -42,7 +43,7 @@ public class F9ModuleFacade {
     }
 
     private void init() {
-        List<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
+        Set<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
         if(standardModuleSettings.isEmpty()) {
             F9Notifier.notifyWarning(project,"未检测到配置文件，请及时配置");
             return;

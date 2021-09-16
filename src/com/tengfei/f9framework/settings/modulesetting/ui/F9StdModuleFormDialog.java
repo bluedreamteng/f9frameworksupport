@@ -4,19 +4,18 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ui.configuration.ChooseModulesDialog;
-import com.intellij.openapi.ui.ComponentValidator;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.util.EmptyRunnable;
-import com.intellij.ui.DocumentAdapter;
 import com.intellij.ui.FieldPanel;
 import com.intellij.util.ui.FormBuilder;
+import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.internal.StringUtil;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class F9StdModuleFormDialog extends DialogWrapper {
     private Project project;
     private JPanel myPanel;
     private FieldPanel moduleNameFiled;
-    private JTextField deployHost;
-    private JTextField productCustomizeName;
+    private JTextField deployHostField = new JTextField();
+    private JTextField productCustomizeNameField = new JTextField();
 
     public F9StdModuleFormDialog(@NotNull Project project, @NotNull String title) {
         super(project);
@@ -43,34 +42,39 @@ public class F9StdModuleFormDialog extends DialogWrapper {
                 moduleNameFiled.setText(module.getName());
             }
         }, EmptyRunnable.getInstance());
-//        moduleNameFiled.setEditable(false);
-        deployHost = new JTextField();
-        myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:", moduleNameFiled).addComponent(deployHost).getPanel();
+        moduleNameFiled.setEditable(false);
+        deployHostField = new JTextField();
+        myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:", moduleNameFiled)
+                .addLabeledComponent("部署端口:",deployHostField)
+                .addLabeledComponent("产品个性化目录:",productCustomizeNameField)
+                .getPanel();
         setTitle(title);
         init();
-        setSize(460, 330);
-        initValidate();
+        setSize(660, 500);
+
     }
 
 
-    private void initValidate() {
-        new ComponentValidator(project).withValidator(v -> {
-            String pt = moduleNameFiled.getText();
-            if(StringUtil.isBlank(pt)) {
-                v.updateInfo(new ValidationInfo("hello",moduleNameFiled));
-            } else {
-                v.updateInfo(null);
-            }
-        }).installOn(moduleNameFiled);
+    /**
+     * Validates user input and returns {@code null} if everything is fine
+     * or validation description with component where problem has been found.
+     *
+     * @return {@code null} if everything is OK or validation descriptor
+     * @see <a href="https://jetbrains.design/intellij/principles/validation_errors/">Validation errors guidelines</a>
+     */
+    @Nullable
+    @Override
+    protected ValidationInfo doValidate() {
+        if(StringUtil.isBlank(moduleNameFiled.getText())) {
+            return new ValidationInfo("模块名不能为空",moduleNameFiled.getTextField());
+        }
 
-        moduleNameFiled.getTextField().getDocument().addDocumentListener(new DocumentAdapter() {
-            @Override
-            protected void textChanged(@NotNull DocumentEvent e) {
-                ComponentValidator.getInstance(moduleNameFiled).ifPresent(v -> v.revalidate());
-            }
-        });
+        if(StringUtil.isBlank(deployHostField.getText())) {
+            return new ValidationInfo("部署端口不能为空",deployHostField);
+        }
+
+        return super.doValidate();
     }
-
 
     @Nullable
     @Override
@@ -84,6 +88,14 @@ public class F9StdModuleFormDialog extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
+        String moduleName = moduleNameFiled.getText();
+        String deployHost = deployHostField.getText();
+        String productCusName = productCustomizeNameField.getText();
+        F9StandardModuleSetting f9StandardModuleSetting = new F9StandardModuleSetting();
+        f9StandardModuleSetting.setName(moduleName);
+        f9StandardModuleSetting.setDeployHost(deployHost);
+        f9StandardModuleSetting.setProductCustomizeName(productCusName);
+        F9ProjectSetting.getInstance(project).standardModules.add(f9StandardModuleSetting);
         super.doOKAction();
 
 

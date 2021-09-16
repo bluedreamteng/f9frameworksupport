@@ -1,7 +1,6 @@
 package com.tengfei.f9framework.settings.modulesetting;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author ztf
@@ -13,7 +12,7 @@ public class F9StandardModuleSetting implements F9ModuleSetting{
 
     public String productCustomizeName;
 
-    public List<F9CustomizeModuleSetting> customizeModuleList = new ArrayList<>();
+    public Set<F9CustomizeModuleSetting> customizeModuleList = new HashSet<>();
 
 
     public String getName() {
@@ -40,11 +39,28 @@ public class F9StandardModuleSetting implements F9ModuleSetting{
         this.productCustomizeName = productCustomizeName;
     }
 
-    public List<F9CustomizeModuleSetting> getCustomizeModuleList() {
+    public Set<F9CustomizeModuleSetting> getCustomizeModuleList() {
         return customizeModuleList;
     }
 
-    public void setCustomizeModuleList(List<F9CustomizeModuleSetting> customizeModuleList) {
+    public void setCustomizeModuleList(Set<F9CustomizeModuleSetting> customizeModuleList) {
         this.customizeModuleList = customizeModuleList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        F9StandardModuleSetting that = (F9StandardModuleSetting) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

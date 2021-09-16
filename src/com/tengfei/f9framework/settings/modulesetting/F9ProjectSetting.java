@@ -9,8 +9,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author ztf
@@ -20,7 +20,7 @@ import java.util.List;
         storages = {@Storage("f9projectSetting.xml")}
 )
 public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetting> {
-    public List<F9StandardModuleSetting> standardModules = new ArrayList<>();
+    public Set<F9StandardModuleSetting> standardModules = new HashSet<>();
 
 
     public static F9ProjectSetting getInstance(Project project) {
@@ -39,8 +39,41 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
         XmlSerializerUtil.copyBean(state, this);
     }
 
-    public void addStandardModuleSetting(F9StandardModuleSetting standardModuleSetting){
-
+    /**
+     * 增加标版模块设置
+     * @param stdModuleSetting 标版模块设置
+     * @return true成功 false 失败
+     */
+    public boolean addStdModuleSetting(@NotNull F9StandardModuleSetting stdModuleSetting) {
+        if(standardModules.contains(stdModuleSetting)) {
+            return false;
+        }
+        standardModules.add(stdModuleSetting);
+        return true;
     }
+
+    public boolean addCusModuleSetting(@NotNull F9StandardModuleSetting parent,@NotNull F9CustomizeModuleSetting cusModuleSetting){
+        if(!standardModules.contains(parent)) {
+            return false;
+        }
+        if(parent.getCustomizeModuleList().contains(cusModuleSetting)) {
+            return false;
+        }
+        parent.getCustomizeModuleList().add(cusModuleSetting);
+        return true;
+    }
+
+    public boolean removeStdModuleSetting(@NotNull F9StandardModuleSetting stdModuleSetting) {
+        return standardModules.remove(stdModuleSetting);
+    }
+
+    public boolean removeCusModuleSetting(@NotNull F9StandardModuleSetting parent,@NotNull F9CustomizeModuleSetting cusModuleSetting) {
+        if(!standardModules.contains(parent)) {
+            return false;
+        }
+        return parent.getCustomizeModuleList().remove(cusModuleSetting);
+    }
+
+
 
 }
