@@ -5,7 +5,6 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
@@ -69,15 +68,14 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
     public void initTree() {
         myRoot.removeAllChildren();
         Set<F9StandardModuleSetting> standardModules = F9ProjectSetting.getInstance(project).standardModules;
-        if (standardModules.isEmpty()) {
-            return;
-        }
-        for (F9StandardModuleSetting f9StandardModuleSetting : standardModules) {
-            F9StdModuleSettingNode stdModuleSettingNode = new F9StdModuleSettingNode(f9StandardModuleSetting);
-            myRoot.add(stdModuleSettingNode);
-            if (!f9StandardModuleSetting.getCustomizeModuleList().isEmpty()) {
-                for (F9CustomizeModuleSetting customizeModuleSetting : f9StandardModuleSetting.getCustomizeModuleList()) {
-                    stdModuleSettingNode.add(new F9CusModuleSettingNode(customizeModuleSetting));
+        if (!standardModules.isEmpty()) {
+            for (F9StandardModuleSetting f9StandardModuleSetting : standardModules) {
+                F9StdModuleSettingNode stdModuleSettingNode = new F9StdModuleSettingNode(f9StandardModuleSetting);
+                myRoot.add(stdModuleSettingNode);
+                if (!f9StandardModuleSetting.getCustomizeModuleList().isEmpty()) {
+                    for (F9CustomizeModuleSetting customizeModuleSetting : f9StandardModuleSetting.getCustomizeModuleList()) {
+                        stdModuleSettingNode.add(new F9CusModuleSettingNode(customizeModuleSetting));
+                    }
                 }
             }
         }
@@ -185,31 +183,34 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
 
     public void removeModuleSetting() {
         F9ModuleSetting selectedModuleSetting = getSelectedModuleSetting();
-        if(selectedModuleSetting == null) {
+        if (selectedModuleSetting == null) {
             return;
         }
-        if(selectedModuleSetting instanceof F9StandardModuleSetting) {
+        if (selectedModuleSetting instanceof F9StandardModuleSetting) {
             F9StandardModuleSetting stdModuleSetting = (F9StandardModuleSetting) selectedModuleSetting;
             boolean isSuccess = F9ProjectSetting.getInstance(project).removeStdModuleSetting(stdModuleSetting);
-            if(isSuccess) {
-                F9Notifier.notifyMessage(project,"删除成功");
+            if (isSuccess) {
+                F9Notifier.notifyMessage(project, "删除成功");
                 initTree();
-            } else {
-                F9Notifier.notifyMessage(project,"删除失败");
             }
-        } else if(selectedModuleSetting instanceof F9CustomizeModuleSetting) {
+            else {
+                F9Notifier.notifyMessage(project, "删除失败");
+            }
+        }
+        else if (selectedModuleSetting instanceof F9CustomizeModuleSetting) {
             F9CustomizeModuleSetting cusModuleSetting = (F9CustomizeModuleSetting) selectedModuleSetting;
             Object parentSelectedNode = getParentSelectedNode();
-            if(!(parentSelectedNode instanceof F9StdModuleSettingNode)) {
+            if (!(parentSelectedNode instanceof F9StdModuleSettingNode)) {
                 return;
             }
             F9StdModuleSettingNode parent = (F9StdModuleSettingNode) parentSelectedNode;
-            boolean isSuccess = F9ProjectSetting.getInstance(project).removeCusModuleSetting(parent.getStandardModuleSetting(),cusModuleSetting);
-            if(isSuccess) {
-                F9Notifier.notifyMessage(project,"删除成功");
+            boolean isSuccess = F9ProjectSetting.getInstance(project).removeCusModuleSetting(parent.getStandardModuleSetting(), cusModuleSetting);
+            if (isSuccess) {
+                F9Notifier.notifyMessage(project, "删除成功");
                 initTree();
-            } else {
-                F9Notifier.notifyMessage(project,"删除失败");
+            }
+            else {
+                F9Notifier.notifyMessage(project, "删除失败");
             }
         }
     }
