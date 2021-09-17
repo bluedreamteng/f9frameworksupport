@@ -74,18 +74,4 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
         return parent.getCustomizeModuleList().remove(cusModuleSetting);
     }
 
-    public boolean editStdModuleSetting(@NotNull F9StandardModuleSetting stdModuleSetting) {
-
-        return standardModules.remove(stdModuleSetting);
-    }
-
-    public boolean editCusModuleSetting(@NotNull F9StandardModuleSetting parent,@NotNull F9CustomizeModuleSetting cusModuleSetting) {
-        if(!standardModules.contains(parent)) {
-            return false;
-        }
-        return parent.getCustomizeModuleList().remove(cusModuleSetting);
-    }
-
-
-
 }

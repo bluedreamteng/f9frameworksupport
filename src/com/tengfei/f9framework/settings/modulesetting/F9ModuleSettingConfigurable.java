@@ -43,7 +43,7 @@ public class F9ModuleSettingConfigurable implements Configurable {
                 .setAddActionUpdater(e -> true)
                 .setAddAction(button -> moduleSettingCheckBoxTree.addModuleSetting())
                 .setEditActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
-                .setEditAction(button -> System.out.println("hello world"))
+                .setEditAction(button -> moduleSettingCheckBoxTree.editModuleSetting())
                 .setRemoveActionUpdater(e -> moduleSettingCheckBoxTree.getSelectedModuleSetting() != null)
                 .setRemoveAction(button -> moduleSettingCheckBoxTree.removeModuleSetting())
                 .createPanel());

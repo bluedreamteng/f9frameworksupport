@@ -10,8 +10,6 @@ import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.ui.FieldPanel;
 import com.intellij.util.ui.FormBuilder;
 import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
-import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
-import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.internal.StringUtil;
@@ -20,18 +18,21 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class F9CusModuleFormDialog extends DialogWrapper {
+/**
+ * @author ztf
+ */
+public class F9CusModuleEditFormDialog extends DialogWrapper {
     private final Project project;
+    private F9CustomizeModuleSetting customizeModuleSetting;
     private final JPanel myPanel;
-    private final F9StandardModuleSetting standardModuleSetting;
     private FieldPanel moduleNameFiled;
     private final JTextField standardModuleNameField = new JTextField();
     private final JTextField customizeNameField = new JTextField();
 
-    public F9CusModuleFormDialog(@NotNull Project project, @NotNull String title, @NotNull F9StandardModuleSetting standardModuleSetting) {
+    public F9CusModuleEditFormDialog(@NotNull Project project, @NotNull String title, @NotNull F9CustomizeModuleSetting customizeModuleSetting) {
         super(project);
         this.project = project;
-        this.standardModuleSetting = standardModuleSetting;
+        this.customizeModuleSetting = customizeModuleSetting;
         moduleNameFiled = new FieldPanel(null, null, (actionEvent) -> {
             ChooseModulesDialog chooseModulesDialog = new ChooseModulesDialog(project, Arrays.asList(ModuleManager.getInstance(project).getModules()), "Choose Module", null);
             chooseModulesDialog.setSingleSelectionMode();
@@ -43,8 +44,10 @@ public class F9CusModuleFormDialog extends DialogWrapper {
             }
         }, EmptyRunnable.getInstance());
         moduleNameFiled.setEditable(false);
-        standardModuleNameField.setText(standardModuleSetting.getName());
+        moduleNameFiled.setText(customizeModuleSetting.getName());
+        standardModuleNameField.setText(customizeModuleSetting.getStandardName());
         standardModuleNameField.setEditable(false);
+        customizeNameField.setText(customizeModuleSetting.getCustomizeProjectPath());
         myPanel = FormBuilder.createFormBuilder().addLabeledComponent("模块名称:", moduleNameFiled)
                 .addLabeledComponent("标版模块:", standardModuleNameField)
                 .addLabeledComponent("个性化目录:", customizeNameField)
@@ -89,13 +92,9 @@ public class F9CusModuleFormDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         String moduleName = moduleNameFiled.getText();
-        String standardModuleName = standardModuleNameField.getText();
         String customizeName = customizeNameField.getText();
-        F9CustomizeModuleSetting f9CustomizeModuleSetting = new F9CustomizeModuleSetting();
-        f9CustomizeModuleSetting.setName(moduleName);
-        f9CustomizeModuleSetting.setStandardName(standardModuleName);
-        f9CustomizeModuleSetting.setCustomizeProjectPath(customizeName);
-        F9ProjectSetting.getInstance(project).addCusModuleSetting(standardModuleSetting,f9CustomizeModuleSetting);
+        customizeModuleSetting.setName(moduleName);
+        customizeModuleSetting.setCustomizeProjectPath(customizeName);
         super.doOKAction();
     }
 
