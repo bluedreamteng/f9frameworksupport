@@ -11,12 +11,12 @@ import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
 import com.tengfei.f9framework.settings.modulesetting.F9StandardModuleSetting;
 import com.tengfei.f9framework.notification.F9Notifier;
 import org.jetbrains.annotations.Nullable;
+import org.jsoup.internal.StringUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author ztf
@@ -44,8 +44,7 @@ public class F9ModuleFacade {
 
     public void init() {
         //clear
-        standardModules.clear();
-        customizeModules.clear();
+        clearModules();
         List<F9StandardModuleSetting> standardModuleSettings = F9ProjectSetting.getInstance(project).standardModules;
         if(standardModuleSettings.isEmpty()) {
             F9Notifier.notifyWarning(project,"未检测到配置文件，请及时配置");
@@ -56,20 +55,36 @@ public class F9ModuleFacade {
             standardModule.setName(standardModuleSetting.name);
             standardModule.setDeployHost(standardModuleSetting.deployHost);
             standardModule.setProductCustomizeName(standardModuleSetting.getProductCustomizeName());
-            standardModule.setWebRootPath(findWebRootPathByModuleName(standardModuleSetting.name));
-
+            String webRootPath = findWebRootPathByModuleName(standardModuleSetting.name);
+            if(StringUtil.isBlank(webRootPath)) {
+                F9Notifier.notifyWarning(project,standardModuleSetting.getName() + "未找到webrootpath,请检查配置");
+                clearModules();
+                return;
+            }
+            standardModule.setWebRootPath(webRootPath);
             for (F9CustomizeModuleSetting customizeModuleSetting : standardModuleSetting.customizeModuleList) {
                 F9CustomizeModule customizeModule = new F9CustomizeModule();
                 customizeModule.setName(customizeModuleSetting.name);
                 customizeModule.setStandardModule(standardModule);
                 customizeModule.setCustomizeProjectPath(customizeModuleSetting.customizeProjectPath);
-                customizeModule.setWebRoot(findCustomizeModuleWebRootPath(standardModule, customizeModuleSetting.customizeProjectPath));
+                String customizeModuleSoftLinkWebRootPath = findCustomizeModuleSoftLinkWebRootPath(standardModule, customizeModuleSetting.customizeProjectPath);
+                if(StringUtil.isBlank(customizeModuleSoftLinkWebRootPath)) {
+                    F9Notifier.notifyWarning(project,customizeModuleSetting.getName() + "未找到对应软链接真实路径webrootpath,请检查配置");
+                    clearModules();
+                    return;
+                }
+                customizeModule.setWebRoot(customizeModuleSoftLinkWebRootPath);
                 standardModule.getCustomizeModuleList().add(customizeModule);
                 customizeModules.add(customizeModule);
             }
-
             standardModules.add(standardModule);
         }
+        F9Notifier.notifyMessage(project,"项目模块初始化成功!");
+    }
+
+    private void clearModules() {
+        standardModules.clear();
+        customizeModules.clear();
     }
 
     public List<F9StandardModule> findAllStandardModules() {
@@ -137,7 +152,7 @@ public class F9ModuleFacade {
     }
 
     @Nullable
-    private String findCustomizeModuleWebRootPath(F9StandardModule standardModule, String customizeProjectPath) {
+    private String findCustomizeModuleSoftLinkWebRootPath(F9StandardModule standardModule, String customizeProjectPath) {
         //定位到个性化目录软链接文件夹
         String result = null;
         String customizeDir = standardModule.getWebRootPath() + "/" + customizeProjectPath;
@@ -146,7 +161,11 @@ public class F9ModuleFacade {
             return null;
         }
         try {
-            result = file.toPath().toRealPath().toString();
+            String softLinkRealPath = file.toPath().toRealPath().toString();
+            if(file.toPath().toString().equals(softLinkRealPath)) {
+                return null;
+            }
+            result = softLinkRealPath;
         }
         catch (IOException e) {
             e.printStackTrace();

@@ -1,7 +1,5 @@
 package com.tengfei.f9framework.settings.modulesetting;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 /**
@@ -14,7 +12,7 @@ public class F9StandardModuleSetting implements F9ModuleSetting{
 
     public String productCustomizeName;
 
-    public Set<F9CustomizeModuleSetting> customizeModuleList = new HashSet<>();
+    public List<F9CustomizeModuleSetting> customizeModuleList = new ArrayList<>();
 
 
     public String getName() {
@@ -41,11 +39,11 @@ public class F9StandardModuleSetting implements F9ModuleSetting{
         this.productCustomizeName = productCustomizeName;
     }
 
-    public Set<F9CustomizeModuleSetting> getCustomizeModuleList() {
+    public List<F9CustomizeModuleSetting> getCustomizeModuleList() {
         return customizeModuleList;
     }
 
-    public void setCustomizeModuleList(Set<F9CustomizeModuleSetting> customizeModuleList) {
+    public void setCustomizeModuleList(List<F9CustomizeModuleSetting> customizeModuleList) {
         this.customizeModuleList = customizeModuleList;
     }
 

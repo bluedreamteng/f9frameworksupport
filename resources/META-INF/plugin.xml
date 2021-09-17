@@ -77,12 +77,7 @@
         <codeInsight.template.postfixTemplateProvider language="HTML"
                                                       implementationClass="com.tengfei.f9framework.postcompletetemplate.htmlpostfix.F9HtmlEditablePostfixTemplateProvider"/>
         <projectConfigurable instance="com.tengfei.f9framework.settings.modulesetting.F9ModuleSettingConfigurable"/>
-        <projectConfigurable instance="com.tengfei.f9framework.TestConfigurable"/>
     </extensions>
-
-    <projectListeners>
-        <listener class="com.tengfei.f9framework.listener.ProjectOpenListener" topic="com.intellij.ide.startup.ProjectLoadListener"/>
-    </projectListeners>
 
 
     <actions>

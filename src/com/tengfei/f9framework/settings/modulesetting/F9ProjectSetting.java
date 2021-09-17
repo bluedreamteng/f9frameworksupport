@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author ztf
@@ -70,6 +68,18 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
     }
 
     public boolean removeCusModuleSetting(@NotNull F9StandardModuleSetting parent,@NotNull F9CustomizeModuleSetting cusModuleSetting) {
+        if(!standardModules.contains(parent)) {
+            return false;
+        }
+        return parent.getCustomizeModuleList().remove(cusModuleSetting);
+    }
+
+    public boolean editStdModuleSetting(@NotNull F9StandardModuleSetting stdModuleSetting) {
+
+        return standardModules.remove(stdModuleSetting);
+    }
+
+    public boolean editCusModuleSetting(@NotNull F9StandardModuleSetting parent,@NotNull F9CustomizeModuleSetting cusModuleSetting) {
         if(!standardModules.contains(parent)) {
             return false;
         }

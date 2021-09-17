@@ -173,8 +173,6 @@ Qsrc/com/tengfei/f9framework/settings/modulesetting/ui/F9StdModuleSettingNode.ja
 Vsrc/com/tengfei/f9framework/settings/modulesetting/ui/F9ModuleSettingCheckBoxTree.java,6\0\608953723effab29283f8f8f707ee6f3b771e8c7
 á
 Wsrc/com/tengfei/f9framework/settings/modulesetting/ui/ModuleSettingValidatorResult.java,c\6\c66f9b250b6ccabb5b52bfad8485f89883631e44
-
-Osrc/com/tengfei/f9framework/settings/modulesetting/ui/F9CusModuleFormPanel.java,a\6\a69b0513ecfda35550b8c5bf535fefa8a0ad68e5
 ~
 Nsrc/com/tengfei/f9framework/settings/modulesetting/ui/F9ModuleSettingNode.java,d\c\dca177c1735c091dec760ba9fb315f08d67f6299
 Å
