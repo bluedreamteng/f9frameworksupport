@@ -39,6 +39,15 @@ public class F9ProjectSetting implements PersistentStateComponent<F9ProjectSetti
         XmlSerializerUtil.copyBean(state, this);
     }
 
+
+    public List<F9CustomizeModuleSetting> findAllCusModuleSettings() {
+        List<F9CustomizeModuleSetting> result = new ArrayList<>();
+        for (F9StandardModuleSetting standardModule : standardModules) {
+            result.addAll(standardModule.getCustomizeModuleList());
+        }
+        return result;
+    }
+
     /**
      * 增加标版模块设置
      * @param stdModuleSetting 标版模块设置

@@ -69,9 +69,6 @@ public class F9StdModuleEditFormDialog extends DialogWrapper {
         return myPanel;
     }
 
-    public void open() {
-        show();
-    }
 
     @Override
     protected void doOKAction() {

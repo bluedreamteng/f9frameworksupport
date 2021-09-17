@@ -27,6 +27,7 @@ public class F9CusModuleAddFormDialog extends DialogWrapper {
     private FieldPanel moduleNameFiled;
     private final JTextField standardModuleNameField = new JTextField();
     private final JTextField customizeNameField = new JTextField();
+    private F9CustomizeModuleSetting f9CustomizeModuleSetting;
 
     public F9CusModuleAddFormDialog(@NotNull Project project, @NotNull String title, @NotNull F9StandardModuleSetting standardModuleSetting) {
         super(project);
@@ -73,6 +74,16 @@ public class F9CusModuleAddFormDialog extends DialogWrapper {
             return new ValidationInfo("个性化目录不能为空", customizeNameField);
         }
 
+        String moduleName = moduleNameFiled.getText();
+        String standardModuleName = standardModuleNameField.getText();
+        String customizeName = customizeNameField.getText();
+        f9CustomizeModuleSetting = new F9CustomizeModuleSetting();
+        f9CustomizeModuleSetting.setName(moduleName);
+        f9CustomizeModuleSetting.setStandardName(standardModuleName);
+        f9CustomizeModuleSetting.setCustomizeProjectPath(customizeName);
+        if(standardModuleSetting.getCustomizeModuleList().contains(f9CustomizeModuleSetting)) {
+            return new ValidationInfo("个性化模块重复");
+        }
         return super.doValidate();
     }
 
@@ -82,19 +93,8 @@ public class F9CusModuleAddFormDialog extends DialogWrapper {
         return myPanel;
     }
 
-    public void open() {
-        show();
-    }
-
     @Override
     protected void doOKAction() {
-        String moduleName = moduleNameFiled.getText();
-        String standardModuleName = standardModuleNameField.getText();
-        String customizeName = customizeNameField.getText();
-        F9CustomizeModuleSetting f9CustomizeModuleSetting = new F9CustomizeModuleSetting();
-        f9CustomizeModuleSetting.setName(moduleName);
-        f9CustomizeModuleSetting.setStandardName(standardModuleName);
-        f9CustomizeModuleSetting.setCustomizeProjectPath(customizeName);
         F9ProjectSetting.getInstance(project).addCusModuleSetting(standardModuleSetting,f9CustomizeModuleSetting);
         super.doOKAction();
     }

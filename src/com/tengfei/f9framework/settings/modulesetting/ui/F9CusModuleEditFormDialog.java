@@ -10,6 +10,7 @@ import com.intellij.openapi.util.EmptyRunnable;
 import com.intellij.ui.FieldPanel;
 import com.intellij.util.ui.FormBuilder;
 import com.tengfei.f9framework.settings.modulesetting.F9CustomizeModuleSetting;
+import com.tengfei.f9framework.settings.modulesetting.F9ProjectSetting;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jsoup.internal.StringUtil;
@@ -75,6 +76,15 @@ public class F9CusModuleEditFormDialog extends DialogWrapper {
         if(StringUtil.isBlank(customizeNameField.getText())) {
             return new ValidationInfo("个性化目录不能为空", customizeNameField);
         }
+        F9CustomizeModuleSetting newSetting = new F9CustomizeModuleSetting();
+        newSetting.setName(moduleNameFiled.getText());
+        newSetting.setStandardName(standardModuleNameField.getText());
+        newSetting.setCustomizeProjectPath(customizeNameField.getText());
+
+        List<F9CustomizeModuleSetting> allCusModuleSettings = F9ProjectSetting.getInstance(project).findAllCusModuleSettings();
+        if(allCusModuleSettings.contains(newSetting)) {
+            return new ValidationInfo("个性化目录重复！");
+        }
 
         return super.doValidate();
     }
@@ -85,9 +95,6 @@ public class F9CusModuleEditFormDialog extends DialogWrapper {
         return myPanel;
     }
 
-    public void open() {
-        show();
-    }
 
     @Override
     protected void doOKAction() {

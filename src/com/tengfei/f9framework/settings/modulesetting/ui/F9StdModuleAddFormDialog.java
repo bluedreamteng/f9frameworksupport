@@ -25,6 +25,7 @@ import java.util.List;
 public class F9StdModuleAddFormDialog extends DialogWrapper {
     private final Project project;
     private final JPanel myPanel;
+    F9StandardModuleSetting f9StandardModuleSetting = new F9StandardModuleSetting();
     private FieldPanel moduleNameFiled;
     private final JTextField deployHostField = new JTextField();
     private final JTextField productCustomizeNameField = new JTextField();
@@ -72,6 +73,17 @@ public class F9StdModuleAddFormDialog extends DialogWrapper {
             return new ValidationInfo("部署端口不能为空",deployHostField);
         }
 
+        String moduleName = moduleNameFiled.getText();
+        String deployHost = deployHostField.getText();
+        String productCusName = productCustomizeNameField.getText();
+        f9StandardModuleSetting.setName(moduleName);
+        f9StandardModuleSetting.setDeployHost(deployHost);
+        f9StandardModuleSetting.setProductCustomizeName(productCusName);
+
+        if(F9ProjectSetting.getInstance(project).standardModules.contains(f9StandardModuleSetting)) {
+            return new ValidationInfo("标版模块重复！");
+        }
+
         return super.doValidate();
     }
 
@@ -81,20 +93,11 @@ public class F9StdModuleAddFormDialog extends DialogWrapper {
         return myPanel;
     }
 
-    public void open() {
-        show();
-    }
+
 
     @Override
     protected void doOKAction() {
-        String moduleName = moduleNameFiled.getText();
-        String deployHost = deployHostField.getText();
-        String productCusName = productCustomizeNameField.getText();
-        F9StandardModuleSetting f9StandardModuleSetting = new F9StandardModuleSetting();
-        f9StandardModuleSetting.setName(moduleName);
-        f9StandardModuleSetting.setDeployHost(deployHost);
-        f9StandardModuleSetting.setProductCustomizeName(productCusName);
-        F9ProjectSetting.getInstance(project).standardModules.add(f9StandardModuleSetting);
+        F9ProjectSetting.getInstance(project).addStdModuleSetting(f9StandardModuleSetting);
         super.doOKAction();
 
     }

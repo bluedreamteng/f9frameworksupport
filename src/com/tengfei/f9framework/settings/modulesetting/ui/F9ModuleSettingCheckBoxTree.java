@@ -169,14 +169,14 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         if (selectedModuleSettingNode == null) {
             //增加标版模块
             F9StdModuleAddFormDialog addStandardModuleSettingDialog = new F9StdModuleAddFormDialog(project, "Add Standard Module Setting");
-            addStandardModuleSettingDialog.open();
+            addStandardModuleSettingDialog.show();
             initTree();
         }
         else if (selectedModuleSettingNode instanceof F9StdModuleSettingNode) {
             //增加该标版的个性化模块
             F9StdModuleSettingNode parent = (F9StdModuleSettingNode) selectedModuleSettingNode;
             F9CusModuleAddFormDialog cusModuleFormDialog = new F9CusModuleAddFormDialog(project, "Add Customize Module Setting", parent.getStandardModuleSetting());
-            cusModuleFormDialog.open();
+            cusModuleFormDialog.show();
             initTree();
         }
         else {
@@ -222,12 +222,12 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         F9ModuleSetting selectedModuleSetting = getSelectedModuleSetting();
         if (selectedModuleSetting instanceof F9StandardModuleSetting) {
             F9StdModuleEditFormDialog stdModuleFormDialog = new F9StdModuleEditFormDialog(project, "Edit Standard Module Setting", (F9StandardModuleSetting) selectedModuleSetting);
-            stdModuleFormDialog.open();
+            stdModuleFormDialog.show();
             initTree();
         }
         else if (selectedModuleSetting instanceof F9CustomizeModuleSetting) {
             F9CusModuleEditFormDialog cusModuleEditFormDialog = new F9CusModuleEditFormDialog(project, "Edit Customize Module Setting", (F9CustomizeModuleSetting) selectedModuleSetting);
-            cusModuleEditFormDialog.open();
+            cusModuleEditFormDialog.show();
             initTree();
         }
     }
