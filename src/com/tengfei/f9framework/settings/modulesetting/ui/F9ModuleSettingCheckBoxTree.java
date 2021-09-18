@@ -1,9 +1,7 @@
 package com.tengfei.f9framework.settings.modulesetting.ui;
 
 import com.intellij.codeInsight.template.postfix.settings.PostfixTemplateCheckedTreeNode;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.*;
 import com.intellij.util.ObjectUtils;
@@ -29,7 +27,7 @@ import java.util.List;
 /**
  * @author ztf
  */
-public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposable {
+public class F9ModuleSettingCheckBoxTree extends CheckboxTree {
 
     @NotNull
     private final CheckedTreeNode myRoot;
@@ -53,7 +51,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
             }
         };
         getSelectionModel().addTreeSelectionListener(selectionListener);
-        Disposer.register(this, () -> getSelectionModel().removeTreeSelectionListener(selectionListener));
         DoubleClickListener doubleClickListener = new DoubleClickListener() {
             @Override
             protected boolean onDoubleClick(MouseEvent event) {
@@ -62,7 +59,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
             }
         };
         doubleClickListener.installOn(this);
-        Disposer.register(this, () -> doubleClickListener.uninstall(this));
     }
 
     public void initTree() {
@@ -81,12 +77,6 @@ public class F9ModuleSettingCheckBoxTree extends CheckboxTree implements Disposa
         }
         myModel.reload();
         TreeUtil.expandAll(this);
-    }
-
-
-    @Override
-    public void dispose() {
-        UIUtil.dispose(this);
     }
 
     @NotNull
