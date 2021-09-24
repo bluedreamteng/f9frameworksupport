@@ -7,6 +7,7 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvid
 import com.intellij.codeInsight.template.postfix.templates.editable.PostfixTemplateEditor;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.containers.ContainerUtil;
 import kotlin.LazyKt;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,7 @@ import static com.intellij.codeInsight.template.postfix.templates.PostfixTemplat
  * @author ztf
  */
 public class F9JavaEditablePostfixTemplateProvider implements PostfixTemplateProvider {
+
 
     /**
      * Identifier of template provider. Used for storing settings of provider's templates.
@@ -47,7 +49,7 @@ public class F9JavaEditablePostfixTemplateProvider implements PostfixTemplatePro
     @NotNull
     @Override
     public Set<PostfixTemplate> getTemplates() {
-        return new HashSet<>();
+        return ContainerUtil.set(new F9AllSetTemplate());
     }
 
     /**
