@@ -7,6 +7,7 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvid
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.tengfei.f9framework.util.EditorManage;
 import org.jetbrains.annotations.NotNull;
@@ -48,10 +49,22 @@ public abstract class F9AbstractPostfixTemplate extends F9EditablePostfixTemplat
         Project project = editor.getProject();
         assert project != null;
         final TemplateManager manager = TemplateManager.getInstance(project);
-        final Template template = manager.createTemplate("", "", getLiveTemplate().getTemplateText());
+        final Template template = manager.createTemplate("", "", getTemplateText(context));
         template.setToReformat(true);
         manager.startTemplate(editor, template);
     }
+
+    public String getTemplateText(PsiElement context) {
+        String templateVariable = context.getText();
+        String templateText = getLiveTemplate().getTemplateText();
+        if(StringUtil.isNotEmpty(templateText)) {
+            templateText = templateText.replaceAll("#expr#",templateVariable);
+            templateText = templateText.replaceAll("#lowercaseexpr#",StringUtil.toLowerCase(templateVariable));
+        }
+        return templateText;
+    }
+
+
 
     private static TemplateImpl createTemplate(@NotNull String templateText) {
         TemplateImpl template = new TemplateImpl("fakeKey", templateText, "");

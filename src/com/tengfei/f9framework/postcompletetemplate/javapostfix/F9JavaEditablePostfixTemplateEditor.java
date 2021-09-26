@@ -29,12 +29,15 @@ public class F9JavaEditablePostfixTemplateEditor extends PostfixTemplateEditorBa
     @NotNull
     private final JPanel myPanel;
 
+    private final JTextArea descriptionArea = new JTextArea();
+
     public F9JavaEditablePostfixTemplateEditor(@NotNull PostfixTemplateProvider provider) {
         super(provider, createEditor(), false);
-
+        descriptionArea.setText("#expr# #lowercaseexpr#");
         myPanel = FormBuilder.createFormBuilder()
                 .addComponentFillVertically(myEditTemplateAndConditionsPanel, UIUtil.DEFAULT_VGAP)
                 .getPanel();
+        myPanel.add(descriptionArea);
     }
 
     @NotNull

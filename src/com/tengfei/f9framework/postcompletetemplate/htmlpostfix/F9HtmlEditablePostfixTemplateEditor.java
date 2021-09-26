@@ -34,6 +34,8 @@ public class F9HtmlEditablePostfixTemplateEditor extends PostfixTemplateEditorBa
         myPanel = FormBuilder.createFormBuilder()
                 .addComponentFillVertically(myEditTemplateAndConditionsPanel, UIUtil.DEFAULT_VGAP)
                 .getPanel();
+        JTextArea descriptionArea = new JTextArea();
+        descriptionArea.setText("#expr# #lowercaseexpr#");
     }
 
     @NotNull
