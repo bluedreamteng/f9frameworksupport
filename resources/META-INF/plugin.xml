@@ -103,17 +103,6 @@
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
 
-        <action id="GenerateTableCodeAction" class="com.tengfei.f9framework.action.GenerateTableJavaCodeAction"
-                text="Generate Table Java Code" description="Generate table Java code">
-            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
-        </action>
-
-        <action id="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction"
-                class="com.tengfei.f9framework.action.GenerateTableHtmlCodeAction" text="Generate Table Html Code"
-                description="Generate table html code">
-            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
-        </action>
-
         <action id="CopyWebRelativePathAction" class="com.tengfei.f9framework.action.CopyWebRelativePathAction"
                 text="Copy Web Relative Path" description="Copy web relative path">
             <add-to-group group-id="CopyGroup" anchor="first"/>

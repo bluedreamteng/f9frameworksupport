@@ -1,6 +1,0 @@
-[
-  {
-    "name": "datagrid",
-    "template": "public DataGridModel<$expr$> getDataGridData() {\n        // 获得表格对象\n        if (model == null) {\n            model = new DataGridModel<$expr$>()\n            {\n\n                @Override\n                public List<$expr$> fetchData(int first, int pageSize, String sortField, String sortOrder) {\n                    // 获取where条件Map集合\n                    Map<String, Object> conditionMap = ListGenerator.getSearchMap(getRequestContext().getComponents(),\n                            sortField, sortOrder);\n                    PageData<$expr$> pageData = service.paginatorList(conditionMap, first, pageSize);\n                    this.setRowCount(pageData.getRowCount());\n                    return pageData.getList();\n                }\n\n            };\n        }\n        return model;\n    }"
-  }
-]

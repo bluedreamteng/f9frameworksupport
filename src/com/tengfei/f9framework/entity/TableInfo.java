@@ -89,56 +89,7 @@ public class TableInfo {
         }
     }
 
-    public String getEntityName() {
-        return name;
-    }
 
-    public String getServiceInterfaceName() {
-        return "I" + name + "Service";
-    }
-
-    public String getServiceImplName() {
-        return name + "Service" + "Impl";
-    }
-
-    public String getServiceName() {
-        return name + "Service";
-    }
-
-    public String getAddActionName() {
-        return name + "AddAction";
-    }
-
-    public String getEditActionName() {
-        return name + "EditAction";
-    }
-
-    public String getListActionName() {
-        return name + "ListAction";
-    }
-
-    public String getDetailActionName() {
-        return name + "DetailAction";
-    }
-
-    public String getAddHtmlName() {
-        return StringUtil.toLowerCase(name + "add");
-    }
-
-    public String getListHtmlName() {
-        return StringUtil.toLowerCase(name + "list");
-
-    }
-
-    public String getEditHtmlName() {
-        return StringUtil.toLowerCase(name + "edit");
-
-    }
-
-    public String getDetailHtmlName() {
-        return StringUtil.toLowerCase(name + "detail");
-
-    }
 
 
     public DbTable getOriginal() {

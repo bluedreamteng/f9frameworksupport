@@ -7,13 +7,13 @@ import com.intellij.codeInsight.template.postfix.templates.PostfixTemplateProvid
 import com.intellij.codeInsight.template.postfix.templates.editable.PostfixTemplateEditor;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.containers.ContainerUtil;
 import kotlin.LazyKt;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 import static com.intellij.codeInsight.template.postfix.templates.PostfixTemplatesUtils.readExternalLiveTemplate;
@@ -47,7 +47,7 @@ public class F9HtmlEditablePostfixTemplateProvider implements PostfixTemplatePro
     @NotNull
     @Override
     public Set<PostfixTemplate> getTemplates() {
-        return new HashSet<>();
+        return ContainerUtil.newHashSet(new F9EditFormPostTemplate(),new F9DetailFormPostTemplate(),new F9ListFormPostTemplate());
     }
 
     /**

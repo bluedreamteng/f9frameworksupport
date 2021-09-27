@@ -8,9 +8,6 @@ import com.intellij.psi.xml.XmlText;
 import com.tengfei.f9framework.postcompletetemplate.F9AbstractPostfixTemplate;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author ztf
  */

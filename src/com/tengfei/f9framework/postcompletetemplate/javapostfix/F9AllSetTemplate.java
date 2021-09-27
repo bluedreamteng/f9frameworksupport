@@ -72,4 +72,6 @@ public class F9AllSetTemplate extends PostfixTemplateWithExpressionSelector {
         }
         return result;
     }
+
+
 }
