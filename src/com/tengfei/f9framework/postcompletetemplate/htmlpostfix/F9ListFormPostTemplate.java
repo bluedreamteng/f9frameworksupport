@@ -31,13 +31,13 @@ public class F9ListFormPostTemplate extends F9PostfixTemplateWithTable {
             String columnName = columnInfo.getNameWithLowerCase();
             String template;
             if ("java.util.Date".equals(columnType)) {
-                template = String.format(" <div field=\"%s\">\n" +
+                template = String.format("<div field=\"%s\" data-options=\"{'format':'yyyy-MM-dd HH:mm:ss'}\" dateFormat=\"yyyy-MM-dd HH:mm:ss\">\n" +
                         "                %s\n" +
                         "            </div>",columnName,columnComment);
             } else {
-                template = String.format("<div role=\"control\" label=\"%s\">\n" +
-                        "                    <div class=\"mini-outputtext\" bind=\"dataBean.%s\"></div>\n" +
-                        "                </div>",columnComment,columnName);
+                template = String.format("<div field=\"%s\">\n" +
+                        "                %s\n" +
+                        "            </div>",columnName,columnComment);
             }
             result.append(template);
         }
