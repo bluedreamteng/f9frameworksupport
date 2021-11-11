@@ -49,7 +49,7 @@ public class F9JavaEditablePostfixTemplateProvider implements PostfixTemplatePro
     @NotNull
     @Override
     public Set<PostfixTemplate> getTemplates() {
-        return ContainerUtil.set(new F9AllSetTemplate());
+        return ContainerUtil.set(new F9AllSetTemplate(),new F9EntityAllSetTemplate());
     }
 
     /**
